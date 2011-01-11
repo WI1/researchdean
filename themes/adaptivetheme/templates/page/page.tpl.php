@@ -148,13 +148,9 @@
 <div id="main" class="container_16">       
 
 
-		<?php if ($breadcrumb): ?>
-      <div id="breadcrumb" class="nav">
-        <?php print $breadcrumb; ?>
-      </div> <!-- /breadcrumb -->
-    <?php endif; ?>
+	
 
-<div class="clear"></div>
+
 <div id="content">     
 	<div id="sidebar-first" class="sidebar section region grid_4">
 	<?php if ($left): ?>
@@ -166,10 +162,12 @@
 	
      <div id="content-column" class="grid_9">
       
-        <?php if ($mission): ?>
-          <div id="mission" ><?php print $mission; ?></div> <!-- /mission -->
-        <?php endif; ?>
-
+     <?php if ($breadcrumb): ?>
+      <div id="breadcrumb" class="nav">
+        <?php print $breadcrumb; ?>
+      </div> <!-- /breadcrumb -->
+    <?php endif; ?>
+<div class="clear"></div>
         <?php if ($content_top): ?>
           <div id="content-top" class="section region">            
           <?php print $content_top; ?>

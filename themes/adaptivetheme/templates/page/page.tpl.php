@@ -154,7 +154,6 @@
       </div> <!-- /breadcrumb -->
     <?php endif; ?>
 
-<?php endif; ?>
 <div class="clear"></div>
 <div id="content">     
 	<div id="sidebar-first" class="sidebar section region grid_4">

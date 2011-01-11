@@ -190,15 +190,9 @@
           <?php endif; ?> 
           
           <div id="contentarea" class="section region">
-			
-			<?php if ($is_front): ?>
-			<?php print views_embed_view('allnodes'); ?>
-			<?php endif; ?>
-			
-			<?php if (!$is_front): ?>
+		
             <?php print $content; ?>
-			<?php endif; ?>
-          
+		         
 		  </div>		
           					
         <?php if ($content_bottom): ?>

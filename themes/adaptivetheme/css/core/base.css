@@ -883,9 +883,8 @@ background: url(img/bg_main.gif) repeat-x;
 }
 
 #breadcrumb {
-position: absolute;
-left: 263px;
 margin-top: 20px;
+margin-bottom: 22px;
 }
 
 

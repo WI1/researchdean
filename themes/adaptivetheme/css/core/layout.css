@@ -1,0 +1,102 @@
+/* $Id: layout.css,v 1.10 2009/08/25 03:52:00 jmburnz Exp $ */
+/* adaptivethemes.com */
+
+/**
+ * @file layout.css
+ * 
+ * See layout-uncompressed.css For the layout variants with 
+ * with instructions and comments.
+ * @see layout-uncompressed.css
+ */
+ 
+/**
+ * #layout-1c
+ * Replace with your preferred layout, remove if using LayoutSP!
+ */
+
+.two-sidebars .content-inner{margin:0 0px;}
+.sidebar-left .content-inner{margin-left:0px;}
+.sidebar-right .content-inner{margin-right:0px;}
+/*
+#sidebar-first{width:240px;margin-left:-100%;}
+#sidebar-last{width:240px;margin-left:-240px;}
+*/
+
+/* Add padding to align elements to the grid. */
+.node,
+.block,
+.block-at-admin,
+.comment,
+.profile,
+.footer-message-inner,
+#main-content-header,
+#skip-nav,
+#branding,
+#search-box,
+#mission,
+#primary,
+#secondary,
+#attribution, 
+#first-time, 
+#forum,
+#aggregator,
+#tracker,
+#user-login,
+#user-register,
+#user-pass,
+#search-form,
+#comments-title,
+.section-search .box,
+.section-admin #content .region-inner,
+.breadcrumb-inner,
+.in-maintenance #content,
+.in-maintenance #page-title {padding:0;}
+
+
+/* Clear Floated Elements
+----------------------------------------------------------------------------------------------------*/
+
+/* http://sonspring.com/journal/clearing-floats */
+
+.clear {
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+/* http://perishablepress.com/press/2008/02/05/lessons-learned-concerning-the-clearfix-css-hack */
+
+.clearfix:after {
+	clear: both;
+	content: ' ';
+	display: block;
+	font-size: 0;
+	line-height: 0;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+* html .clearfix {
+	height: 1%;
+}
+
+.clearfix {
+	display: block;
+}
+
+/* Containers and helpers. */
+#container{position:relative;margin:0 auto;width:1024px;}
+#columns{display:inline-block;}
+#container > #columns{display:block;}
+#content-column,#sidebar-first,#sidebar-last{float:left;}
+
+div.block{position:relative;}
+.clear,#nav,#columns,#breadcrumb,#content-bottom,#secondary-content,#tertiary-content,#footer-wrapper,#footer,#footer-message{clear:both;}

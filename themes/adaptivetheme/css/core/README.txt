@@ -1,0 +1,1 @@
+All files and code within the /css/core directory are licensed under GPL.

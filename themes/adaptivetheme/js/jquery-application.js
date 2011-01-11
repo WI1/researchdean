@@ -1,0 +1,3 @@
+	$(function() {
+		$("#jq-tabs").tabs();
+	});

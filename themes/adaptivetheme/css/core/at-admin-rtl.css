@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* $Id: at-admin-rtl.css,v 1.6 2009/08/26 17:12:24 jmburnz Exp $ */
+/* adaptivethemes.com */
+
+/**
+ * @file at-admin-rtl.css
+ * Contains all styles for the built in Administration Theme.
+ */
+#at-admin .two-sidebars .content-inner{margin:0 240px;}
+#at-admin .sidebar-left .content-inner{margin-left:240px;margin-left:0;}
+#at-admin .sidebar-right .content-inner{margin-right:240px;margin-left:0;}
+#at-admin #sidebar-first{margin-left:0;margin-right:-100%;width:240px;}
+#at-admin #sidebar-last{margin-left:0;margin-right:-240px;width:240px;}
+#content-aside{float:left;padding:0 10px 20px 0;}
+#skip-nav{text-align:left;}
+#search-box{left:0;position:absolute;right:auto;}
+.logo-site-name span{float:right;}
+#logo{padding:0 0 0 10px;}
+#node-form .node-col-last{float:left;}
+#node-form .node-col-first{float:right;}
+#node-form .node-col-last .buttons #edit-submit,
+#node-form .node-col-last .buttons #edit-preview,
+#node-form .node-col-last .buttons #edit-delete{margin:2px 0 2px 2px;}
+ul.menu,ul.menu ul,ul.menu ul ul,ul.menu ul ul ul{margin:0 1em 0 0;}
+.block-at-admin h2{text-align:right;}
+.block-at-admin legend{margin:0 -10px 0 0;}
+.at-admin-block-edit-links .item-list li{margin:0 0 0 .3em;}
+#permissions td.permission{padding-left:0;padding-right:0.5em;}
+ul.primary{padding:0 0.3em 0.4em 0;}
+ul.primary li a{margin-right:0;margin-left:0.08em;}
+ul.secondary li{padding:0 0 0 2em;}
+.fieldset-logo-image-settings{margin-right:0;margin-left:1%;}
+.fieldset-logo-image-settings,.fieldset-shortcut-icon-settings{float:right;}
+#system-theme-settings .button-wrapper{clear:left;float:right;}
+tr #acquia-agent-no-search{background-position:24px 5px;padding-left:0;padding-right:75px;}
+.tips{margin-left:0;margin-right:3em;padding:0.1875em 1.5em 0.1875em 0.375em ;}
+.block-at-admin fieldset{margin-right:0.5em;}
+.block-at-admin h2 span {float:left;}
+div.block div.block-edit{top:10px;left:15px;right:auto;}
+ul.menu,ul.menu ul,ul.menu ul ul,ul.menu ul ul ul{margin:0 1em 0 0;}

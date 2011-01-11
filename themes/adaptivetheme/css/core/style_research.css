@@ -1,0 +1,42 @@
+ol#main_menu li a:link, ol#main_menu li a:visited, div.csc-frame-frame1  { background-color: #909fcf; }
+ol#main_menu li ol li a:link, ol#main_menu li ol li a:visited, ul.courses li a:link, ul.courses li a:visited, div.courseview h2 { background-color: #6981bd; }
+
+
+ol#main_menu li.active a,
+ol#main_menu li ol li.active a,
+ol#main_menu li a:focus, 
+ol#main_menu li ol li a:focus,
+ol#main_menu li a:hover, 
+ol#main_menu li ol li a:hover,
+ol#main_menu li a:active, 
+ol#main_menu li ol li a:active,
+ul.courses li.active a,
+ul.courses li a:focus,
+ul.courses li a:hover,
+ul.courses li a:active {
+	background-color: #1f5aa6;
+}
+
+div#searchbox input#searchbox_submit {
+	background-color: #909fcf;
+}
+
+div#content p.introduction, div#content h1, div#content h2, div#content h3, div#content h4, div#content h5, div#content h6 {
+	color: #6981bd;
+}
+
+div#content a:link { color: #6981bd; text-decoration: underline; }
+div#content a:visited { color: #6981bd; text-decoration: underline; }
+div#content a:focus { color: #6981bd; text-decoration: underline; }
+div#content a:hover { color: #6981bd; text-decoration: underline; }
+div#content a:active { color: #6981bd; text-decoration: underline; }
+
+div.courseview {
+	border-color: #6981bd;
+}
+
+/* Tabellen und Boxen */
+.contenttable-1 {
+background:#abbcf5 url(http://www.wi1.uni-erlangen.de/fileadmin/templates/etc/dev/img/blue_bright.gif) repeat-x scroll 0 0 !important;
+border-color:#1F5AA6 !important;
+}

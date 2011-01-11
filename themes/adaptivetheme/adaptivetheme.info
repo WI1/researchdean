@@ -1,0 +1,238 @@
+; $Id: adaptivetheme.info,v 1.10 2009/08/18 23:27:57 jmburnz Exp $
+
+;----------// Theme Information
+
+ ; Change the name to match your new themes name. Modify the optional description.
+
+  name         = AdaptiveTheme
+  description  = A starter theme for Drupal Rockstars
+
+  core         = 6.x
+  engine       = phptemplate
+  screenshot   = screenshot.png
+
+
+;----------// Modular Stylesheets
+
+ ; Disable Drupal Core Styles
+ stylesheets[all][] = system-menus.css
+
+  ; Core styles
+  stylesheets[all][] = css/core/base.css
+  stylesheets[all][] = css/core/layout.css
+  
+  ; Unset if you don't need this - provides basic starter styles only.
+  stylesheets[all][] = css/core/starter.css
+  
+  ; Uncomment if using Gpanels, if using 960 fixed width layout use the gpanels 960 CSS.
+  stylesheets[all][] = css/core/gpanels-960-fixed.css
+  ;stylesheets[all][] = css/core/gpanels-fluid.css
+	
+  ; Uncomment for Dark Themes
+  ;stylesheets[all][] = css/core/dark.css
+  
+  ; Uncomment for Development (good for firebugging)
+  ;stylesheets[all][] = css/core/dev.css
+	
+  ; Custom stylesheet - don't rename or move this file
+  stylesheets[all][] = css/theme/theme.css
+
+   ; Custom Calendar Stylesheet added by WI1
+   stylesheets[all][] = css/core/calendar.css
+
+   ; jQuery Stylesheet added by WI1
+   stylesheets[all][] = js/jquery-ui/themes/base/jquery-ui.css
+   
+;----------// IE Conditional Stylesheets
+
+  ; Support for the Conditional Styles module. This module allows themes 
+  ; to specify conditional stylesheets in their .info file and the conditional 
+  ; comments will be automatically included at the end of the standard $styles 
+  ; variable. http://drupal.org/project/conditional_styles
+  ;
+  ; Note: You do not need to install the module, it is now included in Genesis.
+
+  ; Example only: see the README in the Conditional Styles module
+  conditional-stylesheets[if lte IE 7][all][] = css/ie/ie-lte-7.css
+
+
+;----------// jQuery Plugins and JavaScripts
+
+  ; Theme settings JS
+  ;scripts[] = js/core/theme-settings.js
+
+  ; Insert WAI ARIA Landmark Roles. Uncomment to use.
+  ;scripts[] = js/core/aria-roles.js
+
+  ; Equal Height Columns
+  ; This will set first child divs in the #columns division
+  ; to the same height (#sidebar-left, #sidebar-right, #content-column).
+  ; To use uncomment and clear cache data in Performance settings.
+  ;scripts[] = js/core/jquery.equalizeheights.minified.js
+
+  ; Preload CSS Images
+  ; jQuery plugin that automatically preloads all images referenced in CSS files.
+  ; http://www.filamentgroup.com
+  ;scripts[] = js/core/preloadCssImages.jQuery_v5_minfied.js
+  
+  ; Use jQuery UI
+  ;scripts[] = js/jquery-ui/jquery-1.3.2.js
+  ;scripts[] = js/jquery-ui/ui/minified/jquery-ui.min.js
+  ;scripts[] = js/jquery-ui/external/jsdiff/jsdiff.js
+  ;scripts[] = js/jquery-application.js
+ 
+;----------// Core Regions
+
+  regions[header]             = Header Blocks
+  regions[content]            = Main Content
+  regions[left]               = Sidebar First
+  regions[right]              = Sidebar Last
+  regions[footer]             = Footer
+
+
+;----------// Additional Regions
+  
+  regions[leaderboard]        = Leaderboard
+  regions[secondary_content]  = Secondary Content
+  regions[content_top]        = Content Top
+  regions[content_aside]      = Content Aside
+  regions[content_bottom]     = Content Bottom
+  regions[tertiary_content]   = Tertiary Content
+
+
+;----------// Node Regions
+
+  regions[node_bottom]        = Node bottom
+  
+
+;----------// Gpanel Regions
+
+  ; Gpanel Regions - use in conjunction with the Gpanel snippets.
+  ; See /gpanels and the README in that folder.
+  ; Uncomment the required regions.
+
+  ;--// TWO column Gpanels
+  
+  ; 2 col 2x50 Gpanel
+  ;regions[two_col_2x50_first]   = 2col 2x50 Gpanel col 1
+  ;regions[two_col_2x50_second]  = 2col 2x50 Gpanel col 2
+
+  ; 2 col 33-66 Gpanel
+  ;regions[two_col_33_66_first]      = 2col 33-66 Gpanel col 1
+  ;regions[two_col_33_66_second]     = 2col 33-66 Gpanel col 2
+
+  ; 2 col 66-33 Gpanel
+  ;regions[two_col_66_33_first]      = 2col 66-33 Gpanel col 1
+  ;regions[two_col_66_33_second]     = 2col 66-33 Gpanel col 2
+
+
+  ;--// THREE column Gpanels
+  
+  ; 3 col 3x33 Gpanel
+  ;regions[three_col_3x33_first]       = 3col 3x33 Gpanel col 1
+  ;regions[three_col_3x33_second]      = 3col 3x33 Gpanel col 2
+  ;regions[three_col_3x33_third]       = 3col 3x33 Gpanel col 3
+
+  ; 3 col 25-25-50 Gpanel
+  ;regions[three_col_25_25_50_first]   = 3col 25-25-50 Gpanel col 1
+  ;regions[three_col_25_25_50_second]  = 3col 25-25-50 Gpanel col 2
+  ;regions[three_col_25_25_50_third]   = 3col 25-25-50 Gpanel col 3
+  
+  ; 3 col 50-25-25 Gpanel
+  ;regions[three_col_50_25_25_first]   = 3col 50-25-25 Gpanel col 1
+  ;regions[three_col_50_25_25_second]  = 3col 50-25-25 Gpanel col 2
+  ;regions[three_col_50_25_25_third]   = 3col 50-25-25 Gpanel col 3
+  
+
+  ;--// FOUR column Gpanel
+  ;regions[four_col_first]   = 4col Gpanel col 1
+  ;regions[four_col_second]  = 4col Gpanel col 2
+  ;regions[four_col_third]   = 4col Gpanel col 3
+  ;regions[four_col_fourth]  = 4col Gpanel col 4
+
+  ;--// FIVE column Gpanel
+  ;regions[five_col_first]   = 5col Gpanel col 1
+  ;regions[five_col_second]  = 5col Gpanel col 2
+  ;regions[five_col_third]   = 5col Gpanel col 3
+  ;regions[five_col_fourth]  = 5col Gpanel col 4
+  ;regions[five_col_fifth]   = 5col Gpanel col 5
+
+  ;--// SIX column Gpanel
+  ;regions[six_col_first]    = 6col Gpanel col 1
+  ;regions[six_col_second]   = 6col Gpanel col 2
+  ;regions[six_col_third]    = 6col Gpanel col 3
+  ;regions[six_col_fourth]   = 6col Gpanel col 4
+  ;regions[six_col_fifth]    = 6col Gpanel col 5
+  ;regions[six_col_sixth]    = 6col Gpanel col 6
+
+
+;----------// Skinr Styles
+
+  ; The following classes require the Skinr module, http://drupal.org/project/skinr
+  ; Adaptivetheme includes native support for Skinr classes on nodes, blocks and views.
+
+  ; Grids - 960px, 16 column grid classes
+
+  ;---// 16 column classes
+  ;skinr[grid][1][label] = 60px
+  ;skinr[grid][1][class] = grid_1
+  ;skinr[grid][2][label] = 120px
+  ;skinr[grid][2][class] = grid_2
+  ;skinr[grid][3][label] = 180px
+  ;skinr[grid][3][class] = grid_3
+  ;skinr[grid][4][label] = 240px
+  ;skinr[grid][4][class] = grid_4
+  
+  ;skinr[grid][5][label] = 300px
+  ;skinr[grid][5][class] = grid_5
+  ;skinr[grid][6][label] = 360px
+  ;skinr[grid][6][class] = grid_6
+  ;skinr[grid][7][label] = 420px
+  ;skinr[grid][7][class] = grid_7
+  ;skinr[grid][8][label] = 480px
+  ;skinr[grid][8][class] = grid_8
+  
+  ;skinr[grid][9][label] = 540px
+  ;skinr[grid][9][class] = grid_9
+  ;skinr[grid][10][label] = 600px
+  ;skinr[grid][10][class] = grid_10
+  ;skinr[grid][11][label] = 660px
+  ;skinr[grid][11][class] = grid_11
+  ;skinr[grid][12][label] = 720px
+  ;skinr[grid][12][class] = grid_12
+ 
+  ;skinr[grid][13][label] = 780px
+  ;skinr[grid][13][class] = grid_13
+  ;skinr[grid][14][label] = 840px
+  ;skinr[grid][14][class] = grid_14
+  ;skinr[grid][15][label] = 900px
+  ;skinr[grid][15][class] = grid_15
+  ;skinr[grid][16][label] = 960px
+  ;skinr[grid][16][class] = grid_16
+
+
+;----------// Features
+
+  ; The "features" control which of these check boxes display on the
+  ; admin/build/themes configuration page. This is useful for 
+  ; suppressing check boxes for elements not used by your theme.
+
+  features[] = logo
+  features[] = name
+  features[] = slogan
+  features[] = mission
+  features[] = node_user_picture
+  features[] = comment_user_picture
+  features[] = search
+  features[] = favicon
+  features[] = primary_links
+  features[] = secondary_links
+
+
+
+; Information added by drupal.org packaging script on 2009-08-26
+version = "6.x-1.3"
+core = "6.x"
+project = "adaptivetheme"
+datestamp = "1251307814"
+

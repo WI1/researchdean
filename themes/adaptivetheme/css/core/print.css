@@ -1,0 +1,11 @@
+/* Added by Tobias Unger in order to "enable" printing. */
+
+#seite,#secondary-content,#footer-wrapper,#sidebar-first,#sidebar-last {
+    display:none;
+}
+
+#content-column {
+    position:absolute;
+	top:2em;
+	left:2em;
+}

@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* $Id: starter-rtl.css,v 1.5 2009/08/25 04:01:04 jmburnz Exp $ */
+/* adaptivethemes.com */
+
+/**
+ * @file stater-rtl.css
+ * Default styles for getting started. Unset this if you want a style-free starter theme.
+ */
+body{font-family:"Arabic Transparent", Verdana, Geneva, "DejaVu Sans", sans-serif;}
+#skip-nav{text-align:left;}
+#branding{float:right;}
+#search-box{float:left;}
+#header-blocks{float:right;}
+.primary-links li{float:right;}
+.secondary-links li{float:right;}
+#content-aside{float:left;padding-right:10px;width:240px;}
+ul.menu,
+ul.menu ul,
+ul.menu ul ul,
+ul.menu ul ul ul{margin:0 1em 0 0;}
+.comment-links ul.links{padding:0 1em;text-align:left;}
+.node ul.links li{padding:0 1em;}
+#block-locale-0 ul{margin:0 1.5em 0 0;}

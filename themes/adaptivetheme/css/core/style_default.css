@@ -1,0 +1,60 @@
+ol#main_menu li a:link, ol#main_menu li a:visited, div.csc-frame-frame1 { background-color: #869BB6; }
+ol#main_menu li ol li a:link, ol#main_menu li ol li a:visited, ul.courses li a:link, ul.courses li a:visited, div.courseview h2 { background-color: #617998; }
+
+
+ol#main_menu li.active a,
+ol#main_menu li ol li.active a,
+ol#main_menu li a:focus, 
+ol#main_menu li ol li a:focus,
+ol#main_menu li a:hover, 
+ol#main_menu li ol li a:hover,
+ol#main_menu li a:active, 
+ol#main_menu li ol li a:active,
+ul.courses li.active a,
+ul.courses li a:focus,
+ul.courses li a:hover,
+ul.courses li a:active,
+div.csc-mailform-field input.csc-mailform-submit
+ {
+	background-color: #002F4F;
+}
+
+div#searchbox input#searchbox_submit, div.csc-mailform-field input, div.csc-mailform-field textarea {
+	background-color: #869bb6;
+	color: #ffffff;
+}
+
+div#content p.introduction, div#content h1, div#content h2, div#content h3, div#content h4, div#content h5, div#content h6 {
+	color: #617998;
+}
+
+div#content a:link { color: #617998; text-decoration: underline; }
+div#content a:visited { color: #617998; text-decoration: underline; }
+div#content a:focus { color: #617998; text-decoration: underline; }
+div#content a:hover { color: #617998; text-decoration: underline; }
+div#content a:active { color: #617998; text-decoration: underline; }
+
+div.courseview {
+	border-color: #617998;
+}
+
+.small {
+display: block;
+font-size: 10px;
+clear:both;
+margin-left: 120px;
+}
+
+/*************** Publication List ****************/
+
+.tx_sixpack_pi1-bibtitle {
+padding-top: 12px;
+font-weight: bold;
+}
+
+/*************** Tabelle und Boxen Akzent **********/
+
+.contenttable-1, div.darkblue {
+	background:#002F4F url(/grafiken/d7/white.gif) repeat-x scroll 0 0 !important;
+	border-color:#D1D1D1;	
+}

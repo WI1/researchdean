@@ -1,0 +1,1112 @@
+/* $Id: dev.css,v 1.3 2009/08/14 18:29:12 jmburnz Exp $ */
+/* adaptivethemes.com */
+
+/**
+ * @file dev.css
+ * dev.css is useful for firebugging to find selectors and
+ * protoyping styles - DO NOT USE THIS FOR PRODUCTION THEMES.
+ */
+ 
+/**********************************************************
+ *                    Body
+ **********************************************************/
+body {}
+
+
+/**********************************************************
+ *                 HTML Elements
+ **********************************************************/
+
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+
+p {}
+
+strong {}
+em, dfn {}
+dfn {}
+
+sup, sub {}
+
+del {}
+ins {}
+
+blockquote {}
+cite {}
+q {}
+
+address {}
+
+ul {}
+ol {}
+li {}
+
+dl {}
+dd {}
+dt {}
+
+
+abbr {}
+acronym {}
+
+pre, code, tt {}
+p code {}
+samp {}
+kbd {}
+var {}
+
+
+/**********************************************************
+ *                 Global Link Styles
+ **********************************************************/
+a {}
+a:link    {}
+a:visited {}
+a:hover   {}
+a:active  {}
+a.active  {}
+
+/* Set global a:active and a:focus styles. */
+a:active,
+a:focus {}
+
+/* Drupal sets this to black. */
+li a.active {}
+
+/* Remove borders on linked images. */
+a img {}
+
+/**********************************************************
+ *              Section, Page and Body Classes
+ **********************************************************/
+/**
+ * Normally you will use these in combination with other
+ * selectors. I include them here for completedness.
+ */
+	
+/** 
+ * Section Class
+ * The section class takes the 2nd part of the URL and
+ * builds a section-[arg] class from it. If you emulate
+ * site sections using the Pathauto module this can be a 
+ * powerful way to style site sections.
+ *
+ * Look in body element for the section you want to style
+ * to find the class to replace section-[arg]:
+ */
+/* .section-arg {} */
+
+/* Front or not front. */
+.front {}
+.not-front {}
+
+/* Is the user logged in. */
+.logged-in {}
+.not-logged-in {}
+
+/* Node type body classes. */
+.node-type-book  {}
+.node-type-blog  {}
+.node-type-forum {}
+.node-type-page  {}
+.node-type-poll  {}
+.node-type-story {}
+
+/**
+ * Warning! 
+ * The sidebar body classes are integral to how genesis
+ * applies the layout. Be careful. 
+ */
+.one-sidebar   {}
+.two-sidebars  {}
+.sidebar-last {}
+.sidebar-first  {}
+
+/** 
+ * Optional Region body classes
+ * When any of the following regions are active a body class can be set.
+ * To use you need to uncomment the conditional statements in 
+ * themeName_preprocess_page(), @see template.php.
+ */
+/*
+.leaderboard       {}
+.header-blocks     {}
+.secondary-content {}
+.tertiary-content  {}
+.footer            {}
+*/
+
+/** 
+ * Page Path Class
+ * The page path class takes the entire URL and builds a page-[path] 
+ * class from it. See examplebelow. You need to use Firebug or view 
+ * source to find out what the actual class will be, and be aware
+ * that this will change if your URL alias changes!
+ *
+ * Replace [example-node-path] with the path you want
+ * to style.
+ */
+/* .page-example-node-path {} */
+
+	
+/**********************************************************
+ *                  The wrapper divs
+ *    Be careful how you modify these, see layout.css
+ **********************************************************/
+/**
+ * Width Setting
+ *
+ * The layout supports Elastic, Fluid and Fixed width values.
+ * Elastic layouts are dynamic and will expand or contract when 
+ * the font size is changed. Fluid widths change when the browser 
+ * is resized and fixed width layouts stay the same width even 
+ * when the broswer is resized or the font size is changed.
+ *
+ * Elastic layouts use ems,       e.g. 80em
+ * Fluid layouts use percentages, e.g. 85%
+ * Fixed widths use pixels,       e.g. 960px
+ */
+#container {}
+
+/* Set a flexible width with max/min widths.
+body > #container {
+  width: 100%;      
+  max-width: 980px;
+  min-width: 760px;
+}
+*/
+/* Column wrappers */
+#columns {}
+.columns-inner {}
+
+/* Content wrappers */
+#content-column {}
+.content-inner {}
+
+/* Main content wrappers*/
+#main-content {}
+#content {}
+
+/* Set padding for content inner */
+/* Em based layouts */
+#layout-1a .two-sidebars  .content-inner {}
+#layout-1a .sidebar-first  .content-inner {}
+#layout-1a .sidebar-last .content-inner {}
+#layout-2a .content-inner {}
+#layout-3a .content-inner {}
+
+/* Percentage based layouts */
+#layout-1b .two-sidebars  .content-inner {}
+#layout-1b .sidebar-first  .content-inner {}
+#layout-1b .sidebar-last .content-inner {}
+#layout-2b .content-inner {}
+#layout-3b .content-inner {}
+
+/* Pixel based layouts */
+#layout-1c .two-sidebars  .content-inner {}
+#layout-1c .sidebar-first  .content-inner {}
+#layout-1c .sidebar-last .content-inner {}
+#layout-2c .content-inner {}
+#layout-3c .content-inner {}
+
+
+/**********************************************************
+ *                       Regions
+ **********************************************************/
+/* Target all regions with this low specifity selector. */
+.region {}
+.region-inner {}
+
+/**
+ * Most regions have an .inner div to set paddings or other
+ * design contingencies.
+ */
+ 
+/* Leaderboard is a full width region at the very top, 
+   ideal for displaying banners. */
+#leaderboard {}
+
+/* Header blocks region is embedded in the header, floated
+   between the logo/site_name and the search box. */
+#header-blocks {}
+#header-blocks .region-inner {}
+
+/* Secondary content is a full width region between 
+   the header and the main columns. */
+#secondary-content {}
+#secondary-content .region-inner {}
+
+/* Tertiary content is a full width region above the footer, 
+   below the main content. */
+#tertiary-content {}
+#tertiary-content .region-inner {}
+
+/* Content top and bottom are above and below the main content, 
+   within the main content column. Content aside floats to the 
+   right within the main central column, but below content top. */
+#content-top {}
+#content-aside {}
+#content-bottom {}
+
+
+/**********************************************************
+ *                      Sidebars
+ **********************************************************/
+/* Target both sidebars with this low specifity selector. */
+.sidebar {}
+.sidebar-inner {}
+
+/* Target a specific sidebar, inner or sidebar-inner. */
+#sidebar-first {}
+#sidebar-first .sidebar-inner {}
+
+#sidebar-last {}
+#sidebar-last .sidebar-inner {}
+
+
+/*********************************************************
+*                     GPanel Regions
+**********************************************************/
+.two-col-50 {}
+.two-col-50 .col-1 {}
+.two-col-50 .col-2 {}
+
+.two-col-50.with-nested {}
+#two-col-50-nested {}
+.two-col-50.with-nested .col-1 {}
+.two-col-50.with-nested .col-2 {}
+.two-col-50.with-nested #two-col-50-nested .col-1 {}
+.two-col-50.with-nested #two-col-50-nested .col-2 {}
+
+.three-col-33 {}
+.three-col-33 .col-1 {}
+.three-col-33 .col-2 {}
+.three-col-33 .col-3 {}
+
+.four-col-25 {}
+.four-col-25 .col-1 {}
+.four-col-25 .col-2 {}
+.four-col-25 .col-3 {}
+.four-col-25 .col-4 {}
+
+
+/**********************************************************
+ *                   Skip navigation
+ **********************************************************/
+/**
+ * To hide the skip-nav you can use: 
+ * 
+ * height: 0; 
+ * overflow: hidden;
+ * 
+ * Do not use display:none as this hides it from screen readers!
+ */
+#skip-nav {}
+
+/* Override default pseudo class styles */
+#skip-nav a:link    {}
+#skip-nav a:visited {}
+#skip-nav a:hover   {}
+#skip-nav a:focus   {}
+#skip-nav a:active  {}
+
+/**
+ * Move the skip-nav out of the viewport. 
+ * Using left -9999em can cause issue with some browsers especially in RTL mode.
+ */
+/*
+#skip-nav {
+  position: absolute;
+  left: -9999em;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+*/
+ 
+/**
+ * An alternative method is to position the skip-nav link offscreen
+ * until the user tabs the link into focus. Uncomment the following to use.
+ * 
+ * Adjust the style of the active/focused link to suit.
+ */
+/*
+#skip-nav {
+   text-align: left;
+}
+#skip-nav a:link, 
+#skip-nav a:hover, 
+#skip-nav a:visited {
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  top: -999em;
+}
+#skip-nav a:active,
+#skip-nav a:focus {
+  background: #FFF;
+  color: #C00000;
+  height: 1.5em;
+  overflow: visible;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: auto;
+  z-index: 1000;
+}
+*/
+
+
+/**********************************************************
+ *                 Header Elements
+ **********************************************************/
+/* #header wraps #branding, #search-box-top and #header-blocks. */
+#header {}
+
+/* #branding wraps #logo, #site-name and #site-slogan. */
+#branding {}
+
+/* h1 is for the front page only, all others use the div. */
+#branding h1 {}
+
+/* Logo and site_name wrapper. */
+.logo-site-name {}
+div.logo-site-name {}
+h1.logo-site-name  {}
+
+/* DIV/strong combo when when title is set. */
+div.logo-site-name strong {}
+
+/* Remove display:block if you want the site name inline with the logo. */
+.logo-site-name span {}
+
+/* Logo. */
+#logo {}
+
+#site-name {}
+
+/* Override default pseudo class styles. */
+#site-name a:link    {}
+#site-name a:visited {}
+#site-name a:hover   {}
+#site-name a:focus   {}
+#site-name a:active  {}
+
+/* Site slogan. */
+#site-slogan {}
+
+
+/**********************************************************
+ *    Search box, Advanced search form, Search results
+ *          For the search block see blocks.css
+ **********************************************************/
+/**
+ * Search box
+ */
+/* Float the serch box right. */
+#search-box {}
+
+/* Reset form element margins. */
+#search-theme-form {}
+
+/* Use the child selector because the inner div has no class. */
+#search-theme-form > div {}
+
+/* #search and .container-inline apply to the same div. */
+#search-theme-form #search {}
+#search-theme-form .container-inline {}
+
+#search-theme-form label {}
+#search-theme-form input {}
+#search-theme-form .search-input {}
+#search-theme-form .search_submit {}
+
+/**
+ * Advanced search form
+ */
+/* Advanced search-form id. */
+#search-form {}
+
+/* Use the child selector because the inner div has no class. */
+#search-form > div {}
+#search-form .container-inline {}
+#search-form #edit-keys-wrapper {}
+
+#search-form label {}
+#search-form input {}
+#search-form .form-item {}
+#search-form .form-submit {}
+
+/* Textfield styles. */
+#search-form #edit-keys-wrapper input {}
+#search-form #edit-keys-wrapper input:hover,
+#search-form #edit-keys-wrapper input:focus {}
+
+/* Advanced search fieldset. */
+fieldset #search-advanced {}
+
+/**
+ * Search results
+ */
+/* Box styles for the results page. */
+.section-search .box {}
+.section-search .box-inner {}
+.section-search .box-title {}
+
+/* Style the no results messages. */
+.section-search .box ul {}
+.section-search .box ul li {}
+
+/* Search results document list. */
+dl.search-results {}
+dl.search-results dt {}
+dl.search-results dd {}
+dl.search-results dd p {}
+dl.search-results dd .search-snippet {}
+dl.search-results dd .search-info {}
+
+
+/**********************************************************
+ *               Primary & Secondary Links
+ **********************************************************/
+/**
+ * Implimentation of Primary and Secondary Links.
+ *
+ * Primary & Secondary Links are colored by default so you 
+ * can easily identify them.
+ */
+
+/**
+ * #nav is the containing div for Primary & Secondary Links.
+ */
+#nav {}
+
+/**
+ * Primary Links
+ */
+/* #primary is the primary-links div wrapper */
+#primary {}
+
+.primary-links {}
+
+/* Modify the margin to set tab spacings. */
+.primary-links li {}
+
+.primary-links li a {}
+
+/* Set pseudo class styles. */
+.primary-links li a:hover {}
+.primary-links li a:focus {}
+.primary-links li a:active {}
+.primary-links li a:visited {}
+
+/* Primary first and last classes. */
+.primary-links li.first {}
+.primary-links li.last {}
+
+/* Active trail classes. */
+.primary-links li.active {}
+.primary-links li.active-trail {}
+.primary-links li.active-trail a {}
+
+
+/**
+ * Secondary Links
+ */
+/* #secondary is the secondary-links div wrapper */
+#secondary {}
+
+.secondary-links {}
+
+/* Modify the margin to set tab spacings. */
+.secondary-links li {}
+
+.secondary-links li a {}
+
+/* Set pseudo class styles. */
+.secondary-links li a:hover {}
+.secondary-links li a:focus {}
+.secondary-links li a:active {}
+.secondary-links li a:visited {}
+
+/* Secondary first and last classes. */
+.secondary-links li.first {}
+.secondary-links li.last {}
+
+/* Active trail classes. */
+.secondary-links li.active {}
+.secondary-links li.active-trail {}
+.secondary-links li.active-trail a {}
+
+
+/**********************************************************
+ *                      Breadcrumb
+ **********************************************************/
+/**
+ * The breadcrumb is directly below the header, 
+ * giving it the full width of theme to expand into.
+ * You can eaisly drag the breadcrumb html/php to the main 
+ * content column if you need to.
+ */
+#breadcrumb {}
+
+
+/**********************************************************
+ *                       Mission
+ **********************************************************/
+#mission {}
+
+
+/**********************************************************
+ *                    H1 Page Title
+ **********************************************************/
+/* The main title on each page. */
+h1#page-title {}
+
+
+/**********************************************************
+ *                     Pager 
+ **********************************************************/
+/* The first 2 classes provide the base pager styles. */
+.item-list ul.pager    {}
+.item-list ul.pager li {}
+
+/* Theme the various states of pager links. */
+.item-list ul.pager li a:link    {}
+.item-list ul.pager li a:visited {}
+.item-list ul.pager li a:hover   {}
+
+/* Note: .pager-current is for the current page. */
+.item-list ul.pager li.pager-item     {}
+.item-list ul.pager li.first          {}
+.item-list ul.pager li.last           {}
+.item-list ul.pager li.pager-current  {}
+.item-list ul.pager li.pager-first    {}
+.item-list ul.pager li.pager-previous {}
+.item-list ul.pager li.pager-next     {}
+.item-list ul.pager li.pager-last     {}
+
+
+/**********************************************************
+ *               Footer, Footer Message
+ **********************************************************/
+#footer-wrapper {}
+
+#footer {}
+#footer .region-inner {}
+#footer a {}
+
+#footer-message {}
+#footer-message a {}
+
+
+/**********************************************************
+ *                 RSS Feed Icon
+ **********************************************************/
+.feed-icon {}
+.feed-icon img {}
+#footer-message a.feed-icon {}
+
+
+/**********************************************************
+ *                      Nodes
+ **********************************************************/
+.node {}
+
+/* Inner wrapper div for nodes. */
+.node-inner {}
+
+/* Node title on teasers and other lists. */
+.node-title {}
+
+.node-title a:link,
+.node-title a:visited,
+.node-title a:active {}
+
+.node-title a:hover {}
+
+/* Node content wrapper. */
+.node-content {}
+
+/* User Picture. */
+.node .user-picture {}
+.node .user-picture img {}
+
+/* Submitted */
+.node-submitted {}
+.node-submitted a {}
+.node-submitted a:hover {}
+
+/* Common links classes. */
+.node ul.links {}
+.node ul.links li {}
+.node ul.links li a {}
+
+/* Links. */
+.node-links {}
+.node-links ul.links {}
+.node-links ul.links li  {}
+.node-links ul.links li a {}
+
+/* Taxonomy terms. */
+.node-terms {}
+.node-terms li.vocab {}
+.node-terms li span.vocab-name {}
+.node-terms ul.taxonomy {}
+.node-terms ul.taxonomy li.vocab-term {}
+.node-terms ul.taxonomy li.vocab-term a {}
+
+/* Style module links. */
+ul.links li.node_read_more a {}
+ul.links li.comment_add a {}
+ul.links li.comment_comments a {}
+ul.links li.comment_new_comments a {}
+ul.links li.blog_usernames_blog a {}
+ul.links li.print_html a {}
+ul.links li.print_email a {}
+ul.links li.print_pdf a {}
+
+/* Node ul link first and last classes. */
+.node ul.links li.first {}
+.node ul.links li.last  {}
+
+/* Node classes for node workflow states. */
+.node-add    {}
+.node-edit   {}
+.node-delete {}
+.node-preview  {}
+.node-sticky   {}
+.node-promoted {}
+
+/* Node status. */
+.node-unpublished {}
+
+/* Theme the node teaser seperatly. */
+.node-teaser {}
+
+
+/**********************************************************
+ *                   Core node types
+ **********************************************************/
+.node-blog  {}
+.node-page  {}
+.node-story {}
+.node-forum {}
+.node-book  {}
+.node-poll  {}
+
+
+/**********************************************************
+ *                 Custom node types
+ **********************************************************/
+/** 
+ * Replace CONTENT_TYPE with the content type 
+ * machine-readable name. 
+ */
+.node-type-CONTENT_TYPE {}
+
+
+/**********************************************************
+ *                    CCK Fields
+ **********************************************************/
+/* Wrapper for any CCK field. */
+.field {}
+
+/* Use "datetime" when creating new CCK date fields. */
+.field-type-datetime {}
+
+/* Filefield field. */
+.field-type-filefield {}
+
+/* Imagefield field. */
+.field-type-image {}
+
+/* Node reference field. */
+.field-type-nodereference {}
+
+/* User reference field. */
+.field-type-userreference {}
+
+/* Number fields. */
+.field-type-number-decimal {}
+.field-type-number-float   {}
+.field-type-number-integer {}
+
+/* Text field. */
+.field-type-text {}
+
+/**
+ * Specific field names.
+ */
+/* Underscores in field name are replaced with dashes. */
+.field-field-FIELDNAME {}
+
+
+/**********************************************************
+ *                     Comments
+ **********************************************************/
+/* Comment wrapper */
+#comments {}
+#comments-title {}
+	
+.comment {}
+
+/* Inner wrapper div for comments. */
+.comment-inner {}
+
+.comment .indented {}
+
+/* The title of each comment. */
+.comment-title {}
+
+.comment-id {}
+.comment-title .new {}
+
+.comment-title a:link,
+.comment-title a:visited,
+.comment-title a:active {}
+
+.comment-title a:hover {}
+
+.comment .user-picture {}
+.comment .user-picture img {}
+
+.comment-submitted {}
+.comment-submitted a {}
+.comment-submitted a:hover {}
+
+/* Comment content wrapper. */
+.comment-content {}
+
+/* Comment links. */
+.comment-links {}
+.comment-links ul.links {}
+.comment-links ul.links li {}
+.comment-links ul.links li a {}
+
+/* Core comment link classes. */
+ul.links li.comment_reply a {}
+ul.links li.comment_edit a {}
+ul.links li.comment_delete a {}
+
+/* Comment ul link first and last classes. */
+.comment-links ul.links li.first {}
+.comment-links ul.links li.last  {}
+
+/**
+ * Comment Classes - extra classes to help out themers.
+ */
+/* Comment author. */
+.comment-by-anonymous   {}
+.comment-by-node-author {}
+.comment-by-viewer      {}
+
+/* Comment is new. */
+.comment-new {}
+
+/* Zebra odd/even classes. */
+.comment.odd  {}
+.comment.even {}
+
+/* Comment status. */
+.comment-unpublished {}
+
+/* Themes the "Unpublished" text. */
+.comment-unpublished .unpublished {}
+
+/* Comment form on a seperate page. */
+.section-comment .box {}
+.section-comment .box .title {}
+
+/* Comment form below content. */
+#comments .box {}
+#comments .box .title {}
+
+
+/**********************************************************
+ *                       Blocks
+ **********************************************************/
+/**
+ * Styles set for .block, .block-inner, block-title and 
+ * .block-content will be inherited by all blocks.
+ */
+.block {}
+.block-inner   {} /* Block inner div */
+.block-title   {} /* h2 block title */
+.block-content {} /* Block content wrapper */
+
+
+/**********************************************************
+ *                   Sidebar blocks
+ **********************************************************/
+/**
+ * You can target blocks in one or more regions and 
+ * style them differently. 
+ */
+/* Low specifity selector to style blocks in both sidebars. */
+.sidebar .block {}
+.sidebar .block h2 {}
+.sidebar .block-inner {}
+.sidebar .block .block-content {}
+
+/* Low specifity selector to style blocks in all regions. */
+.region .block {}
+.region .block h2 {}
+.region .block-inner {}
+.region .block .block-content {}
+
+/* High specifity selectors to style blocks in one sidebar. */
+#sidebar-first .block {}
+#sidebar-first .block h2 {}
+#sidebar-first .block-inner {}
+#sidebar-first .block .block-content {}
+
+#sidebar-last .block {}
+#sidebar-last .block h2 {}
+#sidebar-last .block-inner {}
+#sidebar-last .block .block-content {}
+
+
+/**********************************************************
+ *                  Region blocks
+ **********************************************************/
+/* High specifity selectors to style blocks in one region. */
+#leaderboard       .block {}
+#header-blocks     .block {}
+#secondary-content .block {}
+#tertiary-content  .block {}
+#content-top       .block {}
+#content           .block {}
+#content-bottom    .block {}
+#footer            .block {}
+
+
+/**********************************************************
+ *                   Module blocks
+ **********************************************************/
+/**
+ * Module Block ID's 
+ * For contributed module blocks the pattern is the same,
+ * i.e. #block-[module]-[delta]
+ */
+#block-book-0       {} /* Book navigation block   */
+#block-blog-0       {} /* Recent Blog posts       */
+#block-comment-0    {} /* Recent Comments block   */
+#block-forum-0      {} /* Active Forum topics     */
+#block-forum-1      {} /* New Forum topics        */
+#block-locale-0     {} /* Language Switcher block */
+#block-node-0       {} /* Syndicate block         */
+#block-poll-0       {} /* Most recent poll        */
+#block-profile-0    {} /* Author information      */
+#block-search-0     {} /* Search form block       */
+#block-statistics-0 {} /* Popular content         */
+#block-system-0     {} /* Powered by Drupal       */
+#block-user-0       {} /* Login block             */
+#block-user-1       {} /* Navigation Menu block   */
+#block-user-2       {} /* Who's New block         */
+#block-user-3       {} /* Who's Online block      */
+
+/* Primary and Secondary links blocks */
+#block-menu-primary-links   {}
+#block-menu-secondary-links {}
+
+/* The class selector applies to all blocks of these types. */
+.block-user {} 
+.block-book {} 
+.block-aggregator {}
+
+
+/**********************************************************
+ *                 Search block form
+ **********************************************************/
+#search-block-form {}
+
+/* Wrapper divs. */
+#search-block-form > div {}
+#search-block-form .container-inline{}
+
+#search-block-form label {}
+#search-block-form input {}
+#search-block-form .form-item {}
+#search-block-form .form-submit {}
+#search-block-form #edit-search-block-form-1 {}
+
+/* Override forms.css focus style */
+#edit-search-block-form-1:hover,
+#edit-search-block-form-1:focus {}
+
+
+/**********************************************************
+ *                   Menu blocks
+ **********************************************************/
+/**
+ * Prefix these with the block id to style one menu only.
+ */
+ul.menu,
+ul.menu ul, 
+ul.menu ul ul, 
+ul.menu ul ul ul {}
+
+/* Menu li styles */
+ul.menu li {}
+
+ul.menu li.collapsed {}
+ul.menu li.expanded  {}
+ul.menu li.leaf      {}
+
+ul.menu li a:link    {}
+ul.menu li a:hover   {}
+ul.menu li a:visited {}
+ul.menu li.active a  {}
+ul.menu li.active-trail {}
+
+ul.menu li.first {}
+ul.menu li.last  {}
+
+
+/**********************************************************
+ *                   Block item-list
+ **********************************************************/
+.block .item-list ul {}
+.block .item-list ul li {}
+
+
+/**********************************************************
+ *                  Gpanel blocks
+ **********************************************************/
+/* Examples to get started. Add col specific selectors to style
+   blocks in different Gpanel columns, or element selectors to
+   style specific elements */
+   
+.two-col-2x50  .block {}
+.two-col-33-66 .block {}
+.two-col-66-33 .block {}
+
+.three-col-3x33     .block {}
+.three-col-25-25-50 .block {}
+.three-col-50-25-25 .block {}
+
+.four-col-4x25 .block {}
+.five-col-5x20 .block {}
+.six-col-6x16  .block {}
+
+
+/**********************************************************
+ *                  Gpanel Regions
+ **********************************************************/
+
+/* ONLY ADD BORDERS, MARGIN AND PADDING TO THE INNER OR THE CONTAINED BLOCK */
+
+.gpanel {}
+.gpanel .region {}
+.gpanel .region .inner {}
+.gpanel .first  .inner {}
+.gpanel .last   .inner {}
+
+/* 2 column */
+.two-col-2x50 {}
+.two-col-2x50 .region {}
+.two-col-2x50 .region .inner {}
+.two-col-2x50 .col-1  {}
+.two-col-2x50 .col-2  {}
+.two-col-2x50 .col-1 .inner {}
+.two-col-2x50 .col-2 .inner {}
+
+.two-col-33-66 {}
+.two-col-33-66 .region {}
+.two-col-33-66 .region .inner {}
+.two-col-33-66 .col-1 {}
+.two-col-33-66 .col-2 {}
+.two-col-33-66 .col-1 .inner {}
+.two-col-33-66 .col-2 .inner {}
+
+.two-col-66-33 {}
+.two-col-66-33 .region {}
+.two-col-66-33 .region .inner {}
+.two-col-66-33 .col-1 {}
+.two-col-66-33 .col-2 {}
+.two-col-66-33 .col-1 .inner {}
+.two-col-66-33 .col-2 .inner {}
+
+/* 3 column */
+.three-col-3x33 {}
+.three-col-3x33 .region {}
+.three-col-3x33 .region .inner {}
+.three-col-3x33 .col-2 {}
+.three-col-3x33 .col-3 {}
+.three-col-3x33 .col-2 .inner {}
+.three-col-3x33 .col-3 .inner {}
+
+.three-col-25-25-50 {}
+.three-col-25-25-50 .region {}
+.three-col-25-25-50 .region .inner {}
+.three-col-25-25-50 .col-1 {}
+.three-col-25-25-50 .col-2 {}
+.three-col-25-25-50 .col-3 {}
+.three-col-25-25-50 .col-1 .inner {}
+.three-col-25-25-50 .col-2 .inner {}
+.three-col-25-25-50 .col-3 .inner {}
+
+.three-col-50-25-25 {}
+.three-col-50-25-25 .region {}
+.three-col-50-25-25 .region .inner {}
+.three-col-50-25-25 .col-1 {}
+.three-col-50-25-25 .col-2 {}
+.three-col-50-25-25 .col-3 {}
+.three-col-50-25-25 .col-1 .inner {}
+.three-col-50-25-25 .col-2 .inner {}
+.three-col-50-25-25 .col-3 .inner {}
+
+/* 4 column */
+.four-col-4x25 {}
+.four-col-4x25 .region {}
+.four-col-4x25 .region .inner {}
+.four-col-4x25 .section-1 {}
+.four-col-4x25 .section-2 {}
+.four-col-4x25 .col-1 {}
+.four-col-4x25 .col-2 {}
+.four-col-4x25 .col-3 {}
+.four-col-4x25 .col-4 {}
+.four-col-4x25 .col-1 .inner {}
+.four-col-4x25 .col-2 .inner {}
+.four-col-4x25 .col-3 .inner {}
+.four-col-4x25 .col-4 .inner {}
+
+/* 5 column */
+.five-col-5x20 {}
+.five-col-5x20 .region {}
+.five-col-5x20 .region inner {}
+.five-col-5x20 .col-1 {}
+.five-col-5x20 .col-2 {}
+.five-col-5x20 .col-3 {}
+.five-col-5x20 .col-4 {}
+.five-col-5x20 .col-5 {}
+.five-col-5x20 .col-1 .inner {}
+.five-col-5x20 .col-2 .inner {}
+.five-col-5x20 .col-3 .inner {}
+.five-col-5x20 .col-4 .inner {}
+.five-col-5x20 .col-5 .inner {}
+
+/* 6 column */
+.six-col-6x16 {}
+.six-col-6x16 .region {}
+.six-col-6x16 .region .inner {}
+.six-col-6x16 .col-1 {}
+.six-col-6x16 .col-2 {}
+.six-col-6x16 .col-3 {}
+.six-col-6x16 .col-4 {}
+.six-col-6x16 .col-5 {}
+.six-col-6x16 .col-6 {}
+.six-col-6x16 .col-1 .inner {}
+.six-col-6x16 .col-2 .inner {}
+.six-col-6x16 .col-3 .inner {}
+.six-col-6x16 .col-4 .inner {}
+.six-col-6x16 .col-5 .inner {}
+.six-col-6x16 .col-6 .inner {}
+
+

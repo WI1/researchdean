@@ -1,0 +1,1234 @@
+/* $Id: at-admin.css,v 1.2 2009/08/15 21:57:18 jmburnz Exp $ */
+/* adaptivethemes.com */
+
+/**
+ * @file at-admin.css
+ * Contains all styles for the built in Administration Theme.
+ */ 
+
+/* Jeffs border radius reference...
+-moz-border-radius-topleft 
+-moz-border-radius-topright 
+-moz-border-radius-bottomleft 
+-moz-border-radius-bottomright
+-webkit-border-top-left-radius
+-webkit-border-top-right-radius
+-webkit-border-bottom-left-radius
+-webkit-border-bottom-right-radius
+*/
+
+body.section-admin,
+body#at-admin {
+  font-family: "Lucida Grande",Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #666;
+  color: #222;
+}
+
+
+/**
+ * #at-admin layout
+ */
+#at-admin .two-sidebars  .content-inner {margin      : 0 260px;}
+#at-admin .sidebar-left  .content-inner {margin-left :   260px;}
+#at-admin .sidebar-right .content-inner {margin-right:   260px;}
+#at-admin #sidebar-left  {width: 240px; margin-left: -100%;}
+#at-admin #sidebar-right {width: 240px; margin-left: -240px;}
+
+
+/**********************************************************
+ *                 HTML Elements
+ **********************************************************/
+
+h1 {}
+h2 {}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+
+p {}
+
+sup, sub {}
+
+ul {}
+ol {}
+li {}
+
+dl {}
+dd {}
+dt {}
+
+
+/**********************************************************
+ *                 Admin Link Styles
+ **********************************************************/
+a {
+  margin: 0; 
+  padding: 0;
+  text-decoration: none;
+}
+
+a:link,
+a:visited {
+  color: #21759B;
+}
+a:visited {
+  color: #21759B;
+}
+a:hover {
+  background: transparent;
+  color: #555;
+}
+a:active,
+a.active {
+  color:#222;
+}
+
+/* Set global a:active and a:focus styles. */
+a:active,
+a:focus {
+  color: #C00000;
+  border: 0;
+}
+
+/* Drupal sets this to black. */
+li a.active {}
+
+/* Remove borders on linked images. */
+a img {
+  border: none;
+}
+
+	
+/**********************************************************
+ *                  The wrapper divs
+ *    Be careful how you modify these, see layout.css
+ **********************************************************/
+#container {
+  width: 100%;
+  background: #FFF;
+}
+
+/* Set a flexible width with max/min widths. */
+body > #container {
+  width: 100%;      
+  max-width: 1600px;
+  min-width: 980px;
+}
+
+/* Column wrappers */
+#columns {
+  padding: 1em;
+}
+.columns-inner {}
+
+/* Content wrappers */
+#content-column {}
+.content-inner {}
+
+/* Main content wrappers*/
+#main-content {}
+#content {}
+
+/* Set padding for content inner */
+/* Pixel based layouts */
+#layout-1c .two-sidebars  .content-inner {}
+#layout-1c .sidebar-left  .content-inner {}
+#layout-1c .sidebar-right .content-inner {}
+#layout-2c .content-inner {}
+#layout-3c .content-inner {}
+
+
+/**********************************************************
+ *                       Regions
+ **********************************************************/
+/* Target all regions with this low specifity selector. */
+.region {}
+.region-inner {}
+
+.page-block .region {
+  margin: 0.5em 0;
+}
+.page-block .region-inner,
+.page-block .sidebar-inner,
+.page-block #content-top,
+.page-block #content-aside,
+.page-block #content-bottom,
+.page-block #main-content .block-region {
+  background: #EAF2FA;
+  border: 2px dashed #9BBFCF; 
+  padding: 3px;
+}
+
+.page-block #content-top .block-region,
+.page-block #content-aside .block-region,
+.page-block #content-bottom .block-region {
+  border: none; 
+}
+
+.page-block .region .block {
+  background: #FFF;
+}
+
+.page-block #main-content .block-region {
+  padding: 9px 12px;
+}
+
+.block-region {
+  background: transparent;
+  border: none;
+  color: #9BBFCF;
+  font-weight: bold;
+}
+
+/**
+ * Most regions have an .inner div to set paddings or other
+ * design contingencies.
+ */
+
+/* Header blocks region is embedded in the header, floated
+   between the logo/site_name and the search box. */
+#header-blocks {
+  float: left;
+  margin-left: 2em; /* LTR */
+}
+#header-blocks .region-inner {}
+
+/* Secondary content is a full width region between 
+   the header and the main columns. */
+#secondary-content {}
+#secondary-content .region-inner {}
+
+/* Tertiary content is a full width region above the footer, 
+   below the main content. */
+#tertiary-content {}
+#tertiary-content .region-inner {}
+
+/* Content top and bottom are above and below the main content, 
+   within the main content column. Content aside floats to the 
+   right within the main central column, but below content top. */
+#content-top {}
+#content-aside {
+  background: #FFF; /* Set background or else its transparent. */
+  float: right;
+  padding: 0 0 20px 10px; /* Bottom and left gutter widths */
+  width: 240px; /* Modify the width to suit your layout. */
+}
+#content-bottom {}
+
+
+
+/**********************************************************
+ *                   Skip navigation
+ **********************************************************/
+/**
+ * To hide the skip-nav you can use: 
+ * 
+ * height: 0; 
+ * overflow: hidden;
+ * 
+ * Do not use display:none as this hides it from screen readers!
+ */
+#skip-nav {
+   text-align: right; /* LTR */
+}
+
+/* Override default pseudo class styles */
+#skip-nav a:link    {}
+#skip-nav a:visited {}
+#skip-nav a:hover,
+#skip-nav a:focus   {color: #FFF;}
+#skip-nav a:active  {}
+
+/**
+ * Move the skip-nav out of the viewport. 
+ * Using left -9999em can cause issue with some browsers especially in RTL mode.
+ */
+/**/
+#skip-nav {
+  position: absolute;
+  top: -9999em;
+  left: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+
+/**********************************************************
+ *                 Header Elements
+ **********************************************************/
+/* #header wraps #branding, #search-box-top and #header-blocks. */
+#header {
+  background: #464646;
+  padding: 0.75em 1em;
+}
+
+/* logo site_name wrapper. */
+.logo-site-name {}
+
+/* DIV/strong combo when when title is set. */
+.logo-site-name strong {}
+
+/* Remove display:block if you want the site name inline with the logo. */
+.logo-site-name span {
+  display: block;
+  float: left;
+}
+
+#logo {
+  padding: 0 10px 0 0;
+}
+
+
+#site-name {
+  font-weight: bold; /* Bold or else the line heights vary. */
+  font-size: 1.33em;
+  line-height: 1.5;
+  padding: 2px 0;
+}
+
+/* Override default pseudo class styles. */
+#site-name a:link, 
+#site-name a:visited {
+  color:#FFF;
+}
+#site-name a:hover,
+#site-name a:focus {
+  color: #CCC; 
+  background: transparent;
+}
+#site-name a:active  {}
+
+/* user-date. */
+#user-date {
+  clear: both;
+  color: #CCC;
+  font-size: 0.94em;
+}
+
+
+/**********************************************************
+ *    Search box, Advanced search form, Search results
+ *          For the search block see blocks.css
+ **********************************************************/
+/**
+ * Search box
+ */
+/* Float the serch box right. */
+#search-box {
+  float: right;
+  padding: 5px 0 0 0;
+}
+
+/* Reset form element margins. */
+#search-theme-form {
+  margin: 0;
+}
+
+/* Use the child selector because the inner div has no class. */
+#search-theme-form > div {}
+
+/* #search and .container-inline apply to the same div. */
+#search-theme-form #search {
+  margin:-5px 0 0;
+}
+#search-theme-form .container-inline {}
+
+#search-theme-form label {
+  color: #CCC;
+  font-size: 0.94em;
+}
+#search-theme-form input.search_submit {
+  color: #999;
+  background: url(core-images/search-button-tile.png) repeat-x 0 -15px;
+  border: 1px solid #777;
+  cursor: pointer;
+  padding:1px 6px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+#search-theme-form input.search_submit:hover {
+  color: #EEE;
+  background-position: 0 -65px ;
+}
+
+#edit-search_theme_form {
+  background: #EEE;
+  width: 120px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+
+/**********************************************************
+ *                      Breadcrumb
+ **********************************************************/
+/**
+ * Genesis places the breadcrumb directly below the header, 
+ * giving it the full width of theme to expand into.
+ * You can eaisly drag the breadcrumb html to the main 
+ * content column if you need to.
+ */
+#breadcrumb {
+  padding: 0.5em 1em;
+}
+
+
+/**********************************************************
+ *                    H1 Page Title
+ **********************************************************/
+/* The main title on each page. */
+h1#page-title {font-size:1.5em;}
+
+/**********************************************************
+ *                     Pager 
+ **********************************************************/
+/* The first 2 classes provide the base pager styles. */
+.item-list ul.pager {
+  background-color: #EEE;
+  color: #FFF;
+  font-size: 1.1em;
+  margin: 0 0 20px 0;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+.item-list ul.pager li {
+  color:#FFF;
+  margin:0;
+}
+
+/* Theme the various states of pager links. */
+.item-list ul.pager li a {padding:6px 10px;font-weight:bold;}
+.item-list ul.pager li a:link {color: #444;}
+.item-list ul.pager li a:visited {color: #444;}
+.item-list ul.pager li a:hover {
+  background-color: #BBB;
+  color:#FFF;
+  font-weight:bold;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+/* .pager-current is the current page. */
+.item-list ul.pager li.pager-current  {
+  background-color: #bbb;
+  color:#FFF;
+  font-weight:bold;
+  padding:6px 10px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+/**********************************************************
+ *          Footer, Footer Message, Attribution
+ **********************************************************/
+#footer {}
+#footer .region-inner {}
+#footer a {}
+
+#attribution {
+  font-size: 0.82em;
+  padding: 5px;
+  text-align: center;
+}
+
+#attribution a {
+  color: #999;
+}
+
+#attribution a:hover {
+  color: #CCC;
+}
+
+
+/**********************************************************
+ *                       Node forms
+ **********************************************************/
+#node-form .right {
+  float: right;
+  margin-top: 35px;
+  width: 24.5%;
+}
+#node-form .right .buttons {
+  background: #EEE;
+  border: 1px solid #DADADA;
+  padding: 10px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+#node-form .right .buttons #edit-submit,
+#node-form .right .buttons #edit-preview,
+#node-form .right .buttons #edit-delete {
+   margin: 2px 2px 2px 0;
+}
+
+#node-form .right .fieldset-vocabularies {}
+
+#node-form .left {
+  float: left;
+  width: 74.5%;
+}
+
+/**********************************************************
+ *                       Blocks
+ **********************************************************/
+/**
+ * Styles set for .block, .block-inner, block-title and 
+ * .block-content will be inherited by all blocks.
+ */
+.block {
+  clear: both;
+  margin: 0 0 1.5em;
+  border: 1px solid #DFDFDF;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.block-inner {
+ position: relative;
+}
+
+.block-title {
+  display: block;
+  background: #EDEDED url('core-images/gray-grad.png') repeat-x left bottom;
+  font-size: 1.18em;
+  padding: 0.3em 0.5em;
+}
+
+.block-content {
+ margin: 0 0.5em 0.5em,
+}
+
+/* Navigation Menu block */
+#block-user-1 {}
+
+/* Drupal icon block */
+#block-system-0 {
+  border: none;
+  text-align: center;
+}
+
+#block-system-0 .fieldset-block-info {
+  text-align: left;
+}
+
+.block a:link,
+.block a:visited {color:#21759B;}
+.block a:visited {color:#21759B;}
+.block a:hover {background: #EAF2FA; color: #555}
+.block a:active,
+.block a.active  {color:#222;}
+
+/**********************************************************
+ *                   Menu blocks
+ **********************************************************/
+/**
+ * Prefix these with the block id to style one menu only.
+ */
+ul.menu,
+ul.menu ul, 
+ul.menu ul ul, 
+ul.menu ul ul ul {
+  margin:0 0 0 1.5em; /* LTR */
+  padding: 0;
+}
+
+/* Menu li styles */
+ul.menu li {
+  padding: 0.35em 0 0 0; /* LTR */
+}
+
+ul.menu li.collapsed {}
+ul.menu li.expanded  {}
+ul.menu li.leaf      {}
+
+ul.menu li a         {display: block;}
+ul.menu li a:link    {}
+ul.menu li a:hover,
+ul.menu li a:focus   {outline: 0;}
+ul.menu li a:visited {}
+ul.menu li.active a  {}
+ul.menu li.active-trail {}
+
+ul.menu li.first {}
+ul.menu li.last  {}
+
+#main-content ul.menu,
+#main-content ul.menu li {
+  margin: 0;
+  list-style:none;
+  font-weight: bold;
+}
+
+/*********************************************************
+*                    Admin Blocks
+**********************************************************/
+
+.block-at-admin {
+  background: #FFF;
+  border: 1px solid #13749F;
+  margin-bottom: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.block-at-admin .block-inner {
+  padding: 3px;
+}
+.block-at-admin h2 {
+  background: #13749F;
+  color: #FFF;
+  padding: 0.2em 0.5em;
+}
+
+.block-at-admin .block-content {}
+
+.block-at-admin legend {
+  margin:0 0 0 -10px;
+  padding:0;
+}
+
+.block-at-admin fieldset {
+  background: #FFF;
+  margin: 0;
+  border: none;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+}
+
+.fieldset-block-info {
+  margin-bottom: 0.5em;
+}
+.fieldset-block-content {}
+
+.fieldset-block-info dl {
+  margin: 0;
+}
+.fieldset-block-info dt {
+  font-size: 0.82em;
+  border-bottom: 1px solid #EEE;
+}
+.fieldset-block-info dd {
+  color: #777;
+  font-size: 0.94em;
+  margin: 0 0 0.3em;
+}
+
+/* at-admin block edit links */
+.block-at-admin .fieldset-wrapper {padding: 3px;}
+
+.at-admin-block-edit-links {
+  font-size: 0.94em;
+  float: right;
+  margin-top: 0.5em;
+  padding-bottom: 3px;
+}
+
+.at-admin-block-edit-links ul {
+  margin:0;
+}
+
+.at-admin-block-edit-links .item-list li {
+ list-style:none;
+ display: inline;
+ margin: 0 0.3em 0 0;
+}
+
+.at-admin-block-edit-links .item-list li a {
+  color: #555;
+  border: 1px solid #BBB;
+  padding: 0.2em 0.6em;
+  text-transform: capitalize;
+  -moz-border-radius: 10px;
+}
+
+.at-admin-block-edit-links .item-list li a:hover {
+  color: #222;
+  background: #F7F7F7;
+  border: 1px solid #464646;
+}
+
+/*********************************************************
+*                        Admin
+**********************************************************/
+/**
+ * Admin panels.
+ */
+div.admin-panel {
+  border: 1px solid #DFDFDF;
+  margin: 0 0 0.75em;
+  padding: 0;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+div.admin .left,
+div.admin .right {
+  margin-left: 0;
+  margin-right: 0;
+  width:49%;
+}
+
+.admin-panel h3 {
+  display: block;
+  background: #EDEDED url('core-images/gray-grad.png') repeat-x left bottom;
+  font-size: 1.18em;
+  padding: 0.3em 0.5em;
+}
+
+.admin-panel .body {
+  padding: 0 1em;
+}
+
+.admin-panel p  {
+  margin: 0; 
+  padding: 1em 0 0;
+}
+
+.admin-panel ul,
+.admin-panel ul.menu,
+.admin-panel .item-list ul {
+  padding: 0 0 1em 0;
+}
+
+.admin-panel .item-list ul { 
+  margin: 0;
+}
+
+.admin-panel ul li {
+  color: #555;
+}
+
+.admin-panel dl {
+  margin: 0; 
+  padding: 1em 0;
+}
+
+.admin-panel dt {
+  font-weight: normal;
+}
+
+.admin-panel dd {
+  color: #555; 
+  font-size: 0.94em;
+  margin-left: 0;
+}
+
+.admin .compact-link {
+  margin: 0 0 1em;
+}
+
+.admin .compact-link a {
+  color: #555;
+  border: 1px solid #BBB;
+  padding: 0.3em 0.5em;
+  text-transform: capitalize;
+  -moz-border-radius: 12px;
+}
+
+.admin .compact-link a:hover {
+  color: #222;
+  background: #F7F7F7;
+  border: 1px solid #464646;
+}
+
+.page-admin-by-module .admin-panel .body {
+  margin: 0;
+}
+
+.page-admin-by-module .admin-panel .body p {  
+  color: #555; 
+  font-size: 0.94em; 
+}
+
+/* Misc */
+#user-admin-filter ul li,
+#node-admin-filter ul li {
+  list-style: none;
+}
+
+.more-help-link {
+  font-size: 0.94em;	
+  line-height: 1.667em;
+}
+
+#permissions td.permission {
+  padding-left:0.5em;
+}
+
+#permissions td.module {
+  background: #EEE; 
+  color: #222; 
+  font-weight: bold;
+}
+
+tr .block {
+  border: 0; /* Blocks page table. */
+}
+
+/**********************************************************
+ *                 Local tasks tabs
+ **********************************************************/
+.local-tasks {
+  margin-bottom: 0.75em;
+}
+
+ul.primary {
+  border-bottom-color: #CCC;
+  margin: 1.5em 0 0 0; 
+  padding: 0 0 0.4em 0.3em;
+}
+
+ul.primary li a {
+  background: #EEE url('core-images/gray-grad2.png') repeat-x left top;
+  border-color: #CCC;
+  margin-right: 0.08em;
+  padding: 0.3em 1em 0.4em;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+}
+
+.local-tasks ul.primary li a:hover  {
+  background: #F5F5F5;
+  border-color: #DDD;
+}
+
+.local-tasks ul.primary li.active a {
+  background: #FFF;		
+  border-bottom-color: #FFF;
+}
+
+ul.secondary {
+  border-bottom: 1px solid #CCC;
+  margin: 1em 0 0 0;
+  padding: 0 0.3em 1em;
+}
+
+ul.secondary li {
+  border-right: 0;
+  list-style: none;
+  padding: 0 2em 0 0;
+}
+
+ul.secondary li a:hover,
+ul.secondary li a.active {
+  border-bottom: 0;
+  text-decoration: underline;
+}
+
+
+/**********************************************************
+ *                   Tables
+ **********************************************************/
+ 
+/** 
+ * The selector groupings are from Garland which offers a
+ * sensible starting point for styling Drupal tables.
+ */
+ 
+table {
+  border-color: #C0C0C0;
+  border-spacing: 0;
+  margin: 1em 0; 
+  padding: 0;
+}
+
+caption, th, td {
+  text-align: left; /* LTR */
+}
+
+caption, th {
+  font-weight: bold;
+}
+
+table, td, th {
+  vertical-align: middle;
+}
+
+tbody, tfoot, thead, tr {
+  margin: 0; 
+  padding: 0;
+}
+
+thead th {
+  border-bottom: 0.1875em solid #C0C0C0; 
+  color: #494949;
+  font-weight: bold; 
+}
+
+td, th {
+  border-bottom: 1px solid #CCC;
+  margin: 0;
+  padding: 0.375em 0.5em; 
+}
+
+tr.even,
+tr.odd,
+tbody th {
+  /* border-bottom: 1px solid #CCC; System default */
+}
+
+tr.odd, 
+tr.info {
+  background-color: #FFF;
+}
+
+tr.even {
+  background-color: #E9EFF2;
+}
+
+tr.drag {
+  background-color: #FFFFF0;
+}
+
+tr.drag-previous  {
+  background-color: #FFD;
+}
+
+tr.odd td.active  {
+  background-color: #EEE;
+}
+
+tr.even td.active {
+  background-color: #F7F7F7;
+}
+
+td.region, 
+td.module, 
+td.container td.category {
+  background-color: #EEE;
+  border-bottom: 1px solid #CCC;
+  border-top: 1.5em solid #FFF;
+  color: #222;
+  font-weight: bold;
+}
+
+tr:first-child td.region,
+tr:first-child td.module, 
+tr:first-child td.container {
+  border-top-width: 0;
+}
+
+#block-admin-display-form tr .block {
+  background: transparent;
+}
+
+#system-modules td strong {
+  display: block; 
+  width: 110px;
+}
+
+.fieldset-toggle-display {margin-bottom: 0;}
+
+.fieldset-toggle-display .form-item {
+  background: #EEE;
+  float: left;
+  margin: 0.1em;
+  padding: 3px;
+  width: 16.5em;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.fieldset-logo-image-settings {margin-right: 1%;}
+.fieldset-logo-image-settings,
+.fieldset-shortcut-icon-settings {
+  float: left;
+  width: 46.5%;
+}
+
+#edit-logo-path,
+#edit-favicon-path {width: 90%;}
+
+.fieldset-theme-specific-settings {clear:both;}
+
+#system-theme-settings fieldset {}
+
+#system-theme-settings .button-wrapper {
+  clear: right;
+  display: block;
+  float: left;
+}
+
+
+/**********************************************************
+ *                     Admin tables
+ **********************************************************/
+.section-admin table {width: 100%;}
+
+/* Themes list table. */
+#system-themes-form table.sticky-table {
+  position: relative; 
+  z-index: 10;
+}
+
+
+/***********************************************************
+ *                     Messages
+ **********************************************************/
+div.messages, div.help, div.error, div.warning {
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+div.error {
+  background-color: #C00000;
+  border: 2px solid #FF3F3F;
+  color: #FFF3F6;
+}
+
+
+div.notice  {
+  background: #FFF6BF; 
+  border-color: #FFD324;
+  color: #514721;
+}
+
+div.status {
+  background-color: #2A6827;
+  border: 2px solid #4DA449;
+  color: #F1FFCF;
+}
+
+div.help {
+  background-color: #027AC6;
+  border: 2px solid #66BEF4;
+  color: #F7F8F8;
+}
+
+div.warning {
+  background-color: #9F3800;
+  border: 2px solid #FFB900;
+  color: #FFF6DF;
+}
+
+tr div.warning {
+  background-color: transparent;
+  border: 0;
+  color: #000;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+}
+
+tr #acquia-agent-no-search {
+  padding-left:75px!important;
+  background-position: 24px 5px;
+}
+
+tr #acquia-agent-no-search a:link,
+tr #acquia-agent-no-search a:visited {color:#21759B;}
+tr #acquia-agent-no-search a:hover {background: #EAF2FA; color: #555}
+
+div.error a:link, div.error a:visited,
+div.status a:link, div.status a:visited,
+div.help a:link, div.help a:visited,
+div.warning a:link, div.warning a:visited {
+  color:  yellow;
+  font-weight: bold;
+}
+
+div.error a:hover, div.error a:focus,
+div.status a:hover, div.status a:focus,
+div.help a:hover, div.help a:focus,
+div.warning a:hover, div.warning a:focus {
+  color: yellow;
+}
+
+
+/*********************************************************
+*                     Forms
+**********************************************************/
+form {
+  margin: 0 0 1.5em 0; 
+  padding: 0;
+}
+
+input {
+  margin: 0.375em 0.1875em 0 0.1875em;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.node-form #edit-title {
+  font-size: 1.5em;
+}
+
+input.text, 
+input.title,
+textarea, 
+select {
+  margin:0.375em 0; 
+  border: 1px solid #C0C0C0;
+}
+
+input.form-text:focus,
+input.text:focus, 
+input.title:focus, 
+select:focus {
+  border: 1px solid #FFCC00;
+  background: #FFFFDF;
+}
+
+textarea:focus {
+  border: 1px solid #FFCC00;
+}
+
+input.text, 
+input.title {
+  padding: 0.375em;
+}
+
+input.title {
+  font-size: 1.5em;
+}
+
+input.form-text, 
+textarea {
+  border: 1px solid #CCC;
+  height: auto; 
+  padding: 0.1875em;
+}
+
+textarea, 
+input {
+  font: 1em Verdana,Arial,"Bitstream Vera Sans",sans-serif;
+}
+
+div.form-item {
+  margin-bottom: 1em; 
+  margin-top: 1em;
+}
+
+.form-item strong.error {
+  display: block;
+}
+
+.form-item textarea.error {
+  padding: 0.1875em;
+}
+
+.form-item .description {
+  font-size: 0.9em; 
+  line-height: 1.667em;
+}
+
+span.form-required, 
+span.marker {
+  color: #8A1F11;
+}
+
+div.form-item div.description img {
+  margin: 0;
+}
+
+#node-admin-filter ul {
+  padding: 0.375em 0;
+}
+
+#edit-operation-wrapper select {
+  margin: 0.375em;
+}
+
+div.resizable-textarea textarea {
+  margin-top: 0;
+}
+
+.tips {
+  font-size: 1em;
+  margin-left: 3em; /* LTR */
+  padding: 0.1875em 0.375em 0.1875em 1.5em; /* LTR */
+}
+
+label, legend {
+  margin: 0; 
+  padding: 0;
+}
+
+/* default styling for all form buttons */
+input.form-submit, input.teaser-button {
+  background: transparent url(core-images/blue-button.png) no-repeat top;
+  border: 1px solid #fff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.94em;
+  font-weight: bold;
+  margin: 3px;
+  padding: 2px 4px;
+  outline: 1px solid #9BABB0;
+  -moz-border-radius: 4px;
+  -moz-outline-radius: 4px;
+  -webkit-border-radius: 4px;
+}
+
+.node-form input#edit-submit.form-submit, input#edit-save.form-submit {
+  background: transparent url(core-images/green-button.png) no-repeat top;
+}
+
+input#edit-delete.form-submit,
+#system-modules-uninstall input#edit-submit,
+#user-multiple-delete-confirm input#edit-submit {
+  background: transparent url(core-images/red-button.png) no-repeat top;
+}
+
+input.form-submit:hover,
+input.teaser-button:hover,
+input#edit-save.form-submit,
+.node-form input#edit-submit.form-submit:hover,
+input#edit-delete.form-submit:hover,
+ #system-modules-uninstall input#edit-submit:hover,
+#user-multiple-delete-confirm input#edit-submit:hover   {
+  background-position: bottom;
+  cursor: pointer;
+}
+
+/*********************************************************
+*                     Fieldsets
+**********************************************************/
+fieldset {
+  background: #FFF url('core-images/gray-grad2.png') repeat-x left top;
+  border: 1px solid #dadada;
+  margin: 1.5em 0;
+  padding: 0.75em;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.vertical-tabs fieldset {
+  background: #FFF;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+}
+
+/* Targets IE 7. Fixes background image in field sets (if one is set). */
+*:first-child+html fieldset {
+  background-color: transparent;
+  background-position: 0 .75em;
+  padding: 0 1em 0.75em;
+}
+
+*:first-child+html fieldset > .description, *:first-child+html fieldset .fieldset-wrapper .description {
+  padding-top: 1.5em;
+}
+
+/* Fix legend in Firefox */
+fieldset legend {
+  display: block;
+  font-weight: bold;
+  padding: 0 0.5em;
+}
+
+*:first-child+html fieldset legend, *:first-child+html fieldset.collapsed legend {
+  display: inline;
+}
+
+html.js fieldset.collapsed {
+  background: transparent;
+  padding-bottom: .75em;
+  padding-top: 0;
+}

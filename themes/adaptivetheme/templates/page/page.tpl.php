@@ -146,23 +146,14 @@
 <?php endif; ?>
 <div class="clear"></div>
 <div id="main" class="container_16">       
-        
-     
-<?php if ($secondary_content): ?>	
-<div id="secondary_content"> 
-	 <?php if ($search_box): ?>
-      <?php print $search_box; ?><!-- /search box -->
-     <?php endif; ?>
- 
-    
-	<?php if ($breadcrumb): ?>
+
+
+		<?php if ($breadcrumb): ?>
       <div id="breadcrumb" class="nav">
         <?php print $breadcrumb; ?>
       </div> <!-- /breadcrumb -->
     <?php endif; ?>
-	
-	<?php print $secondary_content; ?>
-</div>
+
 <?php endif; ?>
 <div class="clear"></div>
 <div id="content">     

@@ -734,52 +734,7 @@ function adaptivetheme_menu_item_link($link) {
 	}
 	return l($link['title'], $link['href'], $link['localized_options']);
 }
-/**
- * Outputs a HTML vCard
- *
- * @param int uid
- * @return string
- */
-function phptemplate_business_card($uid) {
-	$hcardOutput = 'Noch keine Person eingetragen';
 
-	if($uid) {
-		$user = user_load($uid);
-
-		$hcard = array(
-			'url' => '/user/' . $user->uid,
-			'given-name' => $user->profile_firstname,
-			'family-name' => $user->profile_lastname,
-			'street-address' => $user->addresses['street'],
-			'postal-code' => $user->addresses['postal_code'],
-			'locality' => $user->addresses['city'],
-			'country-name' => $user->addresses['country'],
-			'phone-work-value' => $user->addresses['phone'],
-			'fax-work-value' => $user->addresses['fax'],
-			'logo' => theme('user_picture', $user),
-		);
-
-		$hcardOutput =
-'<div class="vcard" style="display: inline-block;">
-	<span class="logo">' . $hcard['logo'] . '</span>
-	<span class="fn n">
-		<a class="url" href="' . $hcard['url'] . '">
-			<span class="given-name">' . $hcard['given-name'] . '</span>
-			<span class="family-name">' . $hcard['family-name'] . '</span>
-		</a>
-	</span>
-	<div class="adr">
-		<div class="street-address">' . $hcard['street-address'] . '</div>
-		<span class="postal-code">' . $hcard['postal-code'] . '</span> <span class="locality">' . $hcard['locality'] . '</span>
-		<div class="country-name hide">' . $hcard['country-name'] . '</div>
-	</div>
-	<div class="tel"><span class="type">Tel.</span>: <span class="value">' . $hcard['phone-work-value'] . '</span></div>
-	<div class="tel"><span class="type">Fax</span>: <span class="value">' . $hcard['fax-work-value'] . '</span></div>
-</div>';
-	}
-
-	return $hcardOutput;
-}
 function adaptivetheme_upload_form_current(&$form) {
 	$header = array('', t('Description'),t('Delete'));
 	//$header = array();

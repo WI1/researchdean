@@ -282,7 +282,7 @@ function focus_groups_og_links_alter(&$links, $node) {
  * @return bool
  */
 function focus_groups_is_project($node) {
-	if (in_array($node->type, array('project', 'focusgroup'))) {
+	if (in_array($node->type, array('forschungsfeld'))) {
 		return TRUE;
 	} else {
 		return FALSE;
@@ -326,7 +326,7 @@ function focus_groups_load_group_details($groups) {
 		foreach($groups as $nid => $g) {
 			$current_group = node_load($nid);
 
-			if($current_group->type == 'focusgroup' && !user_access('view focus groups')) {
+			if($current_group->type == 'forschungsfeld' && !user_access('view focus groups')) {
 				continue;
 			}
 

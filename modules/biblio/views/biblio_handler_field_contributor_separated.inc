@@ -13,6 +13,12 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 	$this->auth_category = isset($this->definition['auth_category']) ? $this->definition['auth_category'] : 1;
   }
 
+  function get_filter_author_by_affiliation() {
+	  $result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
+	  $item = db_fetch_array($result);
+	  return $item;  
+  }
+  
   function option_definition() {
     $options = parent::option_definition();
     $options['author_filter'] = array('default' => get_filter_author_by_affiliation());
@@ -30,11 +36,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
     );
   }
   
-  function get_filter_author_by_affiliation() {
-	  $result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
-	  $item = db_fetch_array($result);
-	  return $item;  
-  }
+  
   
   
   function query() {

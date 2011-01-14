@@ -21,18 +21,18 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
   }
 
   function pre_render($values) {
-     
-    
-    $vids = array();
+  
+   
     $this->items = array();
 
+	$this->field_alias = $this->aliases['vid'];
+    $vids = array();
     foreach ($values as $result) {
-      // Don't add empty results to the array.
       if (!empty($result->{$this->aliases['vid']})) {
         $vids[] = $result->{$this->aliases['vid']};
       }
     }
-
+	
     if (count($vids)) {
       // Optimize query if $vids has only 1 item in the array, to use '=' instead of 'IN'.
       if (count($vids) > 1){
@@ -49,19 +49,9 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
       while ($item = db_fetch_array($result)) {
         // Clean up the $item from vid.
         $vid = $item['vid']; unset($item['vid']);
-        $this->items[$vid]['author'][] = $item['name'];
+        $this->items[$vid][] = $item['name'];
 	  }
     }
   }
-  
-  function render_items($items) {
-    if (!empty($items)) {
-      if ($this->options['type'] == 'separator') {
-        return implode(check_plain($this->options['separator']), $items);
-      }
-      else {
-        return theme('item_list', $items, NULL, $this->options['type']);
-      }
-    }
-  }
-}
+ 
+ }

@@ -32,7 +32,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
   
   function _get_filter_author_by_affiliation() {
 	  $result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
-	  $item = db_fetch_array($result)
+	  $item = db_fetch_array($result);
 	  return $item;  
   }
   

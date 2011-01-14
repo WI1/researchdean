@@ -48,10 +48,11 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
                          ' ORDER BY bc.rank');
       while ($item = db_fetch_array($result)) {
         // Clean up the $item from vid.
-        $vid = $item['vid']; unset($item['vid']);
-        $this->items[$vid]['name'] = $item;
+        $vid = $item['name']; unset($item['vid']);
+        $this->items[$vid] = $item;
 		
-      }
+	  }
+	  
     }
   }
 }

@@ -50,10 +50,10 @@ function biblio_views_handlers() {
       'biblio_handler_citation' => array(
         'parent' => 'views_handler_field',
       ),
-      'biblio_handler_field_contributor' => array(
+      /*'biblio_handler_field_contributor' => array(
         'parent' => 'biblio_handler_field',
-      ),
-	  'biblio_handler_field_contributor_separated' => array(
+      ),*/
+	  'biblio_handler_field_contributor' => array(
         'parent' => 'biblio_handler_field_prerender_list',
       ),
       'biblio_handler_field_biblio_type' => array(

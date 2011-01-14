@@ -10,6 +10,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
     else {
       $this->additional_fields['vid'] = array('table' => 'node', 'field' => 'vid');
     }
+	$this->auth_category = isset($this->definition['auth_category']) ? $this->definition['auth_category'] : 1;
   }
 
   function query() {

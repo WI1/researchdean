@@ -53,10 +53,4 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
       }
     }
   }
-
-  function render($values) {
-    $vid = $values->{$this->field_alias};
-    if (!isset($this->items[$vid])) return NULL;
-    return $this->items[$vid];
-  }
 }

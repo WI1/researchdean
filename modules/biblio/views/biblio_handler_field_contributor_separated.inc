@@ -2,10 +2,14 @@
 // $Id: biblio_handler_field_contributor.inc,v 1.1.2.2.2.2 2010/01/25 02:57:39 rjerome Exp $
 class biblio_handler_field_contributor_separated extends biblio_handler_field_prerender_list {
   
-  function construct() {
-    parent::construct();
-    $this->additional_fields['vid'] = array('table' => 'biblio', 'field' => 'vid');
-    $this->auth_category = isset($this->definition['auth_category']) ? $this->definition['auth_category'] : 1;
+  function init(&$view, $options) {
+    parent::init($view, $options);
+    if ($view->base_table == 'node_revisions') {
+      $this->additional_fields['vid'] = array('table' => 'node_revisions', 'field' => 'vid');
+    }
+    else {
+      $this->additional_fields['vid'] = array('table' => 'node', 'field' => 'vid');
+    }
   }
 
   function query() {

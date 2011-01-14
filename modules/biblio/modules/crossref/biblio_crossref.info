@@ -1,0 +1,13 @@
+; $Id: biblio_crossref.info,v 1.1.2.2 2010/07/07 20:31:29 rjerome Exp $
+name = Biblio_DOI
+description = Adds DOI import and search to the Biblio module.
+core = 6.x
+package = Biblio
+dependencies[] = biblio
+
+; Information added by drupal.org packaging script on 2010-10-15
+version = "6.x-2.x-dev"
+core = "6.x"
+project = "biblio"
+datestamp = "1287101040"
+

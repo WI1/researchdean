@@ -53,6 +53,9 @@ function biblio_views_handlers() {
       'biblio_handler_field_contributor' => array(
         'parent' => 'biblio_handler_field',
       ),
+	  'biblio_handler_field_contributor_separated' => array(
+        'parent' => 'biblio_handler_field_prerender_list',
+      ),
       'biblio_handler_field_biblio_type' => array(
         'parent' => 'biblio_handler_field',
       ),

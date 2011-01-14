@@ -21,10 +21,8 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
   }
 
   function pre_render($values) {
-    module_load_include('inc', 'biblio', 'styles/biblio_style_'.$this->options['style_name']);
-    $author_options_func = 'biblio_style_'.$this->options['style_name'].'_author_options';
-    $this->author_options = $author_options_func();
-
+     
+    
     $vids = array();
     $this->items = array();
 

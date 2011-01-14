@@ -49,10 +49,18 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
       while ($item = db_fetch_array($result)) {
         // Clean up the $item from vid.
         $vid = $item['vid']; unset($item['vid']);
-        $this->items[$vid] = $item;
-		print_r($item);
+        $this->items[$vid][] = $item;
 	  }
-	  
     }
   }
+  
+  function render_items($items) {
+    if (!empty($items)) {
+      if ($this->options['type'] == 'separator') {
+        return implode(check_plain($this->options['separator']), $items);
+      }
+      else {
+        return theme('item_list', $items, NULL, $this->options['type']);
+      }
+  
 }

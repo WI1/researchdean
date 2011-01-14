@@ -62,5 +62,6 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
       else {
         return theme('item_list', $items, NULL, $this->options['type']);
       }
-  
+    }
+  }
 }

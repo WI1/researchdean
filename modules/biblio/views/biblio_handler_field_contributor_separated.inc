@@ -1,6 +1,6 @@
 <?php
 // $Id: biblio_handler_field_contributor.inc,v 1.1.2.2.2.2 2010/01/25 02:57:39 rjerome Exp $
-class biblio_handler_field_contributor_separated extends biblio_handler_field_prerender_list {
+class biblio_handler_field_contributor_separated extends views_handler_field_prerender_list {
   
   function init(&$view, $options) {
     parent::init($view, $options);

@@ -55,9 +55,8 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
   }
 
   function render($values) {
-    parent::set_label($values);
     $vid = $values->{$this->field_alias};
     if (!isset($this->items[$vid])) return NULL;
-    return theme('biblio_format_authors', $this->items[$vid], $this->author_options);
+    return $this->items[$vid];
   }
 }

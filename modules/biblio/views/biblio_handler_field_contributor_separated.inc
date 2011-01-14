@@ -15,7 +15,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 
   function option_definition() {
     $options = parent::option_definition();
-    $options['author_filter'] = array('default' => get_filter_author_by_affiliation());
+    $options['author_filter'] = array('default' => _get_filter_author_by_affiliation());
     return $options;
   }
   function options_form(&$form, &$form_state) {
@@ -30,7 +30,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
     );
   }
   
-  function get_filter author_by_affiliation() {
+  function _get_filter_author_by_affiliation() {
 	  $result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
 	  $item = db_fetch_array($result)
 	  return $item;  

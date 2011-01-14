@@ -53,7 +53,7 @@ function biblio_views_handlers() {
       /*'biblio_handler_field_contributor' => array(
         'parent' => 'biblio_handler_field',
       ),*/
-	  'biblio_handler_field_contributor' => array(
+	  'biblio_handler_field_contributor_separated' => array(
         'parent' => 'biblio_handler_field_prerender_list',
       ),
       'biblio_handler_field_biblio_type' => array(
@@ -133,7 +133,7 @@ function biblio_views_data() {
     // for contrib_widgets we use a special handler:
     if ($field['type'] == 'contrib_widget') {
       $data[$field['name']]['field'] = array(
-        'handler' => 'biblio_handler_field_contributor',
+        'handler' => 'biblio_handler_field_contributor_separated',
         'auth_category' => $field['ftdid'],
       );
       unset($data[$field['name']]['sort']);

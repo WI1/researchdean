@@ -30,12 +30,12 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
   
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
-    
+
     $form['style_name'] = array(
       '#type' => 'checkbox',
       '#title' => t('Filter'),
       '#default_value' => $this->options['author_filter'],
-      '#options' => _biblio_admin_get_styles(),
+      '#options' => option_definition(),
       '#description' => t('Filter within selected authors for affiliation')
     );
   }

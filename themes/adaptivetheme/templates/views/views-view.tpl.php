@@ -77,4 +77,8 @@
       <?php print $feed_icon; ?>
     </div>
   <?php endif; ?>
+  
+  <pre>
+  <?php print_r($items); ?>
+  </pre>
 </div>

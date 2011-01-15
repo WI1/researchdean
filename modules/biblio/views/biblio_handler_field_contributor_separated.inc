@@ -102,7 +102,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
                           INNER JOIN {biblio_contributor_data} bcd ON bc.cid = bcd.cid
                           WHERE '. $vidstr . 
                          ' AND auth_category='. $this->auth_category .
-						 ' AND bcd.drupal_uid NOT NULL . 
+						 ' AND bcd.drupal_uid NOT NULL ' . 
                          ' ORDER BY bc.rank';
 		}				
 	  

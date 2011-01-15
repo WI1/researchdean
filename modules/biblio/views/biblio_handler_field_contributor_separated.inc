@@ -82,7 +82,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 	  }
     }
 
-	drupal_set_message("Options:<pre>" . print_r($form_state['values']['author_affiliation'], TRUE) . '</pre>');
+	drupal_set_message("Options:<pre>" . print_r($this->options['author_affiliation'], TRUE) . '</pre>');
   }
  
  }

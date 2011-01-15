@@ -70,13 +70,17 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
       else {
         $vidstr = 'vid = '. $vids[0];
       }
-	  	  
-      $result = db_query('SELECT * FROM {biblio_contributor} bc
+	  
+	  $query='SELECT * FROM {biblio_contributor} bc
                           INNER JOIN {biblio_contributor_data} bcd ON bc.cid = bcd.cid
                           WHERE '. $vidstr . 
                          ' AND auth_category='. $this->auth_category .
 						 ' AND bcd.affiliation IN(' . implode(", ", $this->options['author_affiliation']) . ')' .
-                         ' ORDER BY bc.rank');
+                         ' ORDER BY bc.rank';
+						 
+		drupal_set_message("Options:<pre>" . print_r($query, TRUE) . '</pre>');				 
+	  	  
+      $result = db_query($query);
       while ($item = db_fetch_array($result)) {
         // Clean up the $item from vid.
         $vid = $item['vid']; unset($item['vid']);

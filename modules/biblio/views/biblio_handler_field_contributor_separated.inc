@@ -31,13 +31,14 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 	}
 	
     $form['author_affiliation'] = array(
-      '#type' => 'select',
+      '#type' => 'radios',
       '#title' => t('Filter'),
       '#options' => $options_db,
       '#description' => t('Filter authors by their affiliation'),
-	  '#default_value' => $this->options['author_affiliation']['default'],
+	  '#default_value' => $this->options['author_affiliation'],
     );
-  }
+	
+}
   
   
   
@@ -51,6 +52,14 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 
   function pre_render($values) {
   
+  // Dirty hack because I couldn't access $options_db from function options_form
+  $result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
+	$items = db_fetch_array($result);
+
+	while ($items = db_fetch_array($result)) {
+	    $options_db[] = $items['affiliation'];
+	}
+   // Hack end
    
     $this->items = array();
 
@@ -75,11 +84,10 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
                           INNER JOIN {biblio_contributor_data} bcd ON bc.cid = bcd.cid
                           WHERE '. $vidstr . 
                          ' AND auth_category='. $this->auth_category .
-						 ' AND bcd.affiliation IN(' . implode(", ", $this->options['author_affiliation']) . ')' .
+						 ' AND bcd.affiliation IN ("' . $options_db[$this->options['author_affiliation']] . '")' . 
                          ' ORDER BY bc.rank';
 						 
-		drupal_set_message("Form State:<pre>" . print_r($this->options, TRUE) . '</pre>');				 
-	  	  
+	  
       $result = db_query($query);
       while ($item = db_fetch_array($result)) {
         // Clean up the $item from vid.

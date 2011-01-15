@@ -940,11 +940,11 @@ font-size: 1.2em !important;
 
 #sidebar-first {
   margin-left: 10px;
+  padding: 0 20px 0 0;
 }
 
 #sidebar-last {
  margin: 16px 0 0 20px;
-
 }
 
 #sidebar-last div.block {

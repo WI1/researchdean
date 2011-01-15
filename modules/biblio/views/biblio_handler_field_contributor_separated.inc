@@ -16,8 +16,9 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
   function option_definition() {
     $options = parent::option_definition();
 	$options['author_affiliation'] = array('default' => FALSE);
-
-    return $options;
+    $options['author_affiliation'] = array('default' => FALSE);
+    
+	return $options;
   }
   
   function options_form(&$form, &$form_state) {
@@ -36,6 +37,13 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
       '#options' => $options_db,
       '#description' => t('Filter authors by their affiliation'),
 	  '#default_value' => $this->options['author_affiliation'],
+    );
+	
+	$form['author_userlink'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Filter users by uid connection'),
+      '#description' => t('Filter authors by their affiliation'),
+	  '#default_value' => $this->options['author_userlink'],
     );
 	
 }
@@ -80,13 +88,23 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
         $vidstr = 'vid = '. $vids[0];
       }
 	  
-	  $query='SELECT * FROM {biblio_contributor} bc
+	  
+	  // Filter only for authors where Drupal User ID is set, if flag is set 
+	  if ($this->options['author_userlink'] == 0) {
+		$query='SELECT * FROM {biblio_contributor} bc
                           INNER JOIN {biblio_contributor_data} bcd ON bc.cid = bcd.cid
                           WHERE '. $vidstr . 
                          ' AND auth_category='. $this->auth_category .
 						 ' AND bcd.affiliation IN ("' . $options_db[$this->options['author_affiliation']] . '")' . 
                          ' ORDER BY bc.rank';
-						 
+		} else {
+			$query='SELECT * FROM {biblio_contributor} bc
+                          INNER JOIN {biblio_contributor_data} bcd ON bc.cid = bcd.cid
+                          WHERE '. $vidstr . 
+                         ' AND auth_category='. $this->auth_category .
+						 ' AND bcd.drupal_uid NOT NULL . 
+                         ' ORDER BY bc.rank';
+		}				
 	  
       $result = db_query($query);
       while ($item = db_fetch_array($result)) {

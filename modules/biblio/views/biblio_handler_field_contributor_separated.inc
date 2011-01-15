@@ -16,10 +16,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
   function option_definition() {
     $options = parent::option_definition();
 	$options['author_affiliation'] = array('default' => FALSE);
-	
-	unset($options['type']);
-	unset($options['separator']);
-	
+
     return $options;
   }
   

@@ -13,6 +13,11 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 	$this->auth_category = isset($this->definition['auth_category']) ? $this->definition['auth_category'] : 1;
   }
   
+  function option_definition() {
+    $options = parent::option_definition();
+	
+    return $options;
+  }
   
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
@@ -20,7 +25,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 	$result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
 	$items = db_fetch_array($result);
 	while ($items = db_fetch_array($result)) {
-	    $options[] = $items['affiliation'];
+	    $options_db[] = $items['affiliation'];
 	}
 	
 	drupal_set_message("Options:<pre>" . print_r($options, TRUE) . '</pre>');
@@ -28,7 +33,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 	$form['author_affiliation'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Filter'),
-      '#options' => $options,
+      '#options' => $options_db,
       '#description' => t('Filter within selected authors for affiliation')
     );
   }
@@ -68,7 +73,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
                           INNER JOIN {biblio_contributor_data} bcd ON bc.cid = bcd.cid
                           WHERE '. $vidstr . 
                          ' AND auth_category='. $this->auth_category .
-						 ' AND bcd.affiliation IN(' . implode(", ", $form_state['values']['author_affiliation']) . ')' .
+						 ' AND bcd.affiliation IN(' . implode(", ", $this->options['author_affiliation']) . ')' .
                          ' ORDER BY bc.rank');
       while ($item = db_fetch_array($result)) {
         // Clean up the $item from vid.

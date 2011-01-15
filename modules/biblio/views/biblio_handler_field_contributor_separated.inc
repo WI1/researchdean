@@ -18,7 +18,10 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
     parent::options_form($form, $form_state);
     
 	$result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
-	$options = db_fetch_array($result);
+	$items = db_fetch_array($result);
+	while ($items = db_fetch_array($result)) {
+	    $options[] = $items['affiliation'];
+	}
 	
 	drupal_set_message("Options:<pre>" . print_r($options, TRUE) . '</pre>');
 	

@@ -25,7 +25,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
     $form['author_affiliation'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Filter'),
-      '#options' => get_filter_author_by_affiliation(),
+      '#options' => $item,
       '#description' => t('Filter within selected authors for affiliation')
     );
   }

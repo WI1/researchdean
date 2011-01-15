@@ -70,7 +70,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
         $vidstr = 'vid = '. $vids[0];
       }
 	  
-	  drupal_set_message("Options:<pre>" . print_r($this->options['author_affiliation'], TRUE) . '</pre>');
+	  drupal_set_message("Options:<pre>" . print $this->options['author_affiliation'] . '</pre>');
 	  
       $result = db_query('SELECT * FROM {biblio_contributor} bc
                           INNER JOIN {biblio_contributor_data} bcd ON bc.cid = bcd.cid

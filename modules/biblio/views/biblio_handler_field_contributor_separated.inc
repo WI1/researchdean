@@ -78,7 +78,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
                           WHERE '. $vidstr . 
                          ' AND auth_category='. $this->auth_category .
 						 ' AND bcd.affiliation IN(' . implode(", ", $this->options['author_affiliation']) . ')' .
-                         ' ORDER BY bc.rank'
+                         ' ORDER BY bc.rank';
 						 
 		drupal_set_message("Options:<pre>" . print_r($this->options['author_affiliation'], TRUE) . '</pre>');				 
 	  	  

@@ -30,9 +30,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 	    $options_db[] = $items['affiliation'];
 	}
 	
-    drupal_set_message("Options:<pre>" . print_r($options_db, TRUE) . '</pre>');		
-	
-	$form['author_affiliation'] = array(
+    $form['author_affiliation'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Filter'),
       '#options' => $options_db,
@@ -80,7 +78,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 						 ' AND bcd.affiliation IN(' . implode(", ", $this->options['author_affiliation']) . ')' .
                          ' ORDER BY bc.rank';
 						 
-		drupal_set_message("Options:<pre>" . print_r($this->options['author_affiliation'], TRUE) . '</pre>');				 
+		drupal_set_message("Form State:<pre>" . print_r($form_state['values']['author_affiliation'], TRUE) . '</pre>');				 
 	  	  
       $result = db_query($query);
       while ($item = db_fetch_array($result)) {

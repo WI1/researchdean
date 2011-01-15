@@ -28,13 +28,13 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 	    $options_db[] = $items['affiliation'];
 	}
 	
-	drupal_set_message("Options:<pre>" . print_r($options, TRUE) . '</pre>');
+
 	
 	$form['author_affiliation'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Filter'),
       '#options' => $options_db,
-      '#description' => t('Filter within selected authors for affiliation')
+      '#description' => t('Filter authors by their affiliation')
     );
   }
   
@@ -69,6 +69,9 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
       else {
         $vidstr = 'vid = '. $vids[0];
       }
+	  
+	  drupal_set_message("Options:<pre>" . print_r($this->options['author_affiliation'], TRUE) . '</pre>');
+	  
       $result = db_query('SELECT * FROM {biblio_contributor} bc
                           INNER JOIN {biblio_contributor_data} bcd ON bc.cid = bcd.cid
                           WHERE '. $vidstr . 

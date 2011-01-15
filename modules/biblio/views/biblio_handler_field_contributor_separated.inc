@@ -19,7 +19,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
     
 	 $result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
 	  $item = db_fetch_array($result);
-	  print_r($item;)  
+	  print_r($item);  
 	
 	
     $form['author_affiliation'] = array(

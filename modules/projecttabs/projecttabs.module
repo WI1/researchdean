@@ -24,7 +24,7 @@ function projecttabs_menu() {
 		'title' => 'Mitglieder die Sie kennen könnten',
 		'type' => MENU_CALLBACK,
 		'page callback' => 'projecttabs_users_you_might_know_callback',
-		'access arguments' => TRUE,
+		'access arguments' => array('TRUE'),
 	);
 	return $items;
 }

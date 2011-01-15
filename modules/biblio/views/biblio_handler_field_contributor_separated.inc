@@ -15,7 +15,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
   
   function option_definition() {
     $options = parent::option_definition();
-	$options['author_affiliation'] = array();
+	$options['author_affiliation'] = array('default' => FALSE);
 
     return $options;
   }
@@ -31,11 +31,11 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
 	}
 	
     $form['author_affiliation'] = array(
-      '#type' => 'checkboxes',
+      '#type' => 'select',
       '#title' => t('Filter'),
       '#options' => $options_db,
       '#description' => t('Filter authors by their affiliation'),
-	  '#default_value' => $this->options['author_affiliation'],
+	  '#default_value' => $this->options['author_affiliation']['default'],
     );
   }
   

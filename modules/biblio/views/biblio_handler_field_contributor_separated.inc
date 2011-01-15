@@ -37,7 +37,7 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
       '#type' => 'checkboxes',
       '#title' => t('Filter'),
       '#options' => $options_db,
-      '#description' => t('Filter authors by their affiliation')
+      '#description' => t('Filter authors by their affiliation'),
 	  '#default_value' => $this->options['author_affiliation'],
     );
   }

@@ -12,18 +12,18 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
     }
 	$this->auth_category = isset($this->definition['auth_category']) ? $this->definition['auth_category'] : 1;
   }
-
-  function get_filter_author_by_affiliation() {
-	  $result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
-	  $item = db_fetch_array($result);
-	  return $item;  
-  }
+  
   
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
     
-    $form['style_name'] = array(
-      '#type' => 'checkbox',
+	 $result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
+	  $item = db_fetch_array($result);
+	  print_r($item;)  
+	
+	
+    $form['author_affiliation'] = array(
+      '#type' => 'checkboxes',
       '#title' => t('Filter'),
       '#options' => get_filter_author_by_affiliation(),
       '#description' => t('Filter within selected authors for affiliation')

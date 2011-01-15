@@ -17,15 +17,14 @@ class biblio_handler_field_contributor_separated extends views_handler_field_pre
   function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
     
-	 $result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
-	  $item = db_fetch_array($result);
-	  print_r($item);  
+	  $result = db_query('SELECT DISTINCT affiliation FROM {biblio_contributor_data}');
+	  $options = db_fetch_array($result);
 	
 	
     $form['author_affiliation'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Filter'),
-      '#options' => $item,
+      '#options' => $options,
       '#description' => t('Filter within selected authors for affiliation')
     );
   }

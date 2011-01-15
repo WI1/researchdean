@@ -1918,8 +1918,12 @@ font-size: 1em;
 GEORDNETE LISTE
 --------------------------------------------------------*/
 div#content ol {
-margin: 0 0 16px 30px;
-list-style-type:upper-roman;
+margin: 0 0 16px 0;
+list-style-type: none;
+}
+
+div#content ol  li {
+margin: 0 0 16px 0;
 }
 
 div#content ol ol {

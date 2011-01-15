@@ -1,0 +1,7 @@
+UPDATE node SET title = replace(title, '{', '');# 128 Zeile(n) betroffen.
+
+UPDATE node SET title = replace(title, '}', '');# 128 Zeile(n) betroffen.
+
+UPDATE node_revisions SET title = replace(title, '{', '');# 128 Zeile(n) betroffen.
+
+UPDATE node_revisions SET title = replace(title, '}', '');# 128 Zeile(n) betroffen.

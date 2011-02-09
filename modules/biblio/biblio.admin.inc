@@ -1,5 +1,5 @@
 <?php
-// $Id: biblio.admin.inc,v 1.9.2.85.2.12 2010/10/08 16:25:25 rjerome Exp $
+// $Id: biblio.admin.inc,v 1.9.2.85.2.17 2011/02/03 02:49:38 rjerome Exp $
 /**
  *   biblio.admin.inc
  *
@@ -34,7 +34,7 @@ function biblio_admin_ahah($form, $element, $value) {
 */
 function biblio_admin_settings() {
   $version = theme('advanced_help_topic','biblio','about-admin');
-  $version .= "&nbsp;".'$Name: DRUPAL-6--2 $ $Date: 2010/10/08 16:25:25 $';
+  $version .= "&nbsp;".'$Name: DRUPAL-6--2 $ $Date: 2011/02/03 02:49:38 $';
   $version = str_replace('$', '', $version);
   $form['biblio_rev'] = array(
     '#value' => $version,
@@ -556,11 +556,20 @@ function biblio_admin_settings() {
     '#description' => t('The text that is displayed when the date of publication is deliberately set to <b>9998</b>, it defaults to "In Press".')
   );
 
-  $form['style']['biblio_style'] = array(
-    '#type' => 'radios',
+  if (module_exists('biblio_citeproc')) {
+    $engine = 'biblio_citeproc_style';
+    $default = variable_get('biblio_citeproc_style', 'http://www.zotero.org/styles/ama');
+  }
+  else {
+    $engine = 'biblio_style';
+    $default = variable_get('biblio_style', 'cse');
+  }
+
+  $form['style'][$engine] = array(
+    '#type' => 'select',
     '#title' => t('Style'),
-    '#default_value' => variable_get('biblio_style', 'cse'),
-    '#options' => _biblio_admin_get_styles(),
+    '#default_value' => $default,
+    '#options' => biblio_get_styles(),
     '#description' => t('Set the bibliographic style of the "list" view.')
   );
 
@@ -1050,8 +1059,9 @@ function biblio_admin_type_mapper_form_submit($form, $form_state) {
 }
 
 function biblio_admin_field_mapper_form($form_state, $format = 'bibtex', $op = 'map') {
-  module_load_include('inc', 'biblio', 'biblio.type.mapper');
-  $map = biblio_get_map('field_map', $format);
+  $map        = biblio_get_map('field_map', $format);
+  $export_map = biblio_get_map('export_map', $format);
+
   $form['fileformat'] = array(
     '#type' => 'hidden',
     '#value' => $format,
@@ -1070,7 +1080,8 @@ function biblio_admin_field_mapper_form($form_state, $format = 'bibtex', $op = '
     $schema = drupal_get_schema('biblio');
     $fieldnames = array_keys($schema['fields']);
     asort($fieldnames);
-    $biblio_field_options[''] =  '-none-';
+    $biblio_field_options[''] =  t('-none-');
+    $biblio_field_options['title'] =  'title';
     foreach ($fieldnames as $field) {
       $biblio_field_options[$field] =  $field;
     }
@@ -1083,6 +1094,7 @@ function biblio_admin_field_mapper_form($form_state, $format = 'bibtex', $op = '
       $form['type'][$key] = array(
       'format' => array('#value' => "<b>".$key."</b>"),
       'biblio' => $biblio_field_select,
+      'export' => array('#type' => 'checkbox', '#default_value' => $export_map[$value]),
       '#tree' => 1,
       );
 
@@ -1130,12 +1142,14 @@ function theme_biblio_admin_field_mapper_form($form) {
   foreach(element_children($form['type']) as $key ){
       $rows[] = array(
         drupal_render($form['type'][$key]['format']),
+        drupal_render($form['type'][$key]['biblio']),
         drupal_render($form['type'][$key])
       );
   }
   $header = array(
     $title .' '.t('field identifier'),
-    t('Biblio schema field')
+    t('Biblio schema field'),
+    t('Export')
   );
   $output .= theme('table', $header, $rows);
   //$output .= l('['.t('Add New'). " $title ".t('Publication Type').']','admin/settings/biblio/fields/typemap/'.$form['fileformat']['#value'].'/add').' ';
@@ -1157,14 +1171,19 @@ function biblio_admin_field_mapper_form_submit($form, $form_state) {
   if ($form_state['values']['op'] == t('Save')) {
     foreach($form_state['values'] as $key => $value) {
       if (is_array($value)) {
-        $map[$key]=$value['biblio'];
+        $map[$key] = $value['biblio'];
+        $export_map[$value['biblio']] = $value['export'];
       }
     }
     biblio_set_map('field_map', $form_state['values']['fileformat'], $map);
+    biblio_set_map('export_map', $form_state['values']['fileformat'], $export_map);
+
     drupal_goto('admin/settings/biblio/fields/typemap');
   }
   elseif ($form_state['values']['op'] == t('Reset to Defaults')) {
     biblio_reset_map('field_map', $form_state['values']['fileformat']);
+    biblio_reset_map('export_map', $form_state['values']['fileformat']);
+
     drupal_goto('admin/settings/biblio/fields/fieldmap/'.$form_state['values']['fileformat']);
   }
 //  elseif ($form_state['values']['op'] == t('Add')) {
@@ -1375,27 +1394,41 @@ function _biblio_get_user_profile_form(& $form, $profile_user = FALSE) {
     $options = array();
     $options[0] = t('(None)');
 
+   $cid = isset($profile_user->biblio_contributor_id) ? $profile_user->biblio_contributor_id : '';
     while ($row = db_fetch_object($db_result)) {
-        $options[$row->cid] =  "$row->lastname, $row->firstname $row->initials ";
+      $options[$row->cid] =  "$row->lastname, $row->firstname $row->initials ";
+      if(empty($cid)&& isset($profile_user->biblio_lastname) && !empty($profile_user->biblio_lastname)) {
+        if(trim($row->lastname) == trim($profile_user->biblio_lastname)) {
+          $cid = $row->cid;
+          $profile_user->biblio_lastname = '';
+        }
+      }
     }
+    $form['biblio_profile']['biblio_lastname'] = array(
+      '#type' => 'textfield',
+      '#title' => t('My last name'),
+      '#default_value' => isset($profile_user->biblio_lastname) && !empty($profile_user->biblio_lastname) ? $profile_user->biblio_lastname : '',
+      '#description' => t('NOTE: This field is depreciated and you should select your name from the list below.  If you name is not in the list below, then you can enter your last name in this field, and it will be used to select your publications, by doing a string search of author names with this value.')
+    );
+
     $form['biblio_profile']['biblio_contributor_id'] = array(
-    '#type' => 'select',
-    '#title' => t('Link My Profile with this Author from the Biblio database'),
-    '#default_value' => $profile_user->biblio_contributor_id ,
-    '#disabled' => !$allow_edit,
-    '#options' => $options,
-    '#description' => t('This will link your profile to the selected author from the biblio database, then all publications containing this author to be displayed on your "Publications" tab.'),
+      '#type' => 'select',
+      '#title' => t('Link My Profile with this Author from the Biblio database'),
+      '#default_value' => $cid ,
+      '#disabled' => !$allow_edit,
+      '#options' => $options,
+      '#description' => t('This will link your profile to the selected author from the biblio database, then all publications containing this author to be displayed on your "Publications" tab.'),
     );
     $options = array();
     $options['system'] = t('System default');
-    $options = array_merge($options, _biblio_admin_get_styles() );
+    $options = array_merge($options, biblio_get_styles() );
     $form['biblio_profile']['biblio_user_style'] = array(
-    '#type' => 'radios',
-    '#title' => t('Style'),
-    '#default_value' => (isset($profile_user->biblio_user_style) ? $profile_user->biblio_user_style : 'system'),
-    '#options' => $options,
-    '#description' => t('Set the bibliographic style of the "list" view.')
-  );
+      '#type' => 'radios',
+      '#title' => t('Style'),
+      '#default_value' => (isset($profile_user->biblio_user_style) ? $profile_user->biblio_user_style : 'system'),
+      '#options' => $options,
+      '#description' => t('Set the bibliographic style of the "list" view.')
+    );
 
   }
 }
@@ -1446,22 +1479,6 @@ function _biblio_get_user_openurl_form(&$form, $user) {
  *  calls the info fuction to get some basic information like the short and long
  *  names of the style
 */
-function _biblio_admin_get_styles() {
-  $styles = array();
-
-  $dir = drupal_get_path('module', 'biblio') .'/styles';
-  $files = file_scan_directory($dir, 'biblio_style_..*.inc$');
-  foreach ($files as $file) {
-    include_once $file->filename;
-    $function = $file->name .'_info';
-    if (function_exists($function)) {
-      $styles = array_merge($styles, call_user_func($function)); //build and array of the short and long names
-    }
-  }
-  ksort($styles);
-
-  return $styles;
-}
 function biblio_form_sort($a, $b) {
   $a_weight = (is_array($a) && isset($a['weight'])) ? $a['weight'] : 0;
   $b_weight = (is_array($b) && isset($b['weight'])) ? $b['weight'] : 0;
@@ -1624,10 +1641,24 @@ function biblio_admin_author_edit_form($form_state, $author_id) {
   while($user=db_fetch_array($users)) {
     $options[$user['uid']] = $user['name'];
   }
+  
+  $user_suggestions =  dbquery('SELECT uid FROM {profile_values} p WHERE p.value = %s', $author->lastname);
+  while($user_suggestion=db_fetch_array($user_suggestion)) {
+    $suggestions[$user_suggestion['uid']] = $options[$user_suggestion['uid']];
+    }
+  
   $form['drupal_uid'] = array(
     '#type' => 'select',
     '#title' => t('Drupal User ID'),
     '#options' => $options,
+    '#default_value' => $author->drupal_uid,
+    '#weight' => 12,
+    '#required' => FALSE,
+    );
+  $form['user_suggestions'] = array(
+    '#type' => 'select',
+    '#title' => t('Suggested Users'),
+    '#options' => $suggestions,
     '#default_value' => $author->drupal_uid,
     '#weight' => 12,
     '#required' => FALSE,
@@ -1827,7 +1858,10 @@ function biblio_admin_author_edit_form_submit($form, &$form_state) {
 
 function biblio_admin_orphans_form($form_state) {
   $base = variable_get('biblio_base', 'biblio');
-  $result = pager_query('SELECT * FROM {biblio_contributor_data} WHERE cid NOT IN (SELECT cid FROM {biblio_contributor} GROUP BY cid)', 50);
+  $result = pager_query('SELECT distinct d.cid cid, name, affiliation
+                         FROM {biblio_contributor_data} d
+                         LEFT JOIN {biblio_contributor} c ON (d.cid=c.cid)
+                         WHERE c.cid IS NULL', 50);
   $authors = array();
   while ($author = db_fetch_object($result)) {
     $authors[$author->cid] = '';
@@ -1861,7 +1895,10 @@ function biblio_admin_orphans_form_submit($form, &$form_state) {
 }
 function biblio_admin_keyword_orphans_form($form_state) {
   $base = variable_get('biblio_base', 'biblio');
-  $result = pager_query('SELECT * FROM {biblio_keyword_data} WHERE kid NOT IN (SELECT kid FROM {biblio_keyword} GROUP BY kid)', 50);
+  $result = pager_query('SELECT distinct bkd.kid kid, word
+                         FROM {biblio_keyword_data} bkd
+                         LEFT JOIN {biblio_keyword} bk ON (bkd.kid=bk.kid)
+                         WHERE bk.kid IS NULL', 50);
   $keywords = array();
   while ($keyword = db_fetch_object($result)) {
     $keywords[$keyword->kid] = '';

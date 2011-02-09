@@ -1648,6 +1648,8 @@ function biblio_admin_author_edit_form($form_state, $author_id) {
   while($user_suggestion = db_fetch_array($user_suggestions)) {
     $suggestions[$user_suggestion['uid']] = $options[$user_suggestion['uid']];
     }
+    
+  print_r($user_suggestion);  
   
   $form['drupal_uid'] = array(
     '#type' => 'select',

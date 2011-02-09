@@ -1642,7 +1642,7 @@ function biblio_admin_author_edit_form($form_state, $author_id) {
     $options[$user['uid']] = $user['name'];
   }
   
-  $user_suggestions =  db_query('SELECT uid FROM {profile_values} p WHERE p.value = %s', $author->lastname);
+  $user_suggestions =  db_query('SELECT uid FROM {profile_values} p WHERE p.value = "%s"', $author->lastname);
   while($user_suggestion=db_fetch_array($user_suggestion)) {
     $suggestions[$user_suggestion['uid']] = $options[$user_suggestion['uid']];
     }

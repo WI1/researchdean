@@ -2554,3 +2554,11 @@ padding-left:1.8em;
 #contact {
 padding-top: 160px;
 }
+
+/* OG Views: Forschungsfelder */
+
+.view-og .views-row-unformatted {
+    border: 3px solid #023F6E;
+    margin-bottom: 16px;
+    padding: 0.4em 0.3em 0.2em 0.7em;
+    }

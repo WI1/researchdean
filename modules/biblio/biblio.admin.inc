@@ -565,6 +565,7 @@ function biblio_admin_settings() {
     $default = variable_get('biblio_style', 'cse');
   }
 
+  /*
   $form['style'][$engine] = array(
     '#type' => 'select',
     '#title' => t('Style'),
@@ -572,7 +573,7 @@ function biblio_admin_settings() {
     '#options' => biblio_get_styles(),
     '#description' => t('Set the bibliographic style of the "list" view.')
   );
-
+*/
   $form['style']['biblio_node_layout'] = array(
     '#type' => 'radios',
     '#title' => t('Node Layout'),
@@ -1421,14 +1422,14 @@ function _biblio_get_user_profile_form(& $form, $profile_user = FALSE) {
     );
     $options = array();
     $options['system'] = t('System default');
-    $options = array_merge($options, biblio_get_styles() );
-    $form['biblio_profile']['biblio_user_style'] = array(
+    //$options = array_merge($options, biblio_get_styles() );
+    /*$form['biblio_profile']['biblio_user_style'] = array(
       '#type' => 'radios',
       '#title' => t('Style'),
       '#default_value' => (isset($profile_user->biblio_user_style) ? $profile_user->biblio_user_style : 'system'),
       '#options' => $options,
       '#description' => t('Set the bibliographic style of the "list" view.')
-    );
+    );*/
 
   }
 }

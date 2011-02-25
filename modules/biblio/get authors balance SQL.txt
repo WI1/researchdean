@@ -1,0 +1,4 @@
+SELECT DISTINCT users.name FROM `profile_values` 
+LEFT JOIN biblio_contributor_data ON profile_values.value=biblio_contributor_data.lastname 
+LEFT JOIN users ON profile_values.uid=users.uid
+WHERE biblio_contributor_data.lastname = profile_values.value;

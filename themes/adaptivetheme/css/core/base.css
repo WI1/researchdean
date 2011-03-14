@@ -2614,3 +2614,7 @@ div.exhibit-text-facet input {
      text-decoration: none;
      color: #333;
      }
+     
+     #content-column {
+     padding-top: 13px;
+     }

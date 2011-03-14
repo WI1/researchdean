@@ -1617,7 +1617,7 @@ MAIN - MENU - CONTENT
 --------------------------------------------------------*/
 div#content {  
 	position: relative;
-	padding: 0px;
+	padding: 20px;
 	display: block;
 } 
 
@@ -2559,4 +2559,44 @@ padding-top: 160px;
 
 .view-og .views-row-unformatted {
     margin-bottom: 16px;
+    }
+    
+    
+ /* List Groupings */
+.exhibit-collectionView-group h1 {
+font-size: 11px !important;
+border-bottom: 1px solid #ccc;
+margin-left: 11px !important;
+margin: 1em 0 !important;
+}
+
+.exhibit-collectionView-group ol,
+.exhibit-collectionView-group li,
+.exhibit-collectionView-body ol,
+.exhibit-collectionView-body li {
+margin-left: 0;
+padding-left: 0;
+list-style-type: none;
+display: block;
+}
+
+.exhibit-collectionView-body h2,
+.exhibit-collectionView-body h2 {
+clear: both;
+}
+
+div.exhibit-collectionView-group-content {
+margin-left: 0;
+padding-left: 0;
+}
+
+.exhibit-viewPanel ol {
+margin: 0 !important;
+}
+.exhibit-viewPanel ol  li {
+margin: 0.5em 0 !important;
+}
+    
+div.exhibit-text-facet input {
+    width: 250px;
     }

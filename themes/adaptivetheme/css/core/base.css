@@ -2600,3 +2600,17 @@ margin: 0.5em 0 !important;
 div.exhibit-text-facet input {
     width: 250px;
     }
+    
+    #site-name {
+        font-size: 18px;
+    left: -350px;
+    position: relative;
+    text-decoration: none;
+    top: -15px;
+    width: 200px;
+    }
+    
+     #site-name a {
+     text-decoration: none;
+     color: #333;
+     }

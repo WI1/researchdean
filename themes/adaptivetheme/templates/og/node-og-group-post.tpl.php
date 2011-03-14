@@ -73,10 +73,10 @@
     <?php print $content ?>
   </div>
   
-  <?php if ($node->og_groups && $page) {
-          print '<div class="groups">'. t('Groups'). ': ';
-          print '<div class="links">'.  $og_links['view']. '</div></div>';
-   } ?>
-
+  <?php //if ($node->og_groups && $page) {
+        //  print '<div class="groups">'. t('Groups'). ': ';
+        //  print '<div class="links">'.  $og_links['view']. '</div></div>';
+   //} ?>
+  
   <?php print $links; ?>
 </div>

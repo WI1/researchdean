@@ -228,6 +228,17 @@ function adaptivetheme_node_form($form) {
         </div>";
     }
   }
+  
+   $form['biblio_cut_paste'] = array(
+        '#type' => 'textarea',
+        '#title' => t('BibTex'),
+        '#required' => FALSE,
+        '#default_value' => $form_state['values']['paste_data_bibtex'],
+        '#description' => t('Paste a BibTex entry here'),
+        '#size' => 60,
+        '#weight' => -4,
+        );
+  $form['biblio_cut_paste']['paste_data_bibtex'] = '';
 }
 
 /**

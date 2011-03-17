@@ -452,3 +452,155 @@ function adaptivetheme_system_settings_form($form) {
   return drupal_render($form);
 }
 
+//
+// PDF Creation options
+//
+///////////////////////////////////////////////////
+
+/**
+ * Format the TCPDF header
+ *
+ * @param $pdf
+ *   current TCPDF object
+ * @param $html
+ *   contents of the body of the HTML from the original node
+ * @param $font
+ *   array with the font definition (font name, styles and size)
+ * @see theme_print_pdf_tcpdf_header()
+ */
+function theme_print_pdf_tcpdf_header($pdf, $html, $font) {
+  //preg_match('!<div class="print-logo">(.*?)</div>!si', $html, $tpl_logo);
+  //preg_match('!<h1 class="print-title">(.*?)</h1>!si', $html, $tpl_title);
+  //preg_match('!<div class="print-site_name">(.*?)</div>!si', $html, $tpl_site_name);
+
+  $ratio = 0;
+  $logo = '';
+  $logo_ret = preg_match('!src\s*=\s*(\'.*?\'|".*?"|[^\s]*)!i', $tpl_logo[1], $matches);
+  if ($logo_ret) {
+    $logo = trim($matches[1], '\'"');
+    $size = getimagesize($logo);
+    $ratio = $size ? ($size[0] / $size[1]) : 0;
+  }
+
+  // set header font
+  $pdf->setHeaderFont($font);
+  // set header margin
+  $pdf->SetHeaderMargin(5);
+  // set header data
+  $pdf->SetHeaderData($logo, 10 * $ratio, html_entity_decode($tpl_title[1], ENT_QUOTES, 'UTF-8'), strip_tags($tpl_site_name[1]));
+
+  return $pdf;
+}
+
+/**
+ * Format the TCPDF page settings (margins, etc)
+ *
+ * @param $pdf
+ *   current TCPDF object
+ * @see theme_print_pdf_tcpdf_page()
+ */
+function theme_print_pdf_tcpdf_page($pdf) {
+  // set margins
+  $pdf->SetMargins(15, 20, 15);
+  // set auto page breaks
+  $pdf->SetAutoPageBreak(TRUE, 15);
+  // set image scale factor
+  sscanf(PDF_PRODUCER, "TCPDF %d.%d.%d", $major, $minor, $build);
+  $imagescale = (($major >= 4) && ($minor >= 6) && ($build >= 2)) ? 1 : 4;
+  $pdf->setImageScale($imagescale);
+  // set image compression quality
+  $pdf->setJPEGQuality(100);
+
+  return $pdf;
+}
+
+/**
+ * Format the TCPDF page content
+ *
+ * @param $pdf
+ *   current TCPDF object
+ * @param $html
+ *   contents of the body of the HTML from the original node
+ * @param $font
+ *   array with the font definition (font name, styles and size)
+ * @see theme_print_pdf_tcpdf_content()
+ */
+function theme_print_pdf_tcpdf_content($pdf, $html, $font) {
+  // set content font
+  $pdf->setFont($font[0], $font[1], $font[2]);
+
+  preg_match('!<body.*?>(.*)</body>!sim', $html, $matches);
+  $pattern = '!(?:<div class="print-(?:logo|site_name|breadcrumb|footer)">.*?</div>|<hr class="print-hr" />)!si';
+  $matches[1] = preg_replace($pattern, '', $matches[1]);
+
+  // Make CCK fields look better
+  $matches[1] = preg_replace('!(<div class="field.*?>)\s*!sm', '$1', $matches[1]);
+  $matches[1] = preg_replace('!(<div class="field.*?>.*?</div>)\s*!sm', '$1', $matches[1]);
+  $matches[1] = preg_replace('!<div( class="field-label.*?>.*?)</div>!sm', '<strong$1</strong>', $matches[1]);
+
+  // Since TCPDF's writeHTML is so bad with <p>, do everything possible to make it look nice
+  $matches[1] = preg_replace('!<(?:p(|\s+.*?)/?|/p)>!i', '<br$1 />', $matches[1]);
+  $matches[1] = str_replace(array('<div', 'div>'), array('<span', 'span><br />'), $matches[1]);
+  do {
+    $prev = $matches[1];
+    $matches[1] = preg_replace('!(</span>)<br />(\s*?</span><br />)!s', '$1$2', $matches[1]);
+  } while ($prev != $matches[1]);
+
+  @$pdf->writeHTML($matches[1]);
+
+  return $pdf;
+}
+
+/**
+ * Format the TCPDF footer contents
+ *
+ * @param $pdf
+ *   current TCPDF object
+ * @param $html
+ *   contents of the body of the HTML from the original node
+ * @param $font
+ *   array with the font definition (font name, styles and size)
+ * @see theme_print_pdf_tcpdf_footer()
+ */
+function theme_print_pdf_tcpdf_footer($pdf, $html, $font) {
+  preg_match('!<div class="print-footer">(.*?)</div>!si', $html, $tpl_footer);
+  $footer = trim(preg_replace('!</?div[^>]*?>!i', '', $tpl_footer[1]));
+
+  // set footer font
+  $font[2] *= 0.8;
+  $pdf->setFooterFont($font);
+  // set footer margin
+  $pdf->SetFooterMargin(10);
+  // set footer data
+  $pdf->SetFooterData($footer);
+
+  return $pdf;
+}
+
+/**
+ * Format the TCPDF footer layout
+ *
+ * @param $pdf
+ *   current TCPDF object
+ * @see theme_print_pdf_tcpdf_footer2()
+ */
+function theme_print_pdf_tcpdf_footer2($pdf) {
+  //Position at 1.5 cm from bottom
+  $pdf->writeHTMLCell(0, 15, 15, -10, $pdf->footer, 0, 0, 0, TRUE, '');
+
+  $ormargins = $pdf->getOriginalMargins();
+  $pagenumtxt = t('Page !n of !total', array('!n' => $pdf->PageNo(), '!total' => $pdf->getAliasNbPages()));
+  //Print page number
+  if ($pdf->getRTL()) {
+    $pdf->SetX($ormargins['right']);
+    $pdf->Cell(0, 10, $pagenumtxt, 'T', 0, 'L');
+  }
+  else {
+    $pdf->SetX($ormargins['left']);
+    $pdf->Cell(0, 10, $pagenumtxt, 'T', 0, 'R');
+  }
+
+  return $pdf;
+}
+
+

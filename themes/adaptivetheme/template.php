@@ -617,7 +617,8 @@ function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
   */
   
   // set content font
-  $pdf->setFont($font[0], $font[1], $font[2]);
+  // $pdf->setFont($font[0], $font[1], $font[2]);
+ 
   $pdf->setLineStyle($style=array('width' => 0.5));
 
   /***********************************************************************************************************/

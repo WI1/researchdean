@@ -1905,7 +1905,7 @@ UNGEORDNETE LISTE
  {list-style-type: none !important;} 
 
 div#content ul {  
-margin: 0 0 16px 0px;
+margin: 0 0 16px 16px;
 list-style-type: disc;
 } 
 

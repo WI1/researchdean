@@ -2634,3 +2634,22 @@ font-size: 18px;
 table#field_newsentries_values {
 width: 100%;
 }
+
+.node-type-simplenews.page-node-edit .sticky-header {
+display: none;
+}
+
+.node-type-simplenews.page-node-edit table td {
+vertical-align: top !important;
+}
+
+.node-type-simplenews.page-node-edit table td.content-multiple-drag {
+width: 20px;
+}
+
+.node-type-simplenews.page-node-edit #field_newsentries_values fieldset {
+border:0;
+}
+.node-type-simplenews.page-node-edit #field_newsentries_values fieldset {
+border:0;
+}

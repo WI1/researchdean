@@ -458,6 +458,27 @@ function adaptivetheme_system_settings_form($form) {
 ///////////////////////////////////////////////////
 
 /**
+  * Helping format HTML for TCPDF
+  */
+function adaptivetheme_preparehtml($html) {  
+  
+  $html = preg_replace('!(<div class="field.*?>)\s*!sm', '$1', $html);
+  $html = preg_replace('!(<div class="field.*?>.*?</div>)\s*!sm', '$1', $html);
+  $html = preg_replace('!<div( class="field-label.*?>.*?)</div>!sm', '<strong$1</strong>', $html);
+
+  // Since TCPDF's writeHTML is so bad with <p>, do everything possible to make it look nice
+  $html = preg_replace('!<(?:p(|\s+.*?)/?|/p)>!i', '<br$1 />', $html);
+  $html = str_replace(array('<div', 'div>'), array('<span', 'span><br />'), $html);
+  do {
+    $prev = $html;
+    $html = preg_replace('!(</span>)<br />(\s*?</span><br />)!s', '$1$2', $html);
+  } while ($prev != $html);  /**/
+  
+  return $html;
+  
+}
+
+/**
  * Format the TCPDF header
  *
  * @param $pdf
@@ -468,27 +489,29 @@ function adaptivetheme_system_settings_form($form) {
  *   array with the font definition (font name, styles and size)
  * @see theme_print_pdf_tcpdf_header()
  */
-function theme_print_pdf_tcpdf_header($pdf, $html, $font) {
+function adaptivetheme_print_pdf_tcpdf_header($pdf, $html, $font) {
   //preg_match('!<div class="print-logo">(.*?)</div>!si', $html, $tpl_logo);
   //preg_match('!<h1 class="print-title">(.*?)</h1>!si', $html, $tpl_title);
   //preg_match('!<div class="print-site_name">(.*?)</div>!si', $html, $tpl_site_name);
 
-  $ratio = 0;
-  $logo = '';
-  $logo_ret = preg_match('!src\s*=\s*(\'.*?\'|".*?"|[^\s]*)!i', $tpl_logo[1], $matches);
-  if ($logo_ret) {
-    $logo = trim($matches[1], '\'"');
-    $size = getimagesize($logo);
-    $ratio = $size ? ($size[0] / $size[1]) : 0;
-  }
+  //$ratio = 0;
+  //$logo = '';
+  //$logo_ret = preg_match('!src\s*=\s*(\'.*?\'|".*?"|[^\s]*)!i', $tpl_logo[1], $matches);
+  //if ($logo_ret) {
+  //  $logo = trim($matches[1], '\'"');
+  //  $size = getimagesize($logo);
+  //  $ratio = $size ? ($size[0] / $size[1]) : 0;
+  //}
 
   // set header font
-  $pdf->setHeaderFont($font);
+  //$pdf->setHeaderFont($font);
   // set header margin
-  $pdf->SetHeaderMargin(5);
+  $pdf->SetHeaderMargin(0);
   // set header data
-  $pdf->SetHeaderData($logo, 10 * $ratio, html_entity_decode($tpl_title[1], ENT_QUOTES, 'UTF-8'), strip_tags($tpl_site_name[1]));
+  //$pdf->SetHeaderData($logo, 10 * $ratio, html_entity_decode($tpl_title[1], ENT_QUOTES, 'UTF-8'), strip_tags($tpl_site_name[1]));
 
+  $pdf->SetPrintHeader(false);
+  
   return $pdf;
 }
 
@@ -499,9 +522,9 @@ function theme_print_pdf_tcpdf_header($pdf, $html, $font) {
  *   current TCPDF object
  * @see theme_print_pdf_tcpdf_page()
  */
-function theme_print_pdf_tcpdf_page($pdf) {
+function adaptivetheme_print_pdf_tcpdf_page($pdf) {
   // set margins
-  $pdf->SetMargins(15, 20, 15);
+  $pdf->SetMargins(12.5, 10, 12.5);
   // set auto page breaks
   $pdf->SetAutoPageBreak(TRUE, 15);
   // set image scale factor
@@ -525,14 +548,42 @@ function theme_print_pdf_tcpdf_page($pdf) {
  *   array with the font definition (font name, styles and size)
  * @see theme_print_pdf_tcpdf_content()
  */
-function theme_print_pdf_tcpdf_content($pdf, $html, $font) {
-  // set content font
-  $pdf->setFont($font[0], $font[1], $font[2]);
-
-  preg_match('!<body.*?>(.*)</body>!sim', $html, $matches);
+function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
+  
+  // Get current node object
+  if ($node = menu_get_object()) {
+    $nid = $node->nid;
+  }
+  node_load($nid);
+  
+  
+  
+  
+  /*
+  // get content
+  preg_match('!<body.*?>(.*)</body>!sim', $html, $print_html);
   $pattern = '!(?:<div class="print-(?:logo|site_name|breadcrumb|footer)">.*?</div>|<hr class="print-hr" />)!si';
-  $matches[1] = preg_replace($pattern, '', $matches[1]);
-
+  $print_html[1] = preg_replace($pattern, '', $print_html[1]);
+  
+  // get newsletter items
+  $pattern = '!(<div class="newsletter-item">.*?(?=<div class="newsletter-item">))!si';
+  $count = preg_match_all($pattern, $print_html[1], $matches);
+  
+  // regex to find data within each newsletter item
+  $pattern = "#<h3 class=\"node-title\">\s*(?P<title>.*)\s*</h3>(?:\s|\S)*?".
+    "<img src=\"(?P<image>[^\"]*)\"(?:\s|\S)*?"."(?:\s|\S)*?".
+    "<div class=\"node-content\">\s*(?P<content>.*)\s*</div>(?:\s|\S)*?".
+    "<div class=\"info-box\">\s*(?P<info>.*)\s*</div>(?:\s|\S)*?".
+    "#";
+  */  
+  // store all newsletter items in $newsletter
+  // $newsletter[i]['title/image/content/info'][0]
+  foreach ($matches[1] as $key => $item) {
+    preg_match_all($pattern, $item, $m);
+    $newsletter[] = $m; 
+  }  
+  
+  /*
   // Make CCK fields look better
   $matches[1] = preg_replace('!(<div class="field.*?>)\s*!sm', '$1', $matches[1]);
   $matches[1] = preg_replace('!(<div class="field.*?>.*?</div>)\s*!sm', '$1', $matches[1]);
@@ -544,9 +595,109 @@ function theme_print_pdf_tcpdf_content($pdf, $html, $font) {
   do {
     $prev = $matches[1];
     $matches[1] = preg_replace('!(</span>)<br />(\s*?</span><br />)!s', '$1$2', $matches[1]);
-  } while ($prev != $matches[1]);
+  } while ($prev != $matches[1]);  */
+  
+  // cover text - $covertext
+  $pattern = '!(?:<div id="cover-text">(.*?)</div>)!si';
+  preg_match($pattern, $print_html, $m);
+  $covertext = adaptivetheme_preparehtml($m[1]);
+  
+  // cover edition - $coveredition
+  $pattern = '!(?:<h2 id="cover-edition">(.*?)</h2>)!si';
+  preg_match($pattern, $print_html, $m);
+  $coveredition = adaptivetheme_preparehtml($m[1]);
+  
+  // set content font
+  $pdf->setFont($font[0], $font[1], $font[2]);
+  $pdf->setLineStyle($style=array('width' => 0.5));
 
-  @$pdf->writeHTML($matches[1]);
+  /***********************************************************************************************************/
+  /* COVER PAGE */
+  /***********************************************************************************************************/
+  $coverfile = drupal_get_path('theme', 'adaptivetheme') . '/templates/simplenews/cover.ai';
+  
+  // print cover page
+  if (file_exists($coverfile)) {
+    $pdf->ImageEps($coverfile, $x='0', $y='0', $w=210, $h=0);
+  }
+  
+  // print information on current edition
+  $pdf->SetXY(12.5, 25);
+  $pdf->SetTextColor(137, 24, 45); /* dark red */
+  $pdf->SetFont('helvetica', 'B', 16); 
+  $pdf->Cell(0, 16, $coveredition, 0, false, 'L', 0, '', 0, false);          
+
+  // print textbox
+  $pdf->SetXY(23, 58);
+  $pdf->SetTextColor(0, 0, 0); /* black */
+  $pdf->SetFont('helvetica', 'N', 10); 
+  $pdf->writeHTMLCell(102, 120, 23, 58, $covertext, 0, 0, false, true, 'L', false); 
+  
+  // print table of contents
+  $pdf->SetXY(13, 170);
+  $pdf->SetTextColor(137, 24, 45); /* dark red */
+  $pdf->SetFont('helvetica', 'B', 12); 
+  $pdf->Cell(0, 10, '>> '.t('table of contents'), 0, false, 'L', 0, '', 0, false);
+  $pdf->SetDrawColor(137, 24, 45); /* dark red */
+  $pdf->Line(12.5, 178, 197.5, 178); /* $style=array('width' => 1) */  
+  $pdf->SetXY(23, 180);  
+  $pdf->SetTextColor(0, 0, 0); /* black */
+  $pdf->SetFont('helvetica', 'N', 10);
+  
+  $i = 1;
+  // insert foreach here to generate table of contents
+  foreach($newsletter as $key => $item) {
+   
+    //$item['title/image/content/info'][0]
+    $pdf->MultiCell(10, 7, $i.'.', 0, 'L', 0, 0);      
+    $pdf->MultiCell(165, 7, $item['title'][0], 0, 'L', 0, 1);
+    $i++;    
+  
+  }          
+  
+  // start next page
+  $pdf->AddPage(); 
+
+  /***********************************************************************************************************/
+  /* REGULAR PAGES */
+  /***********************************************************************************************************/
+
+  // flip through all newsletter items
+  foreach($newsletter as $key => $item) {
+   
+    //$item['title/image/content/info'][0]
+    
+    // title and line
+    $pdf->SetDrawColor(137, 24, 45); /* dark red */
+    $pdf->Line(12.5, $pdf->GetY()+5, 197.5, $pdf->GetY()+5); /* $style=array('width' => 1) */ 
+    $pdf->SetTextColor(137, 24, 45); /* dark red */
+    $pdf->SetFont('helvetica', 'B', 10); 
+    $pdf->Cell(0, 14, ">> ".$item['title'][0], 0, false, 'L', 0, '', 0, false);
+    
+    $y = $pdf->GetY();
+    // image
+    if (file_exists($item['image'][0])) {
+      $pdf->Image($item['image'][0], $x='', $y='', $w=37, $h=65, $type='', $link='', $align='', $resize=true, $dpi=72, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox='TL', $hidden=false, $fitonpage=false);
+    }
+    
+    // text
+    $pdf->SetTextColor(0, 0, 0); /* black */
+    $pdf->SetFont('helvetica', 'N', 10); 
+    $pdf->writeHTMLCell(143.5, 0, 54, $y, adaptivetheme_preparehtml($item['content'][0]), 0, 0, false, true, 'L', false);     
+    
+    // infobox
+    $pdf->SetFont('helvetica', 'B', 10); 
+    $pdf->Cell(0, 0, t('Further information'), 0, false, 'L', 0, '', 0, false);
+    $pdf->SetDrawColor(0, 0, 0); /* black */
+    $pdf->Line(54, $pdf->GetY()+1, 197.5, $pdf->GetY()+1, $style=array('width' => 0.2));
+    $pdf->SetTextColor(0, 0, 0); /* black */
+    $pdf->SetY($pdf->GetY()+2);
+    $pdf->SetFont('helvetica', 'N', 10); 
+    $pdf->writeHTMLCell(143.5, 0, 54, '', adaptivetheme_preparehtml($item['info'][0]), 0, 0, false, true, 'L', false); 
+    
+  }  
+  
+  //@$pdf->writeHTML($matches[1]);
 
   return $pdf;
 }
@@ -562,7 +713,8 @@ function theme_print_pdf_tcpdf_content($pdf, $html, $font) {
  *   array with the font definition (font name, styles and size)
  * @see theme_print_pdf_tcpdf_footer()
  */
-function theme_print_pdf_tcpdf_footer($pdf, $html, $font) {
+function adaptivetheme_print_pdf_tcpdf_footer($pdf, $html, $font) {
+  /* no footer required
   preg_match('!<div class="print-footer">(.*?)</div>!si', $html, $tpl_footer);
   $footer = trim(preg_replace('!</?div[^>]*?>!i', '', $tpl_footer[1]));
 
@@ -573,7 +725,7 @@ function theme_print_pdf_tcpdf_footer($pdf, $html, $font) {
   $pdf->SetFooterMargin(10);
   // set footer data
   $pdf->SetFooterData($footer);
-
+  */
   return $pdf;
 }
 
@@ -584,21 +736,30 @@ function theme_print_pdf_tcpdf_footer($pdf, $html, $font) {
  *   current TCPDF object
  * @see theme_print_pdf_tcpdf_footer2()
  */
-function theme_print_pdf_tcpdf_footer2($pdf) {
-  //Position at 1.5 cm from bottom
-  $pdf->writeHTMLCell(0, 15, 15, -10, $pdf->footer, 0, 0, 0, TRUE, '');
-
-  $ormargins = $pdf->getOriginalMargins();
-  $pagenumtxt = t('Page !n of !total', array('!n' => $pdf->PageNo(), '!total' => $pdf->getAliasNbPages()));
-  //Print page number
-  if ($pdf->getRTL()) {
-    $pdf->SetX($ormargins['right']);
-    $pdf->Cell(0, 10, $pagenumtxt, 'T', 0, 'L');
+function adaptivetheme_print_pdf_tcpdf_footer2($pdf) {
+  
+  // not on first page
+  if ($pdf->PageNo() == 1) {
+    return $pdf;
   }
-  else {
-    $pdf->SetX($ormargins['left']);
-    $pdf->Cell(0, 10, $pagenumtxt, 'T', 0, 'R');
-  }
+  
+  $pdf->SetTextColor(0, 64, 113); /* dark blue */
+  $pdf->SetDrawColor(137, 24, 45); /* dark red */
+  
+  $pdf->SetFont('helvetica', 'B', 6); 
+  
+  $pdf->SetXY(12.5, 4.6);
+  
+  $pagenumtxt = t('Page !n', array('!n' => $pdf->PageNo()));
+  $titletxt = t('News from the research dean...');
+  
+  //Print title and page number
+  $pdf->MultiCell(120, 4.9, $titletxt, 0, 'L', 0, 0);      
+  $pdf->MultiCell(65, 4.9, $pagenumtxt, 0, 'R', 0, 1);
+  //$pdf->Line(12.5, 9.5, 197.5, 9.5, $style=array('width' => 0.5)); /* $style=array('width' => 1) */
+  
+  $pdf->SetTextColor(0, 0, 0); /* black */
+  $pdf->SetDrawColor(0, 0, 0); /* black */  
 
   return $pdf;
 }

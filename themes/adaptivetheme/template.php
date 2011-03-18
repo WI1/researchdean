@@ -553,8 +553,14 @@ function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
   // Get current node object
   if ($node = menu_get_object()) {
     $nid = $node->nid;
+    $covertext = $node->field_nl_content[0]['value'];
+    $coveredition = t('Issue') . ' ' . $node->title;
+    foreach ($node->field_newsentries as $key => $item) {
+      $newsletter[] = $item;
+    }
   }
-  node_load($nid);
+  
+ 
   
   
   
@@ -575,14 +581,14 @@ function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
     "<div class=\"node-content\">\s*(?P<content>.*)\s*</div>(?:\s|\S)*?".
     "<div class=\"info-box\">\s*(?P<info>.*)\s*</div>(?:\s|\S)*?".
     "#";
-  */  
+  
   // store all newsletter items in $newsletter
   // $newsletter[i]['title/image/content/info'][0]
   foreach ($matches[1] as $key => $item) {
     preg_match_all($pattern, $item, $m);
     $newsletter[] = $m; 
   }  
-  
+ */ 
   /*
   // Make CCK fields look better
   $matches[1] = preg_replace('!(<div class="field.*?>)\s*!sm', '$1', $matches[1]);
@@ -597,15 +603,18 @@ function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
     $matches[1] = preg_replace('!(</span>)<br />(\s*?</span><br />)!s', '$1$2', $matches[1]);
   } while ($prev != $matches[1]);  */
   
+  /*
   // cover text - $covertext
   $pattern = '!(?:<div id="cover-text">(.*?)</div>)!si';
   preg_match($pattern, $print_html, $m);
   $covertext = adaptivetheme_preparehtml($m[1]);
-  
+  */
+  /*
   // cover edition - $coveredition
   $pattern = '!(?:<h2 id="cover-edition">(.*?)</h2>)!si';
   preg_match($pattern, $print_html, $m);
   $coveredition = adaptivetheme_preparehtml($m[1]);
+  */
   
   // set content font
   $pdf->setFont($font[0], $font[1], $font[2]);
@@ -639,7 +648,7 @@ function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
   $pdf->SetFont('helvetica', 'B', 12); 
   $pdf->Cell(0, 10, '>> '.t('table of contents'), 0, false, 'L', 0, '', 0, false);
   $pdf->SetDrawColor(137, 24, 45); /* dark red */
-  $pdf->Line(12.5, 178, 197.5, 178); /* $style=array('width' => 1) */  
+  $pdf->Line(12.5, 170, 197.5, 170); /* $style=array('width' => 1) */  
   $pdf->SetXY(23, 180);  
   $pdf->SetTextColor(0, 0, 0); /* black */
   $pdf->SetFont('helvetica', 'N', 10);
@@ -647,10 +656,13 @@ function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
   $i = 1;
   // insert foreach here to generate table of contents
   foreach($newsletter as $key => $item) {
-   
+    
+    $linked_node = node_load($item);
+    
+    $pdf->SetXY(23, $pdf->GetY());    
     //$item['title/image/content/info'][0]
     $pdf->MultiCell(10, 7, $i.'.', 0, 'L', 0, 0);      
-    $pdf->MultiCell(165, 7, $item['title'][0], 0, 'L', 0, 1);
+    $pdf->MultiCell(165, 7, $linked_node->title, 0, 'L', 0, 1);
     $i++;    
   
   }          
@@ -665,36 +677,45 @@ function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
   // flip through all newsletter items
   foreach($newsletter as $key => $item) {
    
+    $linked_node = node_load($item); 
+    
     //$item['title/image/content/info'][0]
     
     // title and line
     $pdf->SetDrawColor(137, 24, 45); /* dark red */
-    $pdf->Line(12.5, $pdf->GetY()+5, 197.5, $pdf->GetY()+5); /* $style=array('width' => 1) */ 
+    $pdf->Line(12.5, $pdf->GetY()+5, 197.5, $pdf->GetY()+5, $style=array('width' => 0.4));  
+    $pdf->SetXY(12.5, $pdf->GetY()+2);    
     $pdf->SetTextColor(137, 24, 45); /* dark red */
-    $pdf->SetFont('helvetica', 'B', 10); 
-    $pdf->Cell(0, 14, ">> ".$item['title'][0], 0, false, 'L', 0, '', 0, false);
+    $pdf->SetFont('helvetica', 'B', 12); 
+    $pdf->Cell(0, 14, ">> " . $linked_node->title, 0, false, 'L', 0, '', 0, false);
     
     $y = $pdf->GetY();
     // image
-    if (file_exists($item['image'][0])) {
-      $pdf->Image($item['image'][0], $x='', $y='', $w=37, $h=65, $type='', $link='', $align='', $resize=true, $dpi=72, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox='TL', $hidden=false, $fitonpage=false);
+    if (file_exists($linked_node->field_picture[0]['filepath'])) {
+      $pdf->Image($linked_node->field_picture[0]['filepath'], 12.5, $y+14, $w=30, $h=65, $type='', $link='', $align='', $resize=true, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox='TL', $hidden=false, $fitonpage=false);
     }
     
     // text
     $pdf->SetTextColor(0, 0, 0); /* black */
     $pdf->SetFont('helvetica', 'N', 10); 
-    $pdf->writeHTMLCell(143.5, 0, 54, $y, adaptivetheme_preparehtml($item['content'][0]), 0, 0, false, true, 'L', false);     
     
-    // infobox
-    $pdf->SetFont('helvetica', 'B', 10); 
-    $pdf->Cell(0, 0, t('Further information'), 0, false, 'L', 0, '', 0, false);
-    $pdf->SetDrawColor(0, 0, 0); /* black */
-    $pdf->Line(54, $pdf->GetY()+1, 197.5, $pdf->GetY()+1, $style=array('width' => 0.2));
-    $pdf->SetTextColor(0, 0, 0); /* black */
-    $pdf->SetY($pdf->GetY()+2);
-    $pdf->SetFont('helvetica', 'N', 10); 
-    $pdf->writeHTMLCell(143.5, 0, 54, '', adaptivetheme_preparehtml($item['info'][0]), 0, 0, false, true, 'L', false); 
+    // writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
+    $pdf->writeHTMLCell(143.5, 0, 54, $y+14, adaptivetheme_preparehtml($linked_node->field_newstext[0]['value']), 0, 1, false, true, 'L', false);     
     
+    if (!empty($linked_node->field_furtherinfo[0]['value'])) {
+      $y = $pdf->GetY();
+      $pdf->SetXY(54,$y);
+      // infobox
+      $pdf->SetFont('helvetica', 'B', 10); 
+      //Cell($w, $h=0, $txt='', $border=0, $ln=0, $align='', $fill=0, $link='', $stretch=0, $ignore_min_height=false, $calign='T', $valign='M')
+      $pdf->Cell(0, 0, t('Further information'), 0, 1, 'L', 0, '', 0, false);
+      $pdf->SetDrawColor(0, 0, 0); /* black */
+      $pdf->Line(55, $y+4, 197.5, $y+4, $style=array('width' => 0.3));
+      $pdf->SetTextColor(0, 0, 0); /* black */
+      $pdf->SetY($pdf->GetY()+2);
+      $pdf->SetFont('helvetica', 'N', 10); 
+      $pdf->writeHTMLCell(143.5, 0, 54, $y+4, adaptivetheme_preparehtml($linked_node->field_furtherinfo[0]['value']), 0, 1, false, true, 'L', false); 
+    }
   }  
   
   //@$pdf->writeHTML($matches[1]);

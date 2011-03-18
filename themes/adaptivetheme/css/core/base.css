@@ -1906,11 +1906,11 @@ UNGEORDNETE LISTE
 
 div#content ul {  
 margin: 0 0 16px 16px;
-list-style-type: disc;
+list-style-type: square;
 } 
 
 div#content ul ul {  
-margin: 0 0 16px 0px;
+margin: 0 0 16px 16px;
 font-size: 1em;
 } 
 
@@ -1918,7 +1918,7 @@ font-size: 1em;
 GEORDNETE LISTE
 --------------------------------------------------------*/
 div#content ol {
-margin: 0 0 16px 0;
+margin: 0 0 16px 16px;
 list-style-type: none;
 }
 
@@ -1927,7 +1927,7 @@ margin: 0 0 16px 0;
 }
 
 div#content ol ol {
-margin: 0 0 16px 30px;
+margin: 0 0 16px 16px;
 font-size: 1em;
 }
 

@@ -2630,3 +2630,7 @@ margin-top: 1em;
 border-top: 2px solid #7D0024;
 font-size: 18px;
 }
+
+table#field_newsentries_values {
+width: 100%;
+}

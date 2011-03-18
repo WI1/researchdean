@@ -2618,3 +2618,15 @@ div.exhibit-text-facet input {
      #content-column {
      padding-top: 13px;
      }
+     
+     
+     
+.section-newsletter h3 a {
+display: block;
+text-decoration: none !important;
+color: #7D0024 !important;
+padding: 0.3em 0 0 0;
+margin-top: 1em;
+border-top: 2px solid #7D0024;
+font-size: 18px;
+}

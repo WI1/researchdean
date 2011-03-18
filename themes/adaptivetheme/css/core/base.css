@@ -1098,10 +1098,10 @@ text-decoration: none;
 }
 
 /* Tabellen */
-div#content table,  
-div#content th,  
-div#content tr, 
-div#content td {
+div#content-column table,  
+div#content-column th,  
+div#content-column tr, 
+div#content-column td {
 font-size:11px !important;
 line-height:16px !important;
 color:#000000 !important;
@@ -1117,16 +1117,16 @@ line-height:24px;
 
 
 /* Ungeordnete Liste */
-div#content ul {
+div#content-column ul {
 line-height:16px;
 }
 
-div#content .views ul {
+div#content-column .views ul {
 list-style-type: none !important;	
 }
 
 /* Geordnete Liste */
-div#content ol {
+div#content-column ol {
 line-height:16px;
 list-style-type: decimal;
 }
@@ -1904,12 +1904,12 @@ UNGEORDNETE LISTE
 .block ul, div#menu ul, div#hauptmenu ul, div#bereichsmenu ul
  {list-style-type: none !important;} 
 
-div#content ul {  
+div#content-column ul {  
 margin: 0 0 16px 16px;
 list-style-type: square;
 } 
 
-div#content ul ul {  
+div#content-column ul ul {  
 margin: 0 0 16px 16px;
 font-size: 1em;
 } 
@@ -1917,16 +1917,16 @@ font-size: 1em;
 /*  ------------------------------------------------------
 GEORDNETE LISTE
 --------------------------------------------------------*/
-div#content ol {
+div#content-column ol {
 margin: 0 0 16px 16px;
 list-style-type: none;
 }
 
-div#content ol  li {
+div#content-column ol  li {
 margin: 0 0 16px 0;
 }
 
-div#content ol ol {
+div#content-column ol ol {
 margin: 0 0 16px 16px;
 font-size: 1em;
 }

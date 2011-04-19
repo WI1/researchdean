@@ -89,7 +89,7 @@
  *   $db_url = 'mysqli://username:password@localhost/databasename';
  *   $db_url = 'pgsql://username:password@localhost/databasename';
  */
-$db_url = 'mysqli://scheiner:zFMVcGtvEvSQQynh@localhost/scheiner';
+$db_url = 'mysqli://researchdean:Cv7u9JpKDDm8u3VW@localhost/researchdean';
 $db_prefix = '';
 
 /**
@@ -101,7 +101,7 @@ $db_prefix = '';
  * check. After finishing the upgrade, be sure to open this file again
  * and change the TRUE back to a FALSE!
  */
-$update_free_access = FALSE;
+$update_free_access = TRUE;
 
 /**
  * Base URL (optional).
@@ -238,9 +238,4 @@ ini_set('url_rewriter.tags',        '');
 #   '@count min' => '@count minutes',
 # );
 
-/**
- *  Includes PHP Libraries for Facebook Graph API
- */
-include "sites/all/modules/fb/fb_url_rewrite.inc";
-include "sites/all/modules/fb/fb_settings.inc";
 

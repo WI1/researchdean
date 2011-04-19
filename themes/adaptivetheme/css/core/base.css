@@ -1909,6 +1909,10 @@ margin: 0 0 16px 16px;
 list-style-type: square;
 } 
 
+ ul.tabs , ul.vertical-tabs-list {
+margin-left: 0 !important;
+}
+
 div#content-column ul ul {  
 margin: 0 0 16px 16px;
 font-size: 1em;

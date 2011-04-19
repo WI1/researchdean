@@ -554,8 +554,9 @@ function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
   if ($node = menu_get_object()) {
     $nid = $node->nid;
     $covertext = $node->field_nl_content[0]['value'];
-    $coveredition = t('Issue') . ' ' . $node->title;
-    foreach ($node->field_newsentries as $key => $item) {
+    $year = $node->field_issue[0]['value'];
+	$coveredition = t('Issue') . ' ' . $node->title . '/' . $year;
+	foreach ($node->field_newsentries as $key => $item) {
       $newsletter[] = $item;
     }
   }
@@ -684,16 +685,18 @@ function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
     
     // title and line
     $pdf->SetDrawColor(137, 24, 45); /* dark red */
-    $pdf->Line(12.5, $pdf->GetY()+5, 197.5, $pdf->GetY()+5, $style=array('width' => 0.4));  
+    $pdf->Line(12.5, $pdf->GetY(), 197.5, $pdf->GetY(), $style=array('width' => 0.4));  
     $pdf->SetXY(12.5, $pdf->GetY()+2);    
     $pdf->SetTextColor(137, 24, 45); /* dark red */
-    $pdf->SetFont('helvetica', 'B', 12); 
-    $pdf->Cell(0, 14, ">> " . $linked_node->title, 0, false, 'L', 0, '', 0, false);
+    $pdf->SetFont('helvetica', 'B', 12);
+    // MultiCell($w, $h, $txt, $border=0, $align='J', $fill=0, $ln=1, $x='', $y='', $reseth=true, $stretch=0, $ishtml=false, $autopadding=true, $maxh=0)
+    $pdf->MultiCell(185, 14, ">> " . $linked_node->title, 0, 'L', 0, 1); 
+	
     
     $y = $pdf->GetY();
     // image
     if (file_exists($linked_node->field_picture[0]['filepath'])) {
-      $pdf->Image($linked_node->field_picture[0]['filepath'], 12.5, $y+14, $w=30, $h=65, $type='', $link='', $align='', $resize=true, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox='TL', $hidden=false, $fitonpage=false);
+      $pdf->Image($linked_node->field_picture[0]['filepath'], 12.5, $y, $w=30, $h=65, $type='', $link='', $align='', $resize=true, $dpi=300, $palign='', $ismask=false, $imgmask=false, $border=0, $fitbox='TL', $hidden=false, $fitonpage=false);
     }
     
     // text
@@ -701,7 +704,7 @@ function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
     $pdf->SetFont('helvetica', 'N', 10); 
     
     // writeHTMLCell($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=0, $reseth=true, $align='', $autopadding=true)
-    $pdf->writeHTMLCell(143.5, 0, 54, $y+14, adaptivetheme_preparehtml($linked_node->field_newstext[0]['value']), 0, 1, false, true, 'L', false);     
+    $pdf->writeHTMLCell(143.5, 0, 54, $y, adaptivetheme_preparehtml($linked_node->field_newstext[0]['value']), 0, 1, false, true, 'L', false);     
     
     if (!empty($linked_node->field_furtherinfo[0]['value'])) {
       $y = $pdf->GetY();
@@ -717,10 +720,15 @@ function adaptivetheme_print_pdf_tcpdf_content($pdf, $html, $font) {
       $pdf->SetFont('helvetica', 'N', 10); 
       $pdf->writeHTMLCell(143.5, 0, 54, $y+4, adaptivetheme_preparehtml($linked_node->field_furtherinfo[0]['value']), 0, 1, false, true, 'L', false); 
     }
+	
+	$pdf->SetXY(12.5, $pdf->GetY()+8);
   }  
   
   //@$pdf->writeHTML($matches[1]);
-
+  
+  
+  $doc_title = $year . '-' . $node->title . '-' . t('Forschungsdekan_Newsletter.pdf');
+  $pdf->Output($doc_title, 'D');
   return $pdf;
 }
 
@@ -760,6 +768,11 @@ function adaptivetheme_print_pdf_tcpdf_footer($pdf, $html, $font) {
  */
 function adaptivetheme_print_pdf_tcpdf_footer2($pdf) {
   
+  if ($node = menu_get_object()) {
+    $year = $node->field_issue[0]['value'];
+    $coveredition = t('Issue') . ' ' . $node->title . '/' . $year;
+  }
+  
   // not on first page
   if ($pdf->PageNo() == 1) {
     return $pdf;
@@ -773,7 +786,7 @@ function adaptivetheme_print_pdf_tcpdf_footer2($pdf) {
   $pdf->SetXY(12.5, 4.6);
   
   $pagenumtxt = t('Page !n', array('!n' => $pdf->PageNo()));
-  $titletxt = t('News from the research dean...');
+  $titletxt = t('News from the research dean') . ' - ' . $coveredition;
   
   //Print title and page number
   $pdf->MultiCell(120, 4.9, $titletxt, 0, 'L', 0, 0);      
@@ -786,4 +799,21 @@ function adaptivetheme_print_pdf_tcpdf_footer2($pdf) {
   return $pdf;
 }
 
+/**
+ * Theme widget node form as a table row.
+ */
+function adaptivetheme_node_widget_form($form) {
 
+  if (!empty($form['title']['#default_value'])) {
+    $title = $form['title']['#default_value'];
+  } else {
+    $title = '[Titel fehlt]';
+  }
+
+  $output = '';
+  $output = '<fieldset class="collapsible collapsed"><legend>' . $title . '</legend>';
+  $output .= drupal_render($form);
+  $output .='</fieldset>';
+  
+  return $output;
+}

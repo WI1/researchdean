@@ -219,7 +219,7 @@ function focus_groups_menu() {
 		'access callback' => 'focus_groups_is_project', // We use the access callback to show additional tabs only on project content types
 		'access arguments' => array(1),
 	);
-
+/*
 	$items['node/%node/publications'] = array(
 		'title' => 'Publikationen',
 		'type' => MENU_LOCAL_TASK,
@@ -237,7 +237,7 @@ function focus_groups_menu() {
 		'access callback' => 'focus_groups_is_project',
 		'access arguments' => array(1),
 	);
-
+*/
 	return $items;
 }
 

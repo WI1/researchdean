@@ -38,7 +38,7 @@
 <div id="<?php print $block_module_delta; ?>" class="<?php print $classes; ?>">
 
 
- <?php print $block->title; ?>
+ <h3><?php print $block->title; ?></h3>
  
  <?php print $block->content; ?>
 

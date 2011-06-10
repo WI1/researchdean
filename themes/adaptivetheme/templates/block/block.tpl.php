@@ -36,7 +36,11 @@
  */
 ?>
 <div id="<?php print $block_module_delta; ?>" class="<?php print $classes; ?>">
- <?php print $block->content ?>
+
+
+ <?php print $block->title; ?>
+ 
+ <?php print $block->content; ?>
 
  <?php print $edit_links; ?>
 

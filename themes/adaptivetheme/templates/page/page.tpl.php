@@ -175,6 +175,8 @@
         <?php endif; ?>
 		
      	<div id="main-content-header">
+		    <?php if ($messages && $user->uid != 0): print $messages; endif; ?>
+            <?php if ($help): print $help; endif; ?>
 							<?php if (!empty($title)): ?>
 								<h1 id="page-title" class="title"><?php print $title; ?></h1>
 							<?php endif; ?>
@@ -185,17 +187,8 @@
 								<div class="tabs local-tasks">
 									<?php print $tabs; ?></div>
 								<?php endif; ?>
-            
-		    <?php if ($tabs): ?>
-              <div class="local-tasks"><?php print $tabs; ?></div>
-            <?php endif; ?>
-            
-            <?php if ($messages && $user->uid != 0): print $messages; endif; ?>
-            <?php if ($help): print $help; endif; ?>
+         
           </div>
-    		  
-		  
-		  
           <?php if ($content_aside): ?> 
             <div id="content-aside" class="section region">
               <?php print $content_aside; ?>

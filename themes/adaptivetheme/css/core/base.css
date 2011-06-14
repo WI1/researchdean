@@ -2657,3 +2657,12 @@ border:0;
 .node-type-simplenews.page-node-edit #field_newsentries_values fieldset {
 border:0;
 }
+
+
+.node .meta .submitted {
+display: none;
+}
+
+.node .field img.imagecache-key_visual {
+margin-bottom: 1em;
+}

@@ -68,19 +68,19 @@
     <?php if ($terms): ?>
       <div class="node-terms"><?php print $terms; ?></div>
     <?php endif; ?>
-  
-    <?php if ($submitted && $links): ?>
+    
+   <?php if ($submitted && $links): ?>
 		<div class="node-links node-submitted">
 	      <?php //print $submitted; ?>
           
            <?php if (!drupal_is_front_page()): ?>
-	      		<?php print $links; ?>
+	      		<?php // print $links; ?>
 	       <?php endif; ?>
          
          
          </div>
     <?php endif; ?>
-    
+   
     <?php if ($node_bottom && !$teaser): ?>
       <div id="node-bottom">
         <?php print $node_bottom; ?>

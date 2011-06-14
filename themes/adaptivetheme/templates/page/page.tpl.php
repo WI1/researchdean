@@ -175,18 +175,22 @@
         <?php endif; ?>
 		
      	<div id="main-content-header">
-		    <?php if ($messages && $user->uid != 0): print $messages; endif; ?>
-            <?php if ($help): print $help; endif; ?>
-							<?php if (!empty($title)): ?>
-								<h1 id="page-title" class="title"><?php print $title; ?></h1>
-							<?php endif; ?>
-							<?php if (isset($node) && !empty($node->og_image)): ?>
-							<p class="long"><?php print $node->og_image; ?></p>
-							<?php endif; ?>
-							<?php if (!empty($tabs)): ?>
-								<div class="tabs local-tasks">
-									<?php print $tabs; ?></div>
-								<?php endif; ?>
+		    
+			<?php if ($messages && $user->uid != 0): print $messages; endif; ?>
+            
+			<?php if ($help): print $help; endif; ?>
+			
+			<?php if (isset($node) && !empty($node->field_bild)): ?>
+			  <img src="<?php print $node->field_bild[0]['filepath']; ?> /></p>
+			<?php endif; ?>
+			
+			<?php if (!empty($title)): ?>
+			  <h1 id="page-title" class="title"><?php print $title; ?></h1>
+			<?php endif; ?>
+			
+			<?php if (!empty($tabs)): ?>
+			  <div class="tabs local-tasks"><?php print $tabs; ?></div>
+			<?php endif; ?>
          
           </div>
           <?php if ($content_aside): ?> 

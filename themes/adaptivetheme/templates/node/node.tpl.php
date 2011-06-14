@@ -74,7 +74,7 @@
 	      <?php //print $submitted; ?>
           
            <?php if (!drupal_is_front_page()): ?>
-	      		<?php // print $links; ?>
+	      		<?php print $links; ?>
 	       <?php endif; ?>
          
          

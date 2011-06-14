@@ -181,7 +181,7 @@
 			<?php if ($help): print $help; endif; ?>
 			
 			<?php if (isset($node) && !empty($node->field_bild)): ?>
-			  <img src="<?php print $node->field_bild[0]['filepath']; ?> /></p>
+			  <img src="<?php print $node->field_bild[0]['filepath']; ?>" /></p>
 			<?php endif; ?>
 			
 			<?php if (!empty($title)): ?>

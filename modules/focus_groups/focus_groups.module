@@ -223,7 +223,7 @@ function focus_groups_menu() {
 	$items['node/%node/einreichen'] = array(
 		'title' => 'Publikationen einreichen',
 		'type' => MENU_LOCAL_TASK,
-		'page callback' => 'pubsubmit_tab_call_back',
+		'page callback' => 'focus_groups_pubsubmit_tab_call_back',
 		'page arguments' => array(1),
 		'access callback' => 'og_is_group_admin', 
 		'access arguments' => array(2), 
@@ -314,7 +314,7 @@ function focus_groups_info_tab_call_back($node) {
  * @param array $node
  * @return string
  */
-function pubsubmit_tab_call_back($node) {
+function focus_groups_pubsubmit_tab_call_back($node) {
 	return views_embed_view('rd_og_publications_shortlist','views_tab_page-1',$node->nid);
 }
 

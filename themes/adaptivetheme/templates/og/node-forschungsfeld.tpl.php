@@ -63,5 +63,4 @@
     <?php print $content ?>
   </div>
 
-  <?php print $links; ?>
 </div>

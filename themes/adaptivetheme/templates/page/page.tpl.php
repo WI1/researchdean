@@ -95,10 +95,7 @@
 <head>
   <title><?php print $head_title; ?></title>
   <?php print $head; ?>
-    <?php print $scripts; ?>
-	
-	<?php drupal_add_js('sites/wi1.uni-erlangen.de/themes/adaptivetheme/js/matrix_select.js'); ?>
-	
+  <?php print $scripts; ?>
   <?php print $styles; ?>
 </head>    
 <body <?php print $section_class; ?>>
@@ -146,10 +143,6 @@
 <?php endif; ?>
 <div class="clear"></div>
 <div id="main" class="container_16">       
-
-
-	
-
 
 <div id="content">     
 	<div id="sidebar-first" class="sidebar section region grid_4">

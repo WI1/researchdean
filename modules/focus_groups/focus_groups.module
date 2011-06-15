@@ -325,10 +325,12 @@ function focus_groups_pubsubmit_tab_call_back($node) {
  * @return string
  */
 function focus_groups_publications_tab_call_back($node) {
-  if(!empty($node->field_mendeley_shared_collection[0]['value'])) {
-    return mendeley_publications($node->field_mendeley_shared_collection[0]['value']);
+  if(!empty($_GET['args'])) {
+	$exhibitArgumentsUrl = 'publications';
+	$nid = arg(1, drupal_get_normal_path($exhibitArgumentsUrl));
+	 return node_view(node_load($nid));
   } else {
-   	return '<p><em>Noch keine Publikationen hinterlegt.</em></p>';
+	return '<p><em>' . t('Es sind noch keine Publikationen in dieser Gruppe veröffentlicht.', NULL, 'de') . '</em></p>';
   }
 }
 

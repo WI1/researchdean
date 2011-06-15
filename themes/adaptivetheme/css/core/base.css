@@ -2666,3 +2666,8 @@ display: none;
 .node .field img.imagecache-key_visual {
 margin-bottom: 1em;
 }
+
+.view-og-ghp-ron li, .view-og-ghp-ron ul {list-style-type: none; margin-left: 0, padding-left: 0;}
+.view-og-ghp-ron li a, .view-og-ghp-ron li { font-size: 10px; color: #999 !important; } 
+.view-og-ghp-ron .biblio-entry, .view-og-ghp-ron .biblio-entry a {font-size: 11px; color: #333 !important;}
+.view-og-ghp-ron .biblio-entry { margin-top: 0; margin-bottom: 2em;}

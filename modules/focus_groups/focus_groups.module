@@ -154,6 +154,9 @@ function focus_groups_preprocess_page(&$vars) {
 		$profile = user_load($url[1]);
 		$vars['related_groups'] = focus_groups_load_group_details($profile->og_groups);
 	}
+	
+	// add node id as args to a tab because the exhibit module uses it for arguments in their views. this is a horrible implementation but i think it's the only way which can be done efficiently.
+	$vars['tabs'] = str_replace('/publications"', '/publications?args=' . $vars['node']->nid . '"', $vars['tabs']);
 }
 
 /**

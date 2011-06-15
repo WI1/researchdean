@@ -228,7 +228,7 @@ function focus_groups_menu() {
 		'access callback' => 'og_is_group_admin', 
 		'access arguments' => array(2), 
 	);
-/*
+
 	$items['node/%node/publications'] = array(
 		'title' => 'Publikationen',
 		'type' => MENU_LOCAL_TASK,
@@ -238,6 +238,7 @@ function focus_groups_menu() {
 		'access arguments' => array(1),
 	);
 
+	/*
 	$items['user/%user/publications'] = array(
 		'title' => 'Publikationen',
 		'type' => MENU_LOCAL_TASK,

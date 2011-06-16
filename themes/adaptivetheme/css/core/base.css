@@ -2671,3 +2671,8 @@ margin-bottom: 1em;
 .view-og-ghp-ron li a, .view-og-ghp-ron li { font-size: 10px; } 
 .view-og-ghp-ron .biblio-entry, .view-og-ghp-ron .biblio-entry a {font-size: 11px;}
 .view-og-ghp-ron .biblio-entry { margin-top: 0; margin-bottom: 2em;}
+
+
+.node-type-forschungsfeld div#content-column ul {
+margin: 16px 0 !important;
+}

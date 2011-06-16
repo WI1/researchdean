@@ -319,7 +319,11 @@ function focus_groups_info_tab_call_back($node) {
  * @return string
  */
 function focus_groups_pubsubmit_tab_call_back($node) {
+  if($node->nid) {
 	return views_embed_view('rd_og_publications_shortlist','views_tab_page-1',$node->nid);
+  } else {
+    '<p><em>' . t('Ein Fehler ist aufgetreten, bitte wenden Sie sich an einen Administrator.', NULL, 'de') . '</em></p>'
+  }
 }
 
 /**

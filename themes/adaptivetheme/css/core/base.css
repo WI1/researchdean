@@ -2588,6 +2588,9 @@ display: block;
 .exhibit-collectionView-body h2,
 .exhibit-collectionView-body h2 {
 clear: both;
+font-size: 10px !important;
+margin: 0 !important;
+line-height: inherit !important;
 }
 
 div.exhibit-collectionView-group-content {

@@ -2368,6 +2368,10 @@ Allgemeine Klassen
 
 /***** Frontpage *****/
 
+div#block-menu-primary-links h3 {
+display: none;
+}
+
 #block-block-4 {
 border: 1px solid #ccc;
 background: #eee;

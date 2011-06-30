@@ -939,7 +939,6 @@ font-size: 1.2em !important;
 /*** COLUMNS ***/
 
 #sidebar-first {
-  margin-left: 10px;
   padding: 0 20px 0 0;
 }
 
@@ -1618,7 +1617,7 @@ MAIN - MENU - CONTENT
 --------------------------------------------------------*/
 div#content {  
 	position: relative;
-	padding: 20px;
+	padding: 10px;
 	display: block;
 } 
 

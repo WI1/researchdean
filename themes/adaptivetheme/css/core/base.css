@@ -2688,3 +2688,9 @@ margin: 16px 0 !important;
     text-align:center;
     vertical-align: top !important;
 }
+
+.og-context .node h2 {
+display: none
+
+}
+

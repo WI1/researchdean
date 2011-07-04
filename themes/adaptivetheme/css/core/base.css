@@ -2701,7 +2701,7 @@ margin: 16px 0 !important;
 #609946 hover background color
 */
  
-#node-form .button input#edit-submit-1 {
+#node-form .button input#edit-submit {
 width: 100px;
 font-size: 12px;
 padding:5px 0 5px 0;
@@ -2712,11 +2712,11 @@ color:#ffffff;
 cursor:pointer;
 }
  
-#node-form .button input#edit-submit-1:hover {
+#node-form .button input#edit-submit:hover {
 background-color: #609946;
 }
 
-#node-form .button input#edit-submit-1:focus {
+#node-form .button input#edit-submit:focus {
 background-color: #68a64c;
 border:solid #3b6e22 1px;
 border-bottom:solid #98c286 1px;

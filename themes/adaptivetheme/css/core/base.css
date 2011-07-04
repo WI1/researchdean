@@ -2690,7 +2690,34 @@ margin: 16px 0 !important;
 }
 
 .og-context .node h2 {
-display: none
-
+  display: none
 }
 
+/*
+#68a64c background color
+#98c286 top border
+#3b6e22 border
+#2c5115 border bottom
+#609946 hover background color
+*/
+ 
+#node-form .button input#edit-submit-1 {
+width: 100px;
+font-size: 12px;
+padding:5px 0 5px 0;
+background-color:#68a64c;
+border-top:solid #98c286 1px;
+text-align:center;
+color:#ffffff;
+cursor:pointer;
+}
+ 
+#node-form .button input#edit-submit-1:hover {
+background-color: #609946;
+}
+
+#node-form .button input#edit-submit-1:focus {
+background-color: #68a64c;
+border:solid #3b6e22 1px;
+border-bottom:solid #98c286 1px;
+}

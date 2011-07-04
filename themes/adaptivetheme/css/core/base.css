@@ -1621,6 +1621,10 @@ div#content {
 	display: block;
 } 
 
+div#contentarea {
+  padding-bottom: 4em;
+}
+
 /*  ------------------------------------------------------
 MAIN - MENU - INHALTSINFO
 --------------------------------------------------------*/

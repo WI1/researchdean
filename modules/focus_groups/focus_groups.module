@@ -241,7 +241,7 @@ function focus_groups_menu() {
 		'access arguments' => array(1),
 	);
 
-	/*
+	
 	$items['user/%user/publications'] = array(
 		'title' => 'Publikationen',
 		'type' => MENU_LOCAL_TASK,
@@ -250,7 +250,7 @@ function focus_groups_menu() {
 		'access callback' => 'focus_groups_is_project',
 		'access arguments' => array(1),
 	);
-*/
+
 	return $items;
 }
 

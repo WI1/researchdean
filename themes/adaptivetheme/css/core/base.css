@@ -2711,6 +2711,7 @@ font-size: 12px;
 padding:5px 0 5px 0;
 background-color:#68a64c;
 border-top:solid #98c286 1px;
+border-left:solid #98c286 1px;
 text-align:center;
 color:#ffffff;
 cursor:pointer;
@@ -2724,4 +2725,5 @@ background-color: #609946;
 background-color: #68a64c;
 border:solid #3b6e22 1px;
 border-bottom:solid #98c286 1px;
+border-right:solid #98c286 1px;
 }

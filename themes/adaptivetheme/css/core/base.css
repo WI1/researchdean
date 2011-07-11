@@ -2790,17 +2790,32 @@ cursor:pointer;
 }
 
 .view-id-rd_og_publications_shortlist .flag-fb a.flag:hover {
-background-color: #609946 !important;
+background-color: #ddd !important;
 border-bottom: solid #3b6e22 1px !important;
 }
 
 .view-id-rd_og_publications_shortlist .flag-fb a.flag:focus {
+background-color: #eee;
+border:solid #ddd 1px !important;
+border-bottom:solid #fff 1px !important;
+border-right:solid #fff 1px !important;
+}
+
+.view-id-rd_og_publications_shortlist .flag-fb a.unflag-action:hover {
+background-color: #609946 !important;
+border-bottom: solid #3b6e22 1px !important;
+}
+
+.view-id-rd_og_publications_shortlist .flag-fb a.unflag-action:focus {
 background-color: #68a64c;
 border:solid #3b6e22 1px !important;
 border-bottom:solid #98c286 1px !important;
 border-right:solid #98c286 1px !important;
 }
 
-
+.view-id-rd_og_publications_shortlist .biblio-entry {
+  height:50px;
+  overflow:auto;
+}
 
 

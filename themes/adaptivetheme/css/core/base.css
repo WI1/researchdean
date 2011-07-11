@@ -2749,7 +2749,7 @@ margin-right: 10px;
 
 .view-id-rd_og_publications_shortlist .flag-fb a.flag {
 text-decoration: none !important;
-color: #fff !important;
+
   width: 130px;
   height: 50px;
   display: block;
@@ -2785,13 +2785,13 @@ border:solid #3b6e22 1px;
 border-top:solid #98c286 1px;
 border-left:solid #98c286 1px;
 text-align:center;
-color:#ffffff;
 cursor:pointer;
 }
 
 .view-id-rd_og_publications_shortlist .flag-fb a.flag:hover {
-background-color: #ddd !important;
-border-bottom: solid #3b6e22 1px !important;
+background-color: #999 !important;
+border-bottom: solid #ddd 1px !important;
+color: #fff !important;
 }
 
 .view-id-rd_og_publications_shortlist .flag-fb a.flag:focus {

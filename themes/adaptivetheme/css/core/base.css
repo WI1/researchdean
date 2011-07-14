@@ -744,10 +744,9 @@ overflow: hidden;
 }  
 
 #block-menu-secondary-links {
-position: relative;
-top: -133px;
-background-color:#fff;
-float: right;
+margin-top: -78px;
+float: left;
+margin-left: 650px;
 padding: 3px 20px;
 }
 

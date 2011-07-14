@@ -786,7 +786,7 @@ ul.nice-menu li a {
 display: block;
 height: 20px;
 width: 160px;
-padding: 3px 27px;
+padding: 5px 27px 3px;
 font-size: 13px;
 font-weight: bold;
 text-decoration: none;

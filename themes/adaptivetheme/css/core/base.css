@@ -772,7 +772,7 @@ height: 13px;
 /*** NICE MENU ***/
 
 ul.nice-menu {
-  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 ul.nice-menu li {

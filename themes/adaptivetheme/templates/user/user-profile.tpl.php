@@ -40,7 +40,25 @@
  *   Where the html is handled for each item in the group.
  * @see template_preprocess_user_profile()
  */
+
+$pub_view_name = 'biblio_views';
+$pub_view_display = 'page_5';
+
+$node = $content_profile->get_variables('nutzerprofil');
+//drupal_set_message('<pre>' . print_r($node, TRUE) . '</pre>');
+
 ?>
 <div class="profile">
-  <?php print "Benutzer" ?>
+  <div  class="profileContainer vcard card">
+    <div class="profilePicture grid_2"><?php echo $profile['user_picture']; ?></div>
+    <div class="info grid_6">
+      <p class="profileLink"><?php print l('Zum Lehrstuhlprofil' ,$node['field_webseite_ls'][0]['url']); ?></p>
+    </div>
+  </div>
+
+<div class="clear"></div>
+ <div class="publications">
+  <h3>Publikationen</h3>
+  <?php print views_embed_view($pub_view_name, $pub_view_display, $account->name); ?>
+ </div>
 </div>

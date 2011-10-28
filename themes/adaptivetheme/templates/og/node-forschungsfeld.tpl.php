@@ -51,12 +51,8 @@
  * @see template_preprocess_node()
  */
 ?>
-<div id="node-<?php print $node->nid; ?>" class="node<?php if ($sticky) { print ' sticky'; } ?><?php if (!$status) { print ' node-unpublished'; } ?> clear-block">
-
-<?php print $picture ?>
-
-  <div class="content">
-    <?php print $content ?>
-  </div>
-
-</div>
+<?php if(arg(2) === null): ?>
+<?php print $node->content['view']['#value']; $node=node_load(arg(1)); drupal_set_title($node->title); ?>
+<?php elseif(arg(2) == 'info'): ?>
+<?php print views_embed_view('og_members_faces', 'page_1');
+<?php endif ?>

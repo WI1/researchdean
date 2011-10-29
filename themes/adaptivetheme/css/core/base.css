@@ -2755,7 +2755,8 @@ border-right:solid #98c286 1px !important;
 
 /** reformat of tabs in forschungsfeld **/
 
-.node-type-forschungsfeld #page-title {
+.node-type-forschungsfeld #page-title,
+.node-type-biblio #page-title {
 visibility: hidden;
 height: 0;
 margin: 0;

@@ -66,7 +66,7 @@ $node = $content_profile->get_variables('nutzerprofil');
         module_invoke('exhibit', 'block', 'view', 'facets');
         print node_view(node_load($nid));
       } else {
-        print views_embed_view($pub_iew_name, $pub_view_display, $account->name);
+        print views_embed_view($pub_view_name, $pub_view_display, $account->name);
       }
 	?>
  </div>

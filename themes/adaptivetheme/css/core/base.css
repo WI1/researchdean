@@ -2804,7 +2804,8 @@ color: #48546A !important;
 .node-type-biblio table,
 .node-type-biblio tbody,
 .node-type-biblio tr,
-.node-type-biblio td {
+.node-type-biblio td,
+table.views-view-grid {
 background: transparent;
 border: 0;
 color: #666 !important;

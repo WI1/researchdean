@@ -59,6 +59,15 @@ $node = $content_profile->get_variables('nutzerprofil');
 <div class="clear"></div>
  <div class="publications">
   <h3>Publikationen</h3>
-  <?php print views_embed_view($pub_view_name, $pub_view_display, $account->name); ?>
+ <?php
+   if(!empty($_GET['args'])) {
+        $exhibitArgumentsUrl = 'publications-user';
+        $nid = arg(1, drupal_get_normal_path($exhibitArgumentsUrl));
+        module_invoke('exhibit', 'block', 'view', 'facets');
+        print node_view(node_load($nid));
+      } else {
+        print views_embed_view($pub_iew_name, $pub_view_display, $account->name);
+      }
+	?>
  </div>
 </div>

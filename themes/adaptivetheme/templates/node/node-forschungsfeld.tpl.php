@@ -56,7 +56,7 @@
 
 <?php elseif(arg(2) == 'info'): ?>
 <?php drupal_set_message('<pre>' . print_r($node, TRUE) . '</pre>'); ?>
-
+<?php print $node->content['body']['#value']; ?>
 <h3 class="field-label">Mitglieder</h3>
 <?php print $node->field_members[0]['view'] ?></div>
 <h3 class="field-label">Nachwuchswissenschaftler</h3>

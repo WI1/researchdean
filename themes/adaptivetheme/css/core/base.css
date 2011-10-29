@@ -2755,39 +2755,39 @@ border-right:solid #98c286 1px !important;
 
 /** reformat of tabs in forschungsfeld **/
 
-.node-type-forschungsfeld #page-title {
+#page-title {
 visibility: hidden;
 height: 0;
 margin: 0;
 }
 
-.node-type-forschungsfeld #content-top {
+#content-top {
 margin: 0;
 }
 
-.node-type-forschungsfeld #breadcrumb {
+#breadcrumb {
 margin-bottom: 0;
 }
 
-.node-type-forschungsfeld ul.tabs.primary {
+ul.tabs.primary {
 border: 0;
 }
 
-.node-type-forschungsfeld ul.tabs.primary li a {
+ul.tabs.primary li a {
 border: 0;
 font-size: 1.3em;
 padding: 0.5em 1em;
 text-decoration: none !important;
 }
 
-.node-type-forschungsfeld ul.tabs.primary li a:hover {
+ul.tabs.primary li a:hover {
 border-bottom: 0 !important;
 text-decoration: underline !important;
 background: #ccc;
 color: inherit;
 }
 
-.node-type-forschungsfeld ul.tabs.primary li a.active:hover {
+ul.tabs.primary li a.active:hover {
 background: transparent !important;
 text-decoration: none !important;
 cursor: auto;

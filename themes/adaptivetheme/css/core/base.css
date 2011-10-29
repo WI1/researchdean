@@ -2796,4 +2796,19 @@ color: #48546A !important;
 }
 
 
+/** table on biblio nodes **/
+
+.node-type-biblio table,
+.node-type-biblio tbody,
+.node-type-biblio tr,
+.node-type-biblio td {
+background: transparent;
+border: 0;
+color: #666 !important;
+}
+
+td.biblio-row-title {
+font-weight: bold;
+padding-left: 0;
+}
 

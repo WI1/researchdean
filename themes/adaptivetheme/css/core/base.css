@@ -2759,6 +2759,9 @@ border-right:solid #98c286 1px !important;
 .node-type-biblio #page-title {
 visibility: hidden;
 height: 0;
+}
+
+.node-type-forschungsfeld #page-title {
 margin: 0;
 }
 

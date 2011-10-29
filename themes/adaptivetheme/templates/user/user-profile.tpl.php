@@ -58,11 +58,12 @@ $node = $content_profile->get_variables('nutzerprofil');
 		<?php 
 		// Quick fix for the problem, should actually be put into a function with the possibility to set different arguments for each group node type
 		foreach($related_groups as $group) {
-		  if ($group->type == 'project' || $group->type == 'focusgroup') {
+		  if ($group->type == 'forschungsfeld') {
 			 print '<div class="group-list-item">' . phptemplate_group_list_item($group) . '</div>';
 			}
 		}
 		?>
+	  <?php endif; ?>
     </div>
   </div>
 

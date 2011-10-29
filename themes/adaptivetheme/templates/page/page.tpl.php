@@ -154,8 +154,11 @@
 	</div> <!-- /sidebar-left -->
 	
      <div id="content-column" class="grid_9">
-      
-     <?php if ($breadcrumb): ?>
+     <?php if ($messages && $user->uid != 0): print $messages; endif; ?>
+     
+	 <?php if ($help): print $help; endif; ?>
+     
+	 <?php if ($breadcrumb): ?>
       <div id="breadcrumb" class="nav">
         <?php print $breadcrumb; ?>
       </div> <!-- /breadcrumb -->
@@ -169,14 +172,6 @@
 		
      	<div id="main-content-header">
 		    
-			<?php if ($messages && $user->uid != 0): print $messages; endif; ?>
-            
-			<?php if ($help): print $help; endif; ?>
-			
-			<?php if (isset($node) && !empty($node->field_bild)): ?>
-			  <img src="<?php print $node->field_bild[0]['filepath']; ?>" /></p>
-			<?php endif; ?>
-			
 			<?php if (!empty($title)): ?>
 			  <h1 id="page-title" class="title"><?php print $title; ?></h1>
 			<?php endif; ?>

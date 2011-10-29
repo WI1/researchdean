@@ -145,7 +145,7 @@
 <div id="main" class="container_16">       
 
 <div id="content">     
-	<div id="sidebar-first" class="sidebar section region grid_4">
+	<div id="sidebar-first" class="sidebar section region grid_3">
 	<?php if ($left): ?>
 	
 	  <?php print $left; ?>

@@ -53,6 +53,16 @@ $node = $content_profile->get_variables('nutzerprofil');
     <div class="profilePicture grid_2"><?php echo $profile['user_picture']; ?></div>
     <div class="info grid_6">
       <p class="profileLink"><?php print l('Zum Lehrstuhlprofil' ,$node['field_webseite_ls'][0]['url']); ?></p>
+	  <?php if($related_groups): ?>
+		<h3>Forschungsfelder</h3>
+		<?php 
+		// Quick fix for the problem, should actually be put into a function with the possibility to set different arguments for each group node type
+		foreach($related_groups as $group) {
+		  if ($group->type == 'project' || $group->type == 'focusgroup') {
+			 print '<div class="group-list-item">' . phptemplate_group_list_item($group) . '</div>';
+			}
+		}
+		?>
     </div>
   </div>
 

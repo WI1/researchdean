@@ -2802,6 +2802,15 @@ cursor: auto;
 color: #48546A !important;
 }
 
+/** Members on Forschungsfeld **/
+
+.views-view-grid td {
+text-align: left !important;
+}
+
+.views-view-grid td.col-1 {
+padding-left: 0;
+}
 
 /** table on biblio nodes **/
 

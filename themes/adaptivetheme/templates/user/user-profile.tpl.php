@@ -56,8 +56,8 @@ drupal_goto($url, $query);
 
 <div class="profile">
   <div  class="profileContainer vcard card">
-    <div class="profilePicture grid_3"><?php echo $profile['user_picture']; ?></div>
-    <div class="info grid_5">
+    <div class="profilePicture grid_4"><?php echo $profile['user_picture']; ?></div>
+    <div class="info grid_4">
       <p class="profileLink"><?php print l('Zum Lehrstuhlprofil' ,$node['field_webseite_ls'][0]['url']); ?></p>
 	  <?php if($related_groups): ?>
 		<h3>Forschungsfelder</h3>
@@ -77,7 +77,7 @@ drupal_goto($url, $query);
  <div class="publications">
  <?php
    if(!empty($_GET['args'])) {
-        $exhibitArgumentsUrl = 'publications-user';
+        $exhibitArgumentsUrl = 'publications-0';
         $nid = arg(1, drupal_get_normal_path($exhibitArgumentsUrl));
         //module_invoke('exhibit', 'block', 'view', 'facets');
         print node_view(node_load($nid));

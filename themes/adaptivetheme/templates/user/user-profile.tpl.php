@@ -47,10 +47,9 @@ $pub_view_display = 'page_5';
 $node = $content_profile->get_variables('nutzerprofil');
 //drupal_set_message('<pre>' . print_r($node, TRUE) . '</pre>');
 
-module_invoke('js_redirect');
-drupal_set_message('<pre>' . print_r(js_redirect_get_mapping(), TRUE) . '</pre>');
-
-$current_path = drupal_get_destination();
+if (module_exists('path')) {
+$current_path = drupal_get_path_alias($_GET['q']);
+}
 
 $redirected_path = $current_path . '?args=' . $account->uid;
 
@@ -59,11 +58,16 @@ $user_redirect = array(
 'enhanced' => $redirected_path,
 );
 
-$variable = variable_get('js_redirect');
-$variable += json_encode($user_redirect);
-variable_set('js_redirect', $variable);
+$variable = json_decode(variable_get('js_redirect_mapping', ''), TRUE);
+
+$variable[] = $user_redirect;
+
+variable_set('js_redirect_mapping', json_encode($variable));
+
 drupal_set_message('<pre>' . print_r(js_redirect_get_mapping(), TRUE) . '</pre>');
-js_redirect_preprocess_page();
+
+module_invoke('js_redirect');
+
 ?>
 
 <div class="profile">

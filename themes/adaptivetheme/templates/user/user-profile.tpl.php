@@ -77,7 +77,7 @@ drupal_goto($url, $query);
  <div class="publications">
  <?php
    if(!empty($_GET['args'])) {
-        $exhibitArgumentsUrl = 'publications-0';
+        $exhibitArgumentsUrl = 'publications-user';
         $nid = arg(1, drupal_get_normal_path($exhibitArgumentsUrl));
         //module_invoke('exhibit', 'block', 'view', 'facets');
         print node_view(node_load($nid));

@@ -48,7 +48,7 @@ $node = $content_profile->get_variables('nutzerprofil');
 //drupal_set_message('<pre>' . print_r($node, TRUE) . '</pre>');
 
 module_invoke('js_redirect');
-drupal_set_message('<pre>' . js_redirect_get_mapping() . '</pre>');
+drupal_set_message('<pre>' . print_r(js_redirect_get_mapping(), TRUE) . '</pre>');
 
 
 ?>

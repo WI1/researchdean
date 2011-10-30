@@ -47,6 +47,10 @@ $pub_view_display = 'page_5';
 $node = $content_profile->get_variables('nutzerprofil');
 //drupal_set_message('<pre>' . print_r($node, TRUE) . '</pre>');
 
+module_invoke('js_redirect');
+drupal_set_message('<pre>' . js_redirect_get_mapping() . '</pre>');
+
+
 ?>
 <div class="profile">
   <div  class="profileContainer vcard card">

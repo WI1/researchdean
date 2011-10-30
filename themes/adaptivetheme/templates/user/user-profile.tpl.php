@@ -50,8 +50,22 @@ $node = $content_profile->get_variables('nutzerprofil');
 module_invoke('js_redirect');
 drupal_set_message('<pre>' . print_r(js_redirect_get_mapping(), TRUE) . '</pre>');
 
+$current_path = drupal_get_destination();
 
+$redirected_path = $current_path . '?args=' . $account->uid;
+
+$user_redirect = array(
+'noscript' => $current_path,
+'enhanced' => $redirected_path,
+);
+
+$variable = variable_get('js_redirect');
+$variable += json_encode($user_redirect);
+variable_set('js_redirect', $variable);
+drupal_set_message('<pre>' . print_r(js_redirect_get_mapping(), TRUE) . '</pre>');
+js_redirect_preprocess_page();
 ?>
+
 <div class="profile">
   <div  class="profileContainer vcard card">
     <div class="profilePicture grid_2"><?php echo $profile['user_picture']; ?></div>

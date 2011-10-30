@@ -2820,3 +2820,13 @@ font-weight: bold;
 padding-left: 0;
 }
 
+/** Exhibit on Personen page **/
+
+.exhibit-thumbnailView-itemContainer .name {
+width: 100px;
+height: 40px;
+}
+
+.exhibit-thumbnailView-itemContainer {
+margin-right: 1.5em;
+}

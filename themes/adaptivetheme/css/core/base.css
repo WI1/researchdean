@@ -1023,12 +1023,14 @@ div#content a .active {
 text-decoration:underline
 }
 
+/*
 div#content-column a:hover,
 div#content-column a .active {
 border-bottom-width: 1px;
 border-bottom-style: dashed;
-text-decoration: none;
+text-decoration: none !important;
 }
+*/
 
 /* Tabellen */
 div#content-column table,  
@@ -1417,6 +1419,7 @@ border-top-width: 1px;
 
 div#block-menu-primary-links ul.menu li.last a, 
 div#block-menu-primary-links ul.menu li.last span.aktiv {}
+
 div#block-menu-primary-links ul.menu li a:hover, 
 div#block-menu-primary-links ul.menu li a:focus, 
 div#block-menu-primary-links ul.menu li a:active {
@@ -2204,6 +2207,7 @@ LINKS
 div#content a, div#content a:link {color: #48546A;}
 div#content a:visited {color: #666;}
 div#content a:hover, div#content a:focus, div#content a:active {color: #B00E0E;}
+
 div#content a:focus, div#content a:active {color: #B00E0E;}
 
 div#content a.externlink, 

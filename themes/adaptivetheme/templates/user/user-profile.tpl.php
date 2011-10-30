@@ -46,6 +46,12 @@ $pub_view_display = 'page_5';
 
 $node = $content_profile->get_variables('nutzerprofil');
 //drupal_set_message('<pre>' . print_r($node, TRUE) . '</pre>');
+
+$url = drupal_get_path_alias($_GET['q']);
+$query = "args=" . $account->uid;
+if (drupal.jsenabled && !empty($_GET['args']) == false ) {
+drupal_goto($url, $query);
+}
 ?>
 
 <div class="profile">
@@ -74,8 +80,9 @@ $node = $content_profile->get_variables('nutzerprofil');
    if(!empty($_GET['args'])) {
         $exhibitArgumentsUrl = 'publications-user';
         $nid = arg(1, drupal_get_normal_path($exhibitArgumentsUrl));
-        module_invoke('exhibit', 'block', 'view', 'facets');
+        //module_invoke('exhibit', 'block', 'view', 'facets');
         print node_view(node_load($nid));
+        
       } else {
         print views_embed_view($pub_view_name, $pub_view_display, $account->name);
       }

@@ -45,7 +45,7 @@ $pub_view_name = 'biblio_views';
 $pub_view_display = 'page_5';
 
 $node = $content_profile->get_variables('nutzerprofil');
-//drupal_set_message('<pre>' . print_r($node, TRUE) . '</pre>');
+drupal_set_message('<pre>' . print_r($profile, TRUE) . '</pre>');
 
 $url = drupal_get_path_alias($_GET['q']);
 $query = "args=" . $account->uid;
@@ -60,7 +60,7 @@ drupal_goto($url, $query);
     <div class="info grid_5">
 	  <h3>Lehrstuhl</h3>
       <p class="profileLink"><?php 
-        $text = render($profile['profile_chair']);	  
+        $text = $profile['profile_chair'];	  
 	  print l($text, $node['field_webseite_ls'][0]['url']); ?></p>
 	  
 	  <?php if($related_groups): ?>

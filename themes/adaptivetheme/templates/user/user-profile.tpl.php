@@ -70,6 +70,26 @@ drupal_goto($url, $query);
 		}
 		?>
 	  <?php endif; ?>
+	  <?php 
+	  //Embed codes for Person and Chair
+	  if (module_exists('web_widgets')): ?>
+		<?php $style = 'inline';
+			  $path_chair = $base_url . '/widgets/chairs/' . $profile['profile_chair'] .  '/widget';
+			  $path_person = $base_url . '/widgets/users/' . $account->uid .  '/widget';
+		if (user_edit_access($account): ?>
+			
+			<h3>Embed Code f&uuml;r Publikationen</h3>
+			<p>Nur f&uuml;r Sie: Javascript-Code zum Einbinden Ihrer Publikationen und derer Ihres Lehrstuhls in externe Webseiten.</p> 
+			
+			<p><strong>Ihre persönlichen Publikationen</strong></p>
+		    <?php print web_widgets_render_embed_code($style, $path_chair, $width, $height); ?>
+			
+			<p><strong>Publikationen Ihres Lehrstuhls</strong></p>
+			<?php print web_widgets_render_embed_code($style, $path_chair, $width, $height); ?>
+		    
+		<?php endif; ?>
+		
+	<?php endif; ?>
     </div>
   </div>
 

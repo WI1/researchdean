@@ -58,7 +58,10 @@
 <?php //drupal_set_message('<pre>' . print_r($node, TRUE) . '</pre>'); ?>
 <?php print $node->content['body']['#value']; ?>
 <h3 class="field-label">Mitglieder</h3>
-<?php print $node->field_members[0]['view'] ?>
+<?php print $node->field_members[0]['view']; ?>
 <h3 class="field-label">Nachwuchswissenschaftler</h3>
-<?php print $node->field_junresearchers[0]['view']?>
+<?php print $node->field_junresearchers[0]['view']; ?>
+
+<?php print $node->field_webwidget[0]['view']; ?>
+
 <?php endif; ?>

@@ -58,9 +58,11 @@ drupal_goto($url, $query);
   <div  class="profileContainer vcard card">
     <div class="profilePicture grid_3"><?php echo $profile['user_picture']; ?></div>
     <div class="info grid_5">
-      <p class="profileLink"><?php print l('Zum Lehrstuhlprofil' ,$node['field_webseite_ls'][0]['url']); ?></p>
+	  <h3>Lehrstuhl</h3>
+      <p class="profileLink"><?php print l($profile['profile_chair'] ,$node['field_webseite_ls'][0]['url']); ?></p>
+	  
 	  <?php if($related_groups): ?>
-		<h3>Forschungsfelder</h3>
+	  <h3>Forschungsfelder</h3>
 		<?php 
 		// Quick fix for the problem, should actually be put into a function with the possibility to set different arguments for each group node type
 		foreach($related_groups as $group) {

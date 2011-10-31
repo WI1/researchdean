@@ -40,12 +40,15 @@
  *   Where the html is handled for each item in the group.
  * @see template_preprocess_user_profile()
  */
+//adds JS for collapsible fieldset
+drupal_add_js('misc/collapse.js');
+drupal_add_js('misc/drupal.js');
 
 $pub_view_name = 'biblio_views';
 $pub_view_display = 'page_5';
 
 $node = $content_profile->get_variables('nutzerprofil');
-drupal_set_message('<pre>' . print_r($account, TRUE) . '</pre>');
+//drupal_set_message('<pre>' . print_r($account, TRUE) . '</pre>');
 
 $url = drupal_get_path_alias($_GET['q']);
 $query = "args=" . $account->uid;
@@ -57,10 +60,10 @@ drupal_goto($url, $query);
 <div class="profile">
   <div  class="profileContainer vcard card">
     <div class="profilePicture grid_3"><?php echo $profile['user_picture']; ?></div>
-    <div class="info grid_5">
+    <div class="info grid_6">
 	  <h3>Lehrstuhl</h3>
       <p class="profileLink"><?php 
-        $text = $profile['profile_chair'];	  
+        $text = $account->profile_chair;	  
 	  print l($text, $node['field_webseite_ls'][0]['url']); ?></p>
 	  
 	  <?php if($related_groups): ?>
@@ -83,19 +86,19 @@ drupal_goto($url, $query);
 	  //Embed codes for Person and Chair
 	  if (module_exists('web_widgets')): ?>
 		<?php $style = 'inline';
-			  $path_chair = $base_url . '/widgets/chairs/' . $profile['profile_chair'] .  '/widget';
-			  $path_person = $base_url . '/widgets/users/' . $account->uid .  '/widget';
+			  $path_chair = $base_url . '/widgets/chairs/' . $account->profile_chair . '/widget';
+			  $path_person = $base_url . '/widgets/users/' . $account->uid . '/widget';
 		if (user_edit_access($account)): ?>
 		<fieldset class="collapsible collapsed">	
 			<legend>Embed Code f&uuml;r Publikationen</legend>
 			<p>Nur f&uuml;r Sie: Javascript-Code zum Einbinden Ihrer Publikationen und derer Ihres Lehrstuhls in externe Webseiten.</p> 
 			
-			<p><strong>Ihre pers&ouml;nlichen Publikationen</strong></p>
+			<h3>Ihre pers&ouml;nlichen Publikationen</h3>
 		    <?php print web_widgets_render_embed_code($style, $path_chair, $width, $height); ?>
 			
-			<p><strong>Publikationen Ihres Lehrstuhls</strong></p>
-			<?php print web_widgets_render_embed_code($style, $path_chair, $width, $height); ?>
-		 <fieldset>   
+			<h3>Publikationen Ihres Lehrstuhls</h3>
+			<?php print web_widgets_render_embed_code($style, $path_person, $wiidth, $height); ?>
+		 </fieldset>   
 		<?php endif; ?>
 		
 	<?php endif; ?>

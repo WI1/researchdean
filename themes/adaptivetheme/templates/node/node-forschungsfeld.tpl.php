@@ -62,6 +62,6 @@
 <h3 class="field-label">Nachwuchswissenschaftler</h3>
 <?php print $node->field_junresearchers[0]['view']; ?>
 
-<?php print $node->field_webwidget[0]['view']; ?>
+<?php print $node->field_pubwidget[0]['view']; ?>
 
 <?php endif; ?>

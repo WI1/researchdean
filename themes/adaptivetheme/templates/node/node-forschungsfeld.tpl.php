@@ -62,6 +62,12 @@
 <h3 class="field-label">Nachwuchswissenschaftler</h3>
 <?php print $node->field_junresearchers[0]['view']; ?>
 
-<?php print $node->field_pubwidget[0]['view']; ?>
+<?php
+if (module_exists('web_widgets') {
+$style = 'inline';
+$path = '/widgets/og/' . $node->nid .  '/widget';
+print web_widgets_render_embed_code($style, $path, $width, $height);
+}
+?>
 
 <?php endif; ?>

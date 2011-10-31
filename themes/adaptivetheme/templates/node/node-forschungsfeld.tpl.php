@@ -52,23 +52,32 @@
  */
 ?>
 <?php if(arg(2) === null): ?>
-<?php print views_embed_view('og_ghp_ron', 'default', $node->nid); $node=node_load(arg(1)); drupal_set_title($node->title); ?>
+	
+	<?php print views_embed_view('og_ghp_ron', 'default', $node->nid); $node=node_load(arg(1)); drupal_set_title($node->title); ?>
 
 <?php elseif(arg(2) == 'info'): ?>
-<?php //drupal_set_message('<pre>' . print_r($node, TRUE) . '</pre>'); ?>
-<?php print $node->content['body']['#value']; ?>
-<h3 class="field-label">Mitglieder</h3>
-<?php print $node->field_members[0]['view']; ?>
-<h3 class="field-label">Nachwuchswissenschaftler</h3>
-<?php print $node->field_junresearchers[0]['view']; ?>
+	
+	<?php //drupal_set_message('<pre>' . print_r($node, TRUE) . '</pre>'); ?>
+	<?php print $node->content['body']['#value']; ?>
+	<h3 class="field-label">Mitglieder</h3>
+	<?php print $node->field_members[0]['view']; ?>
+	<h3 class="field-label">Nachwuchswissenschaftler</h3>
+	<?php print $node->field_junresearchers[0]['view']; ?>
 
-<?php
-if (module_exists('web_widgets')) {
-$style = 'inline';
+	<?php if (module_exists('web_widgets')): ?>
+		
+		<?php $style = 'inline';
+			  $path = $base_url . '/widgets/og/' . $node->nid .  '/widget';
 
-$path = $base_url . '/widgets/og/' . $node->nid .  '/widget';
-print web_widgets_render_embed_code($style, $path, $width, $height);
-}
-?>
+		if (og_is_group_member($node->nid)): ?>
+			
+			<h3>Embed Code für Publikationen</h3>
+			<p>Nur für Mitglieder des Forschungsfeldes. Javascript-Code zum Einbinden der Publikationen des Forschungsfelds in externe Webseiten.</p> 
+			
+			<?php print web_widgets_render_embed_code($style, $path, $width, $height); ?>
+		
+		<?php endif; ?>
+		
+	<?php endif; ?>
 
 <?php endif; ?>

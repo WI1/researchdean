@@ -65,7 +65,8 @@
 <?php
 if (module_exists('web_widgets')) {
 $style = 'inline';
-$path = '/widgets/og/' . $node->nid .  '/widget';
+
+$path = $base_url . '/widgets/og/' . $node->nid .  '/widget';
 print web_widgets_render_embed_code($style, $path, $width, $height);
 }
 ?>

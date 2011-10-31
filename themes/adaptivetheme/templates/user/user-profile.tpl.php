@@ -56,8 +56,8 @@ drupal_goto($url, $query);
 
 <div class="profile">
   <div  class="profileContainer vcard card">
-    <div class="profilePicture grid_4"><?php echo $profile['user_picture']; ?></div>
-    <div class="info grid_4">
+    <div class="profilePicture grid_3"><?php echo $profile['user_picture']; ?></div>
+    <div class="info grid_5">
       <p class="profileLink"><?php print l('Zum Lehrstuhlprofil' ,$node['field_webseite_ls'][0]['url']); ?></p>
 	  <?php if($related_groups): ?>
 		<h3>Forschungsfelder</h3>
@@ -82,7 +82,7 @@ drupal_goto($url, $query);
 			<h3>Embed Code f&uuml;r Publikationen</h3>
 			<p>Nur f&uuml;r Sie: Javascript-Code zum Einbinden Ihrer Publikationen und derer Ihres Lehrstuhls in externe Webseiten.</p> 
 			
-			<p><strong>Ihre persönlichen Publikationen</strong></p>
+			<p><strong>Ihre pers&ouml;nlichen Publikationen</strong></p>
 		    <?php print web_widgets_render_embed_code($style, $path_chair, $width, $height); ?>
 			
 			<p><strong>Publikationen Ihres Lehrstuhls</strong></p>

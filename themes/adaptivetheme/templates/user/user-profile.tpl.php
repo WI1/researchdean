@@ -59,7 +59,9 @@ drupal_goto($url, $query);
     <div class="profilePicture grid_3"><?php echo $profile['user_picture']; ?></div>
     <div class="info grid_5">
 	  <h3>Lehrstuhl</h3>
-      <p class="profileLink"><?php print l($profile['profile_chair'] ,$node['field_webseite_ls'][0]['url']); ?></p>
+      <p class="profileLink"><?php 
+        $text = render($profile['profile_chair']);	  
+	  print l($text, $node['field_webseite_ls'][0]['url']); ?></p>
 	  
 	  <?php if($related_groups): ?>
 	  <h3>Forschungsfelder</h3>

@@ -71,8 +71,8 @@
 
 		if (og_is_group_member($node->nid)): ?>
 			
-			<h3>Embed Code für Publikationen</h3>
-			<p>Nur für Mitglieder des Forschungsfeldes. Javascript-Code zum Einbinden der Publikationen des Forschungsfelds in externe Webseiten.</p> 
+			<h3>Embed Code f&uuml;r Publikationen</h3>
+			<p>Nur f&uuml;r Mitglieder des Forschungsfeldes. Javascript-Code zum Einbinden der Publikationen des Forschungsfelds in externe Webseiten.</p> 
 			
 			<?php print web_widgets_render_embed_code($style, $path, $width, $height); ?>
 		

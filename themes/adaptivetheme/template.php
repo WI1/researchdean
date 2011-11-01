@@ -52,12 +52,16 @@ function phptemplate_business_card($uid) {
 function adaptivetheme_theme(&$existing, $type, $theme, $path) {
   
   // Register a function so we can theme the theme settings form.
+  // Added snippet to theme usernames on apachesolr search results as realnames
   return array(
     'system_settings_form' => array(
       'arguments' => array(
         'form' => NULL,
         'key' => 'adaptivetheme',
       ),
+	),
+	'apachesolr_breadcrumb_uid' => array(
+      'arguments' => array('field' => NULL),
     ),
   );
   
@@ -871,4 +875,19 @@ function phptemplate_group_list_item($g, $withTitle = TRUE, $withCreateLink = FA
 
 
 	return $out;
+}
+// Code for displaying authors in apache SolR facets as Realnames .. added snippet to _theme function as well!
+/**
+* Theme function to change name of ApacheSolr Search's user facet.
+*/
+function adaptivetheme_apachesolr_breadcrumb_uid($field) {
+  $uid = $field;
+  if ($uid == 0) {
+    return variable_get('anonymous', t('Anonymous'));
+  }
+  else {
+    $user = realname_get_user($uid);
+    $realname = $user->name;
+    return($realname);
+  }
 }

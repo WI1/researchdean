@@ -2837,3 +2837,45 @@ height: 40px;
 .exhibit-thumbnailView-itemContainer {
 margin-right: 1.5em;
 }
+
+
+/** Facets auf SolR Suchergebnisseiten **/
+
+.block-apachesolr_search .item-list,
+ .block-apachesolr_og .item-list {
+border: 1px solid #ccc;
+padding: 0.5em;
+height: 10em;
+overflow: auto;
+}
+
+
+.block-apachesolr_search .item-list ul li,
+ .block-apachesolr_og .item-list ul li {
+list-style-type: none;
+margin-left: .3em;
+}
+
+.block-apachesolr_search h3,
+ .block-apachesolr_og h3 {
+margin-bottom: 0.2em !important;
+}
+
+#block-apachesolr-sort {
+border: 1px solid #ccc;
+border-left: 0;
+border-right: 0;
+}
+
+#block-apachesolr-sort ul li {
+display: block;
+float: left;
+list-style-type: none;
+margin-right: 3em;
+margin-left: 0;
+}
+
+#block-apachesolr-sort ul li a.active {
+font-weight: bold;
+text-decoration: none;
+}

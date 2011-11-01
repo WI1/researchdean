@@ -1,0 +1,13 @@
+; $Id: biblio_pm.info,v 1.1.2.2 2010/07/07 20:31:30 rjerome Exp $
+name = Biblio_PubMed
+description = Adds PubMed import and search to the Biblio module.
+core = 6.x
+package = Biblio
+dependencies[] = biblio
+
+; Information added by drupal.org packaging script on January 1, 1970 - 00:00
+version = "6.x-2.x-dev"
+core = "6.x"
+project = "biblio"
+datestamp = "1296735096"
+

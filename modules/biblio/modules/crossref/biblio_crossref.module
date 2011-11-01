@@ -1,0 +1,153 @@
+<?php
+// $Id: biblio_crossref.module,v 1.1.2.5 2010/07/07 20:31:29 rjerome Exp $
+/*
+ * @file biblio_crossref.module
+ *
+ */
+
+function biblio_crossref_form_biblio_node_form_alter(&$form, &$form_state) {
+  global $user;
+  if (phpversion() > 5 && !$form_state['submitted'] &&
+    !isset($form['#node']->nid) &&
+    empty($form['biblio_type']['#default_value']))
+    {
+    $form['biblio_doi_lookup'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('DOI Lookup'),
+        '#weight' => -20,
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+    );
+    $have_pid  = (isset($user->biblio_crossref_pid) && !empty($user->biblio_crossref_pid)) ? FALSE : TRUE;
+    if ($have_pid) {
+      $form['biblio_doi_lookup']['doi_register'] = array(
+          '#prefix' => '<p><b>',
+          '#suffix' => '</b></p>',
+          '#value' => l('You need to register with CrossRef', 'http://www.crossref.org/requestaccount/', array('attributes' => array('target' => '_blank'), 'absolue' => TRUE)) . t(' and then enter your CrossRef UserID in the "<i>CrossRef Login Information</i>" section of your account profile ') . l('here...', "user/$user->uid/edit"),
+      );
+    }
+
+    $form['biblio_doi_lookup']['doi_data'] = array(
+        '#type' => 'textfield',
+        '#title' => t('DOI'),
+        '#required' => FALSE,
+        '#default_value' => $form_state['values']['doi_data'],
+        '#description' => t('Enter a DOI name in the form: <b>10.1000/123456</b>'),
+        '#disabled' => $have_pid,
+        '#size' => 60,
+        '#maxlength' => 255,
+        '#weight' => -4
+    );
+    $form['biblio_doi_lookup']['doi_submit'] = array(
+        '#type' => 'submit',
+        '#disabled' => $have_pid,
+        '#value' => t('Populate using DOI')
+    );
+    $form['#validate'] = array_merge(array('biblio_crossref_form_biblio_node_form_validate'), $form['#validate']); // put my validator first
+  }
+  $biblio_crossref_id = (isset($form_state['values']['biblio_crossref_id'])) ? $form_state['values']['biblio_crossref_id'] : '';
+  $biblio_crossref_md5 = (isset($form_state['values']['biblio_crossref_md5'])) ? $form_state['values']['biblio_crossref_md5'] : '';
+  $form['biblio_crossref_id'] = array('#type' => 'value', '#value'  => $biblio_crossref_id);
+  $form['biblio_crossref_md5'] = array('#type' => 'value', '#value' => $biblio_crossref_md5);
+}
+
+function biblio_crossref_form_biblio_node_form_validate($form, &$form_state) {
+  global $user;
+  $node_data = array();
+  if (strlen($doi = $form_state['values']['doi_data'])) {
+    if (($doi_start = strpos($form_state['values']['doi_data'], '10.')) !== FALSE) {
+      if (!($dup = biblio_crossref_check_doi($doi))) {
+        if (!isset($user->biblio_crossref_pid) || empty($user->biblio_crossref_pid) ) {
+          form_set_error('doi_data', t(l('You need to register with CrossRef', 'http://www.crossref.org/requestaccount/', array('attributes' => array('target' => '_blank'), 'absolue' => TRUE)). t(' and then enter your CrossRef UserID in the "<i>CrossRef Login Information</i>" section of your account profile ') . l('here...', "user/$user->uid/edit")));
+          return;
+        }
+        module_load_include('php', 'biblio_crossref', 'biblio.crossref.client');
+        $client = new BiblioCrossRefClient($doi, $user->biblio_crossref_pid);
+        $node_data = $client->fetch();
+        if (!empty($node_data)) {
+          $form_state['values'] = array_merge($form_state['values'], $node_data);
+          $form_state['storage']['biblio_type']  = $node_data['biblio_type'];
+          return;
+        }
+      }
+      else {
+        $message = t('The DOI that you are trying to import already exists in the database, see ');
+        $message .= l('node/'. $dup, 'node/'. $dup);
+        form_set_error('doi_data', $message);
+        $form_state['rebuild'] = TRUE;
+        $form_state['submitted'] = FALSE;
+        unset($form_state['values']['biblio_type']);
+        return;
+      }
+    }
+    else {
+      form_set_error('doi_data', t('This does not appear to be a valid DOI name, it should start with "10." '));
+      $form_state['rebuild'] = TRUE;
+      $form_state['submitted'] = FALSE;
+      unset($form_state['values']['biblio_type']);
+      return;
+    }
+  }
+  return;
+}
+
+function biblio_crossref_check_doi($doi) {
+    return db_result(db_query("SELECT nid FROM {biblio_crossref} WHERE biblio_crossref_id = '%s'", $doi));
+}
+
+function biblio_crossref_biblio_lookup_link_settings() {
+  return array('crossref'  => t('DOI'));
+}
+
+function biblio_crossref_biblio_lookup_link($node) {
+  return biblio_crossref_link('node', $node);
+}
+
+function biblio_crossref_link($type, $node = NULL, $teaser = FALSE) {
+  $show_link = variable_get('biblio_lookup_links', array('crossref' => TRUE));
+  if (!$show_link['crossref']) return array();
+  if ($type == 'node' && $node->type == 'biblio' && !empty($node->biblio_crossref_id)) {
+    $link  = 'http://dx.doi.org/'. $node->biblio_crossref_id;
+    return array('biblio_crossref' => array(
+        'title'      => t('DOI'),
+        'href'       => $link,
+        'attributes' => array('title' => t("Click to view the CrossRef listing for this node")),
+    ));
+  }
+  return ;
+}
+
+
+function biblio_crossref_nodeapi(&$node, $op, $a3 = NULL, $a4 = NULL) {
+  if ($node->type != 'biblio') return;
+  $callback = '_biblio_crossref_'. str_replace(' ', '_', $op);
+  if (function_exists($callback)) {
+    return $callback($node, $a3, $a4);
+  }
+  return;
+}
+
+function _biblio_crossref_delete($node) {
+  db_query('DELETE FROM {biblio_crossref} WHERE nid = %d', $node->nid);
+}
+
+function _biblio_crossref_view($node) {
+
+}
+
+function _biblio_crossref_insert($node, $update = FALSE) {
+  if (empty($node->biblio_crossref_id)) return;
+  drupal_write_record('biblio_crossref', $node);
+}
+
+function _biblio_crossref_load($node) {
+  static $result = array();
+  if (empty($result[$node->nid])) {
+    return $result[$node->nid] = db_fetch_array(db_query('SELECT  biblio_crossref_id  FROM {biblio_crossref} WHERE nid = %d', $node->nid));
+  }
+  return $result[$node->nid] ;
+}
+function biblio_crossref_crossref_map_reset($type = NULL) {
+  module_load_include('install', 'biblio_crossref', 'biblio_crossref');
+ _reset_crossref_map($type);
+}

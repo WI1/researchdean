@@ -1,0 +1,10 @@
+/* $Id: hcard.css,v 1.1.4.1 2008/12/21 01:12:39 shawndearmond Exp $ */
+
+/**
+ * @file
+ * hCard CSS rules.
+ */
+
+.vcard .geo {
+  display: none;
+}

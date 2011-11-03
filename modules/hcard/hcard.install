@@ -1,0 +1,14 @@
+<?php
+// $Id: hcard.install,v 1.1.2.1 2009/01/18 07:32:03 shawndearmond Exp $
+
+/**
+ * @file
+ * This is the hcard.module's removal file.
+ */
+
+/**
+ * Implementation of hook_uninstall().
+ */
+function hcard_uninstall() {
+  variable_del('hcard');
+}

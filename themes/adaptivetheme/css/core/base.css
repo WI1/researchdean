@@ -768,6 +768,11 @@ padding: 5px 10px;
 height: 13px;
 }
 
+div.exhibit-thumbnailView-itemContainer-IE {
+width: 100px !important;
+margin-right: 1.5em !important;
+}
+
 /*** NICE MENU ***/
 
 ul.nice-menu {

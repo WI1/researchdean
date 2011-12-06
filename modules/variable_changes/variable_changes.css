@@ -1,0 +1,13 @@
+/** $Id: variable_changes.css,v 1.1 2010/09/04 23:09:28 dagmar Exp $ **/
+
+.variable-created {
+  color: #06AC18;
+}
+
+.variable-modified {
+  color: #000;
+}
+
+.variable-removed {
+  color: #F23338;
+}

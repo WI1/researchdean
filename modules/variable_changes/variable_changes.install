@@ -1,0 +1,44 @@
+<?php
+
+// $Id: variable_changes.install,v 1.1 2010/09/04 23:09:28 dagmar Exp $
+
+/**
+ * Implementation of hook_schema().
+ */
+function variable_changes_schema() {
+  $schema['variable_copy'] = array(
+    'description' => 'Named variable/value pairs created by Drupal core or any other module or theme. All variables are cached in memory at the start of every Drupal request so developers should not be careless about what is stored here.',
+    'fields' => array(
+      'name' => array(
+        'description' => 'The name of the variable.',
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => ''),
+      'value' => array(
+        'description' => 'The value of the variable.',
+        'type' => 'text',
+        'not null' => TRUE,
+        'size' => 'big'),
+      ),
+    'primary key' => array('name'),
+  );
+  return $schema;
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function variable_changes_install() {
+  drupal_install_schema('variable_changes');
+  db_query("TRUNCATE {variable_copy}");
+  db_query("INSERT INTO {variable_copy} SELECT * FROM {variable}");
+  drupal_set_message(t('Variable Changes module has been correctly installed. All changes made to variable will be displayed in !link.', array('!link' => l('admin/reports/variable_changes', 'admin/reports/variable_changes'))));
+}
+
+/**
+ * Implementation of hook_install().
+ */
+function variable_changes_uninstall() {
+  drupal_uninstall_schema('variable_changes');
+}

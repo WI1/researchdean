@@ -1,0 +1,13 @@
+; $Id: variable_changes.info,v 1.1 2010/09/04 23:09:28 dagmar Exp $
+name = Variable Changes
+description = Allow to know what variables have been modified since the last backup
+package = Development
+core = 6.x
+
+
+; Information added by drupal.org packaging script on 2010-09-04
+version = "6.x-1.0-beta1"
+core = "6.x"
+project = "variable_changes"
+datestamp = "1283642210"
+

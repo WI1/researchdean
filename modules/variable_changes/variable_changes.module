@@ -1,0 +1,181 @@
+<?php
+
+// $Id: variable_changes.module,v 1.1 2010/09/04 23:09:28 dagmar Exp $
+
+/**
+ * Implementation of hook_menu().
+ */
+function variable_changes_menu() {
+  $items = array();
+  $items['admin/reports/variable_changes'] = array(
+    'title' => 'Variable Changes',
+    'description' => 'Display what variables have been modified since last backup.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('variable_changes_modified_variables_form'),
+    'access arguments' => array('view variable changes'),
+  );
+  if (module_exists('diff')) {
+    $items['admin/reports/variable_changes/diff/%'] = array(
+      'title' => 'Variable Differences',
+      'description' => 'Compare backuped and current value for a variable.',
+      'page callback' => 'variable_changes_variable_diff',
+      'page arguments' => array(4),
+      'access arguments' =>  array('view variable changes'),
+      'type' => MENU_LOCAL_TASK,
+    );
+  }
+  return $items;
+}
+
+/**
+ * Implementation of hook_perm().
+ */
+function variable_changes_perm() {
+  return array('view variable changes');
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function variable_changes_theme() {
+  return array(
+    'variable_changes_modified_variables_form' => array(
+      'arguments' => array('form' => NULL)
+    ),
+  );
+}
+
+function variable_changes_modified_variables_form() {
+  $header = array(
+    array('data' => t('Status')),
+    array('data' => t('Name'), 'field' => 'name', 'sort' => 'asc'),
+    array('data' => t('Value'), 'field' => 'value'),
+    array('data' => t('Operations')),
+  );
+
+  $sql = "SELECT v.name name, v.value AS current_value, vc.value AS old_value
+          FROM {variable} v
+          LEFT JOIN {variable_copy} vc ON v.name = vc.name";
+
+  $devel_installed = module_exists('devel');
+  $diff_installed =  module_exists('diff');
+
+  $variables_modified = FALSE;
+  $result = db_query($sql . tablesort_sql($header));
+  while ($row = db_fetch_object($result)) {
+    if ($row->current_value == $row->old_value) {
+      continue;
+    }
+    $variables_modified = TRUE;
+
+    $variables[$row->name] = '';
+    $form['name'][$row->name] = array('#value' => check_plain($row->name));
+
+    if (drupal_strlen($row->current_value) > 70) {
+      $value = check_plain(drupal_substr($row->current_value, 0, 65)) .'...';
+    }
+    else {
+      $value = check_plain($row->current_value);
+    }
+
+    if (empty($row->old_value)) {
+      $form[$row->name]['status'] = array('#value' => t('Created'), '#class' => 'variable-created');
+    }
+    else {
+      $form[$row->name]['status'] = array('#value' => t('Modified'), '#class' => 'variable-modified');
+    }
+
+    $form[$row->name]['value'] = array('#value' => $value);
+    if ($devel_installed) {
+      $form[$row->name]['edit'] = array('#value' => l(t('edit'), "devel/variable/edit/$row->name"));
+    }
+    if ($diff_installed) {
+      $form[$row->name]['diff'] = array('#value' => l(t('diff'), "admin/reports/variable_changes/diff/{$row->name}"));
+    }
+  }
+
+  $sql = "SELECT vc.name name FROM {variable_copy} vc WHERE vc.name NOT IN (SELECT v.name FROM {variable} v)";
+  $result = db_query($sql);
+  while ($row = db_fetch_object($result)) {
+    $form['name'][$row->name] = array('#value' => check_plain($row->name), '#class' => 'variable-removed');
+    $form[$row->name]['status'] = array('#value' => t('Removed'));
+    $form[$row->name]['value'] = array('#value' => '');
+    $variables_modified = TRUE;
+  }
+
+  if ($variables_modified) {
+    $form['info'] = array(
+      '#type' => 'item',
+      '#value' => t('The following list display all the changes that were made to variables since the last backup.
+      Please not that not all module storaged their settings into variables, therefore, if you save the settings
+      of some module and you do not see changes here, maybe module settings are being storaged in a custom table.'),
+    );
+  }
+  $form['sync'] = array(
+    '#type' => 'submit',
+    '#value' => t('Backup variables')
+  );
+  return $form;
+}
+
+function theme_variable_changes_modified_variables_form($form) {
+  drupal_add_css(drupal_get_path('module', 'variable_changes') .'/variable_changes.css');
+  $children = element_children($form['name']);
+  if (count($children)) {
+    foreach ($children as $key) {
+      $rows[] = array(
+        array('data' => drupal_render($form[$key]['status']), 'class' => $form[$key]['status']['#class']),
+        drupal_render($form['name'][$key]),
+        drupal_render($form[$key]['value']),
+        drupal_render($form[$key]['edit']) . ' ' . drupal_render($form[$key]['diff']),
+      );
+    }
+  }
+  else {
+    $rows[] = array(array('data' => t('No variable have been modified, created or removed since last backup.'), 'colspan' => 4));
+  }
+  $header = array(
+    array('data' => t('Status')),
+    array('data' => t('Name'), 'field' => 'name', 'sort' => 'asc'),
+    array('data' => t('Current value'), 'field' => 'value'),
+    array('data' => t('Operations'), 'colspan' => 2),
+  );
+  $output = drupal_render($form['info']);
+  $output .= theme('table', $header, $rows);
+  $output .= drupal_render($form);
+
+  return $output;
+}
+
+function variable_changes_modified_variables_form_submit($form, $form_state) {
+  db_query("TRUNCATE {variable_copy}");
+  db_query("INSERT INTO {variable_copy} SELECT * FROM {variable}");
+  drupal_set_message(t('Variable table have been backuped.'));
+}
+
+function variable_changes_variable_diff($variable) {
+  $current = variable_get($variable, NULL);
+  $old = unserialize(db_result(db_query("SELECT value FROM {variable_copy} WHERE name = '%s'", '$variable')));
+
+  if ($old == $current) {
+    $output = "<div class='variables-without-changes'>" . t('No changes have been made to this variable.') ."</div>";
+    return $output;
+  }
+
+  if (!is_array($old) && !is_array($current)) {
+    $old = array($old);
+    $current = array($current);
+  }
+
+  module_load_include('php', 'diff', 'DiffEngine');
+  $formatter = new DrupalDiffFormatter();
+  $rows = array();
+
+  $diff = new Diff($old, $current);
+  $rows = $formatter->format($diff);
+  $header = array(
+    array('data' => t('Backuped value'), 'colspan' => 2),
+    array('data' => t('Current value'), 'colspan' => 2),
+  );
+  return theme('diff_table', $header, $rows, array('class' => 'diff variable-diff'));
+}

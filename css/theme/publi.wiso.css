@@ -1,0 +1,190 @@
+/********************************************************
+  *              CSS-Anpassungen für					*
+  *			http://www.publi.wiso.uni-erlangen.de/		*
+  * Autor: Thorsten.b.Schmidt@wiso.stud.uni-erlangen.de *
+  *					Stand: 26.06.2013					*
+  *******************************************************/
+
+
+/* ===================== Overall ======================== */
+
+/* Links: Invertierung Unterstreichung (Normal) */
+#seite #contentarea a {
+	text-decoration: none;
+}
+
+/* Links: Invertierung Unterstreichung (Hover) */
+#seite #contentarea a:hover {
+	text-decoration: underline;
+}
+
+/* Hauptnavigation: Anpassung Farbe */
+#seite #kopf ul.nice-menu li a {
+	color: #48546A;
+}
+
+#seite #kopf ul.nice-menu li a:hover {
+	color: #ffffff;
+}
+
+
+/* ===================== Startseite ===================== */
+
+/* Zuletzt eingestellte Publikationen: Abstand nach oben */
+#seite.front #contentarea .view-dom-id-og-ghp-ron-block-1-1 ul {
+	margin: 10px 0px 0px 0px;
+}
+
+/* Zulezt eingestellte Publikationen > Ausblenden "Neuste Beiträge" */
+#seite.front #contentarea .view-dom-id-og-ghp-ron-block-1-1:first-line {
+	color: #FFFFFF;
+}
+
+/* Zuletzt eingestellte Publikationen: Verhalten der einzelnen Elemtene */
+#seite.front #contentarea .view-og-ghp-ron li {
+	min-height: 110px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+/* Zuletzt eingestellte Publikationen: Verhalten des Textes in den Elementen */
+#seite.front #contentarea .biblio-entry .biblio-style-wi1 {
+	display: table;
+}
+
+/* More-Link */
+#seite.front #contentarea .more-link a {
+	display: block;
+	padding: 4px;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+
+/* Forschungsfelder: "Bunt..." */
+#seite.front #contentarea .view-og .views-row-unformatted a span{
+	margin-bottom: 5px;
+	padding: 7px 5px;
+	display: block;
+	/* background-color: orange; /* wird natürlich noch individuell angepasst */
+}
+
+
+/* Farben fuer eigene Forschungsfelder: "Bunt..." */
+.ff0 {
+	background-color: #666666; /* Forschungsfeld "Arbeitsmarkt und Arbeitswelt" */
+}
+
+.ff1 {
+	background-color: #F5AED8; /* Forschungsfeld "Arbeitsmarkt und Arbeitswelt" */
+}
+
+.ff2 {
+	background-color: #FA8C6B; /* Forschungsfeld "Bewertung" */
+}
+
+.ff3 {
+	background-color: #B685B2; /* Forschungsfeld "International Business & Globalisierung" */
+}
+
+.ff4 {
+	background-color: #D2AD67; /* Forschungsfeld "Management" */
+}
+
+.ff5 {
+	background-color: #C6D7B5; /* Forschungsfeld "Marketing" */
+}
+
+.ff6 {
+	background-color: #EBED88; /* Forschungsfeld "Steuern" */
+}
+
+.ff7 {
+	background-color: #FFB2A6; /* Forschungsfeld "Wirtschafsinformatik" */
+}
+
+.ff8 {
+background-color: #3B8BA4; /* Forschungsfeld "Wirtschaftspädagogik" */
+}
+
+.ff9 {
+background-color: #E08939; /* Forschungsfeld "Wirtschaftspolitik" */
+}
+
+
+/* Forschungsfelder: "Anpassung der Schrift..." */
+#seite.front #contentarea .view-og .views-row-unformatted a {
+	font-weight: bold; 
+	font-size: 12px;
+	color: white; /* würde ich hier auf weiß setzen */
+}
+
+
+
+
+/* ===================== News ===================== */
+
+.section-news #seite #contentarea {
+}
+
+
+
+
+
+/* ===================== Forschungsfelder ===================== */
+.section-forschungsfelder #seite #contentarea .item-list .pager li {
+	padding: 3px 7px;
+	background-color: #ccc;
+}
+
+.section-forschungsfelder #seite #contentarea .item-list ul li {
+	margin: 0px;
+}
+
+
+/* ===================== Personen ===================== */
+
+/* Zuletzt eingestellte Publikationen: Abstand nach oben */
+.section-personen #seite #contentarea .exhibit-thumbnailView-itemContainer .name {
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+
+
+/* ===================== Projekte ===================== */
+
+.section-projekte #seite #contentarea table.exhibit-tabularView-body tr {
+	border-bottom: 1px solid #D1D1D1;
+}
+
+.section-projekte #seite #contentarea table.exhibit-tabularView-body tr td:nth-of-type(2) {
+	font-size: 13px !important;
+	vertical-align: top;
+}
+
+
+
+/* ============== Wissenschaftsschwerpunkt (Unterseiten Forschungsdekan) ============== */
+
+/* Überschriften: Dezente Anpassung */
+.section-wissenschaftsschwerpunkt #seite #contentarea .node-content h3 {
+	display: block;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #999999;
+}
+
+/* Bilder: Automatischer Float left (wenn die Bildgröße bei Floatenden Bilder
+   auf ein einheitliches Maß (z.B. 200px Breite) festgelegt wird dürfte es keine Probleme geben */
+.section-wissenschaftsschwerpunkt #seite #contentarea .node-content p > img {
+	float: left;
+	padding-right: 5px;
+}
+
+
+/* ============== Auf mehr als einer Seite (Unterseiten Forschungsdekan) ============== */
+
+/* Buchnavigation unten: "nach oben"-Bug behoben */
+#seite #contentarea .node-content .page-links a.page-up {
+	width: 70px;
+	margin: 0px;
+}

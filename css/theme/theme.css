@@ -11,7 +11,7 @@
  *                    HTML & Body
  **********************************************************/
 html {}
-body {}
+body { margin: 0; }
 
 /* Admin menu */
 body.admin-menu {}
@@ -107,7 +107,7 @@ a:focus {}
 #container {}
 
 /* Column wrappers */
-#columns {}
+#columns { background: url(img/bg_main.gif) repeat-x; }
 .columns-inner {}
 
 /* Content wrappers */
@@ -187,7 +187,7 @@ a:focus {}
 #header {}
 
 /* #branding wraps #logo, #site-name and #site-slogan. */
-#branding {}
+#branding { padding: 0; }
 
 /* Logo and Site Name wrapper. */
 .logo-site-name {}

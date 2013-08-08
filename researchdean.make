@@ -16,17 +16,17 @@ projects[adminrole][version] = "1.3"
 projects[advanced_help][version] = "1.2"
 projects[advuser][version] = "2.3"
 projects[ajax_load][version] = "1.3"
-projects[apachesolr][version] = "3.0-dev"
+projects[apachesolr][version] = "3.x-dev"
 projects[apachesolr_autocomplete][version] = "1.2"
 projects[apachesolr_biblio][version] = "1.x-dev"
 projects[apachesolr_stats][version] = "1.0-beta4"
-projects[apachesolr_views][version] = "1.0-dev"
+projects[apachesolr_views][version] = "1.x-dev"
 projects[auto_nodetitle][version] = "1.2"
 projects[autoload][version] = "2.1"
 projects[backreference][version] = "1.1"
 projects[better_formats][version] = "1.2"
 projects[biblio][version] = "2.x-dev"
-projects[book_helper][version] = "1.0-dev"
+projects[book_helper][version] = "1.x-dev"
 projects[ctools][version] = "1.8"
 projects[color_scheme][version] = "1.0"
 projects[contemplate][version] = "1.2"
@@ -61,7 +61,6 @@ projects[imagecache][version] = "2.0-beta12"
 projects[imagecache_actions][version] = "1.8"
 projects[imagecache_profiles][version] = "1.3"
 projects[imagefield][version] = "3.10"
-projects[imce][version] = "2.2"
 projects[inputstream][version] = "1.0"
 projects[jammer][version] = "1.7"
 projects[javascript_aggregator][version] = "1.5"
@@ -135,8 +134,6 @@ projects[views_datasource][version] = "1.0-beta2"
 projects[views_or][version] = "1.x-dev"
 projects[views_periodic_execution][version] = "1.1"
 projects[web_widgets][version] = "1.4"
-projects[wysiwyg][version] = "2.4"
-projects[wysiwyg_template][version] = "2.6"
 projects[xmlsitemap][version] = "1.x-dev"
 
 
@@ -149,66 +146,65 @@ projects[adaptivetheme][version] = "2.2"
 ; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
 ; and url is the url of the download.
 
-; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
-; and url is the url of the download.
-projects[focus_groups][download][type] = ""
-projects[focus_groups][download][url] = ""
+projects[focus_groups][download][type] = "git"
+projects[focus_groups][download][url] = "git://github.com/WI1/focus_groups.git"
 projects[focus_groups][type] = "module"
+projects[focus_groups][subdir] = "custom"
 
-; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
-; and url is the url of the download.
-projects[js_redirect][download][type] = ""
-projects[js_redirect][download][url] = ""
+projects[js_redirect][download][type] = "git"
+projects[js_redirect][download][url] = "git://github.com/jakob-stoeck/drupal-js-redirect.git"
 projects[js_redirect][type] = "module"
+projects[js_redirect][subdir] = "custom"
 
-; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
-; and url is the url of the download.
-projects[projecttabs][download][type] = ""
-projects[projecttabs][download][url] = ""
+projects[projecttabs][download][type] = "git"
+projects[projecttabs][download][url] = "git://github.com/WI1/projecttabs.git"
 projects[projecttabs][type] = "module"
+projects[projecttabs][subdir] = "custom"
 
-; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
-; and url is the url of the download.
-projects[wysiwyg_panels][download][type] = ""
-projects[wysiwyg_panels][download][url] = ""
+projects[wysiwyg_panels][download][type] = "git"
+projects[wysiwyg_panels][download][url] = "git://github.com/WI1/wysiwyg_panels.git"
 projects[wysiwyg_panels][type] = "module"
+projects[wysiwyg_panels][subdir] = "noncontrib"
+
+projects[apachesolr_users][download][type] = "git"
+projects[apachesolr_users][download][url] = "git://github.com/SupermanScott/apachesolr_users.git"
+projects[apachesolr_users][type] = "module"
+projects[apachesolr_users][subdir] = "noncontrib"
 
 ; Libraries
 ; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
 ; and url is the url of the download.
 
 
-; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
-; and url is the url of the download.
-libraries[tinymce][download][type] = ""
-libraries[tinymce][download][url] = ""
+; TinyMCE
+libraries[tinymce][download][type] = "get"
+libraries[tinymce][download][url] = "http://github.com/downloads/tinymce/tinymce/tinymce_3.5.0.1.zip"
 libraries[tinymce][directory_name] = "tinymce"
-libraries[tinymce][type] = "library"
 
+  ;- libraries dependency
+  projects[libraries][version] = "1.0"
 
-; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
-; and url is the url of the download.
-libraries[SolrPhpClient][download][type] = ""
-libraries[SolrPhpClient][download][url] = ""
-libraries[SolrPhpClient][directory_name] = "SolrPhpClient"
-libraries[SolrPhpClient][type] = "library"
+  ; WYSIWYG
+  projects[wysiwyg][version]= "2.4"
+  projects[wysiwyg][patch][]= "http://drupal.org/files/wysiwyg.tinymce-lists.682160.7.patch"
+  projects[wysiwyg_template][version] = "2.6"
+  
+  ; IMCE WYSIWYG BRIDGE
+  projects[imce_wysiwyg][version]= "1.1"
 
-; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
-; and url is the url of the download.
-libraries[phpmailer][download][type] = ""
-libraries[phpmailer][download][url] = ""
-libraries[phpmailer][directory_name] = "phpmailer"
-libraries[phpmailer][type] = "library"
+  ; IMCE
+  projects[imce][version]= "2.3"
 
-; Please fill the following out. Type may be one of get, cvs, git, bzr or svn,
-; and url is the url of the download.
-libraries[tcpdf][download][type] = ""
-libraries[tcpdf][download][url] = ""
+libraries[phpmailer][download][type] = "file"
+libraries[phpmailer][download][url] = "http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_5.2.1.zip"
+libraries[phpmailer][destination] = "smtp/phpmailer"
+
+libraries[SolrPhpClient][download][type] = "file"
+libraries[SolrPhpClient][download][url] = "http://solr-php-client.googlecode.com/files/SolrPhpClient.r22.2009-11-09.tgz"
+libraries[SolrPhpClient][download][sha1] = "32fa0e387c92d02fe4da4ca2ebbbeddb2d6ce0a8"
+libraries[SolrPhpClient][destination] = "apachesolr/SolrPhpClient"
+
+libraries[tcpdf][download][type] = "get"
+libraries[tcpdf][download][url] = "http://freefr.dl.sourceforge.net/project/tcpdf/tcpdf_6_0_023.zip"
 libraries[tcpdf][directory_name] = "tcpdf"
 libraries[tcpdf][type] = "library"
-
-
-
-
-
-                                                                                                                                                                                                         

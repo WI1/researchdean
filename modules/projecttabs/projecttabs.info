@@ -1,7 +1,0 @@
-; $Id$
-name = Project tabs
-description = Balanceonline.org-specific modifications and extensions.
-dependencies[] = og
-dependencies[] = views
-core = 6.x
-package = Balance Meta

@@ -87,7 +87,7 @@ projects[nodewords][version] = "1.11"
 projects[oai2][version] = "1.3"
 projects[oauth_common][version] = "1.x-dev"
 projects[og][version] = "2.1"
-projects[og_user_roles][version] = "1.5"
+projects[og_user_roles][version] = "4.1"
 projects[og_username_helper][version] = "1.1"
 projects[page_title][version] = "2.5"
 projects[panels][version] = "3.9"
@@ -181,9 +181,6 @@ libraries[tinymce][download][type] = "get"
 libraries[tinymce][download][url] = "http://github.com/downloads/tinymce/tinymce/tinymce_3.5.0.1.zip"
 libraries[tinymce][directory_name] = "tinymce"
 
-  ;- libraries dependency
-  projects[libraries][version] = "1.0"
-
   ; WYSIWYG
   projects[wysiwyg][version]= "2.4"
   projects[wysiwyg][patch][]= "http://drupal.org/files/wysiwyg.tinymce-lists.682160.7.patch"
@@ -197,12 +194,12 @@ libraries[tinymce][directory_name] = "tinymce"
 
 libraries[phpmailer][download][type] = "file"
 libraries[phpmailer][download][url] = "http://phpmailer.apache-extras.org.codespot.com/files/PHPMailer_5.2.1.zip"
-libraries[phpmailer][destination] = "smtp/phpmailer"
+libraries[phpmailer][destination] = "modules/smtp/phpmailer"
 
 libraries[SolrPhpClient][download][type] = "file"
 libraries[SolrPhpClient][download][url] = "http://solr-php-client.googlecode.com/files/SolrPhpClient.r22.2009-11-09.tgz"
 libraries[SolrPhpClient][download][sha1] = "32fa0e387c92d02fe4da4ca2ebbbeddb2d6ce0a8"
-libraries[SolrPhpClient][destination] = "apachesolr/SolrPhpClient"
+libraries[SolrPhpClient][destination] = "modules/apachesolr/SolrPhpClient"
 
 libraries[tcpdf][download][type] = "get"
 libraries[tcpdf][download][url] = "http://freefr.dl.sourceforge.net/project/tcpdf/tcpdf_6_0_023.zip"

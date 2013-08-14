@@ -77,7 +77,7 @@ projects[mailsave][version] = "1.3"
 projects[masquerade][version] = "1.7"
 projects[menu_token][download][type] = "git"
 projects[menu_token][download][url] = "http://git.drupal.org/project/menu_token.git"
-projects[menu_token][download][branch] = "1.0-alpha2"
+projects[menu_token][download][tag] = "6.x-1.0-alpha2"
 projects[menu_token][type] = "module"
 projects[menu_token][version] = "1.0-alpha2"
 projects[mimemail][version] = "1.1"
@@ -179,11 +179,18 @@ projects[apachesolr_users][type] = "module"
 projects[apachesolr_users][subdir] = "noncontrib"
 
 ; Adapted Modules
-projects[biblio][subdir] = "sites"
-projects[biblio][version] = "2.x-dev"
+projects[biblio][subdir] = "patched"
+projects[biblio][version] = "2.0-rc2"
+; Author Link patch (displays separated authors in views and shows author links only to platform users)
+projects[biblio][patch] = "https://drupal.org/files/biblio-author-link-platform_0.diff"
+; Linked Authors patch (Displays publications of linked authors in views)
+;projects[biblio][patch] = ""
 
-projects[exhibit][subdir] = "sites"
-projects[exhibit][version] = "1.x-dev"
+projects[exhibit][download][type] = "git"
+projects[exhibit][url] = "https://github.com/WI1/exhibitd6.git"
+projects[exhibit][type] = "module"
+projects[exhibit][subdir] = "patched"
+
 
 
 ; Libraries

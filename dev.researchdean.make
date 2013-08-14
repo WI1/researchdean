@@ -179,7 +179,7 @@ projects[apachesolr_users][subdir] = "noncontrib"
 projects[biblio][subdir] = "patched"
 projects[biblio][version] = "2.0-rc2"
 ; Author Link patch (displays separated authors in views and shows author links only to platform users)
-projects[biblio][patch][2063967] = "http://drupal.org/files/biblio-author-link-platform_0.diff"
+projects[biblio][patch][2063967] = "http://drupal.org/files/biblio-author-link-platform_1.diff"
 ; Linked Authors patch (Displays publications of linked authors in views)
 ;projects[biblio][patch] = ""
 

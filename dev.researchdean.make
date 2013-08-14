@@ -4,7 +4,7 @@ api = 2
 
 ; Core
 projects[pressflow][download][type] = "get"
-projects[pressflow][download][url] = "http://files.pressflow.org/pressflow-6-current.tar.gz"
+projects[pressflow][download][url] = "https://github.com/pressflow/6/tarball/master"
 projects[pressflow][type] = "core"
 
 ; Modules
@@ -218,7 +218,7 @@ libraries[phpmailer][destination] = "modules/smtp/phpmailer"
 libraries[SolrPhpClient][download][type] = "file"
 libraries[SolrPhpClient][download][url] = "http://solr-php-client.googlecode.com/files/SolrPhpClient.r22.2009-11-09.tgz"
 libraries[SolrPhpClient][download][sha1] = "32fa0e387c92d02fe4da4ca2ebbbeddb2d6ce0a8"
-libraries[SolrPhpClient][destination] = "modules/apachesolr/SolrPhpClient"
+libraries[SolrPhpClient][destination] = "modules/apachesolr"
 
 libraries[tcpdf][download][type] = "get"
 libraries[tcpdf][download][url] = "http://freefr.dl.sourceforge.net/project/tcpdf/tcpdf_6_0_023.zip"

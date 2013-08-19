@@ -176,10 +176,16 @@ projects[apachesolr_users][type] = "module"
 projects[apachesolr_users][subdir] = "noncontrib"
 
 ; Adapted Modules
+
+projects[biblio][download][type] = "git"
+projects[biblio][download][url] = "https://github.com/dominikb1888/biblio-custom.git"
+projects[biblio][type] = "module"
 projects[biblio][subdir] = "patched"
-projects[biblio][version] = "2.0-rc2"
+
+;Temp removal of patched version for reasons of efficiency
+;projects[biblio][version] = "2.0-rc2"
 ; Author Link patch (displays separated authors in views and shows author links only to platform users)
-projects[biblio][patch][2063967] = "http://drupal.org/files/biblio-author-link-platform_2.diff"
+;projects[biblio][patch][2063967] = "http://drupal.org/files/biblio-author-link-platform_2.diff"
 ; Linked Authors patch (Displays publications of linked authors in views)
 ;projects[biblio][patch] = ""
 

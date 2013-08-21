@@ -2158,14 +2158,6 @@ margin-right: 1.5em;
   border-bottom:1px solid #CCCCCC;
 }
 
-.exhibit-collectionView-group-count {
-display: none;
-}
-
-.exhibit-collectionView-header {
-  display: none;
-}
-
 /** Facets auf SolR Suchergebnisseiten **/
 
 .block-apachesolr_search .item-list,

@@ -68,6 +68,10 @@
 	/* background-color: orange; /* wird natürlich noch individuell angepasst */
 }
 
+input#edit-search-block-form-1 {
+	display: none;
+}
+
 
 /* Farben fuer eigene Forschungsfelder: "Bunt..." */
 .ff0 {

@@ -8,6 +8,12 @@
 
 /* ===================== Overall ======================== */
 
+/* ==== TEST ==== */
+#seite.front #content-column {
+	margin: 1px auto;
+}
+
+
 /* Links: Invertierung Unterstreichung (Normal) */
 #seite #contentarea a {
 	text-decoration: none;
